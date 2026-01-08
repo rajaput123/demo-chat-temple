@@ -22,7 +22,7 @@ export default function SecurityCustody() {
                             { name: 'Meera Rao', role: 'Admin', assets: 45, risk: 'Low' },
                         ].map(c => (
                             <div key={c.name} className="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-2xl transition-all cursor-pointer border border-transparent hover:border-slate-100">
-                                <div className="w-10 h-10 rounded-full bg-earth-900 text-white flex items-center justify-center font-bold text-xs">
+                                <div className="w-10 h-10 rounded-full bg-industrial-gray text-white flex items-center justify-center font-bold text-xs">
                                     {c.name.split(' ').map(n => n[0]).join('')}
                                 </div>
                                 <div className="flex-1">
@@ -60,7 +60,7 @@ export default function SecurityCustody() {
                                 </div>
                                 <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                                     <div
-                                        className="h-full bg-earth-900"
+                                        className="h-full bg-industrial-gray"
                                         style={{ width: `${l.occ}%` }}
                                     />
                                 </div>

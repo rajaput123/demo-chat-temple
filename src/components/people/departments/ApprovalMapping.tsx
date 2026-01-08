@@ -52,7 +52,7 @@ export default function ApprovalMapping({
                     <select
                         value={selectedDept}
                         onChange={(e) => setSelectedDept(e.target.value)}
-                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                     >
                         <option value="">Select Department</option>
                         {departments.map((dept) => (
@@ -63,7 +63,7 @@ export default function ApprovalMapping({
                     <select
                         value={selectedRole}
                         onChange={(e) => setSelectedRole(e.target.value)}
-                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                     >
                         <option value="">Select Role</option>
                         {roles.map((role) => (
@@ -74,7 +74,7 @@ export default function ApprovalMapping({
                     <select
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value as any)}
-                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                        className="px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                     >
                         <option value="financial">Financial</option>
                         <option value="asset">Asset</option>
@@ -95,7 +95,7 @@ export default function ApprovalMapping({
                 <button
                     onClick={handleAdd}
                     disabled={!selectedDept || !selectedRole}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-earth-900 text-white rounded-lg text-xs font-medium hover:bg-earth-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-3 py-1.5 bg-industrial-gray text-white rounded-lg text-xs font-medium hover:bg-industrial-gray/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     <Plus size={14} />
                     <span>Add Mapping</span>
@@ -122,7 +122,7 @@ export default function ApprovalMapping({
                                                 <span className="text-xs text-neutral-500">•</span>
                                                 <span className="text-xs text-neutral-500 capitalize">{mapping.approvalType}</span>
                                                 {mapping.requiresDualApproval && (
-                                                    <span className="text-xs px-1.5 py-0.5 bg-earth-100 text-earth-700 rounded">Dual</span>
+                                                    <span className="text-xs px-1.5 py-0.5 bg-cane-green/10 text-cane-green/80 rounded">Dual</span>
                                                 )}
                                             </div>
                                             <button

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Namaha Platform - AI-Powered Planner Assistance",
-  description: "Streamline temple operations with intelligent planning, computer vision insights, and seamless management for Sringeri Sharada Peetham",
+  title: "SugarOS - Industrial Agriculture Operations & Procurement Platform",
+  description: "AI-powered digital factory management for sugar factories, cooperative mills, and government stakeholders.",
 };
 
 export default function RootLayout({

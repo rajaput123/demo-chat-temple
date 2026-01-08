@@ -45,7 +45,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                 <h3 className="text-lg font-bold text-neutral-900">Department Master</h3>
                 <button
                     onClick={() => setIsAddModalOpen(true)}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-earth-900 text-white rounded-lg text-xs font-medium hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-3 py-1.5 bg-industrial-gray text-white rounded-lg text-xs font-medium hover:bg-industrial-gray/90 transition-all"
                 >
                     <Plus size={14} />
                     <span>Add Department</span>
@@ -69,7 +69,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div>
@@ -81,7 +81,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                             required
                             value={formData.code}
                             onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div>
@@ -91,7 +91,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                         <select
                             value={formData.parentId}
                             onChange={(e) => setFormData({ ...formData, parentId: e.target.value })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         >
                             <option value="">None (Top Level)</option>
                             {departments.map((dept) => (
@@ -107,7 +107,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="flex items-center gap-2">
@@ -122,7 +122,7 @@ export default function DepartmentMaster({ departments, onAdd, onEdit, onDelete 
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Create Department
                         </button>

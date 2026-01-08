@@ -87,7 +87,7 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
                         const role = roles.find(r => r.id === e.target.value);
                         setSelectedRole(role || null);
                     }}
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                 >
                     <option value="">Select a role</option>
                     {roles.filter(r => r.isActive).map((role) => (
@@ -98,14 +98,14 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
 
             {selectedRole ? (
                 <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-earth-50 border border-earth-200 rounded-lg">
+                    <div className="flex items-center justify-between p-4 bg-soft-white border border-cane-green/20 rounded-lg">
                         <div className="flex items-center gap-2">
-                            <Shield size={18} className="text-earth-900" />
-                            <span className="text-sm font-black text-earth-900">{selectedRole.name}</span>
+                            <Shield size={18} className="text-industrial-gray" />
+                            <span className="text-sm font-black text-industrial-gray">{selectedRole.name}</span>
                         </div>
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="px-3 py-1.5 bg-earth-900 text-white rounded-lg text-xs font-medium hover:bg-earth-800 transition-all"
+                            className="px-3 py-1.5 bg-industrial-gray text-white rounded-lg text-xs font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Add Approval Authority
                         </button>
@@ -160,7 +160,7 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
                                     .sort((a, b) => a.approvalLevel - b.approvalLevel)
                                     .map((authority) => (
                                         <div key={authority.id} className="flex items-center gap-2">
-                                            <div className="w-6 h-6 rounded-full bg-earth-900 text-white flex items-center justify-center text-xs font-bold">
+                                            <div className="w-6 h-6 rounded-full bg-industrial-gray text-white flex items-center justify-center text-xs font-bold">
                                                 {authority.approvalLevel}
                                             </div>
                                             <span className="text-sm text-neutral-700">
@@ -194,7 +194,7 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
                             required
                             value={formData.approvalType}
                             onChange={(e) => setFormData({ ...formData, approvalType: e.target.value as ApprovalType })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         >
                             {APPROVAL_TYPES.map((type) => (
                                 <option key={type} value={type}>{approvalLabels[type]}</option>
@@ -213,7 +213,7 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
                             max="10"
                             value={formData.approvalLevel}
                             onChange={(e) => setFormData({ ...formData, approvalLevel: parseInt(e.target.value) })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                         <p className="text-xs text-neutral-500 mt-1">Lower numbers = higher authority (1 = highest)</p>
                     </div>
@@ -248,7 +248,7 @@ export default function ApprovalAuthority({ roles, authorities, setAuthorities }
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Add Authority
                         </button>

@@ -29,8 +29,8 @@ export default function FileSummaryView({ file }: FileSummaryViewProps) {
         <div className="space-y-4">
             {/* File Info Header */}
             <div className="flex items-start gap-3 p-4 bg-white/40 backdrop-blur-sm border border-neutral-200/30 rounded-lg">
-                <div className="p-2 bg-earth-100 rounded-lg shrink-0">
-                    <FileText size={20} className="text-earth-700" />
+                <div className="p-2 bg-cane-green/10 rounded-lg shrink-0">
+                    <FileText size={20} className="text-cane-green/80" />
                 </div>
                 <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2 mb-1">

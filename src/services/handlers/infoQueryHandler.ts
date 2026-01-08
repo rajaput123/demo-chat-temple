@@ -33,21 +33,21 @@ export function handleInfoQuery(query: string): InfoQueryResult {
     let summaryCardData: any = null;
     let response = '';
 
-    if (isSummaryQuery(query) && progressQuery && progressQuery.festivalName) {
-        // Get festival data for summary card
-        const festivalData = DataLookupService.searchFestivals(query);
-        if (festivalData.data.length > 0) {
-            const fest = festivalData.data[0];
+    if (isSummaryQuery(query) && progressQuery && progressQuery.seasonName) {
+        // Get season data for summary card
+        const seasonData = DataLookupService.searchFestivals(query); // Reusing festivals service for seasons
+        if (seasonData.data.length > 0) {
+            const season = seasonData.data[0];
 
             // Create rich summary card data
             summaryCardData = {
-                title: `${fest.festivalName} Preparation Status`,
-                progress: fest.progress || 0,
-                status: fest.status || "in-progress",
+                title: `${season.seasonName || 'Production Season'} Preparation Status`,
+                progress: season.progress || 0,
+                status: season.status || "in-progress",
                 todayHighlights: [
-                    { time: 'Status', description: `Overall: ${fest.progress || 0}% complete` },
-                    { time: 'Actions', description: `${fest.actions?.filter((a: any) => a.status === 'completed').length || 0} of ${fest.actions?.length || 0} actions completed` },
-                    ...(fest.actions?.slice(0, 2).map((action: any) => ({
+                    { time: 'Status', description: `Overall: ${season.progress || 0}% complete` },
+                    { time: 'Actions', description: `${season.actions?.filter((a: any) => a.status === 'completed').length || 0} of ${season.actions?.length || 0} actions completed` },
+                    ...(season.actions?.slice(0, 2).map((action: any) => ({
                         time: action.status === 'completed' ? '✓' : action.status === 'in-progress' ? '⟳' : '○',
                         description: action.description
                     })) || [])
@@ -55,9 +55,9 @@ export function handleInfoQuery(query: string): InfoQueryResult {
                 highlightTitle: "PROGRESS | HIGHLIGHTS"
             };
 
-            response = `**${fest.festivalName} Preparation Progress:**\n\n`;
-            response += `Status: ${fest.status}\n`;
-            response += `Progress: ${fest.progress}%\n\n`;
+            response = `**${season.seasonName || 'Production Season'} Preparation Progress:**\n\n`;
+            response += `Status: ${season.status}\n`;
+            response += `Progress: ${season.progress}%\n\n`;
             response += `**Actions:**\n`;
             fest.actions.forEach((action: any) => {
                 const statusIcon = action.status === 'completed' ? '✓' : action.status === 'in-progress' ? '⟳' : '○';

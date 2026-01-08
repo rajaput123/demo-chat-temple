@@ -73,7 +73,7 @@ export default function VIPVisitsListView({ vipVisits = [], filter = 'today' }: 
 
                         const fullTime = `${displayTime} on ${displayDate}`;
                         const protocolColor = visit.protocolLevel === 'maximum' ? 'bg-red-500' :
-                                             visit.protocolLevel === 'high' ? 'bg-amber-500' :
+                                             visit.protocolLevel === 'high' ? 'bg-harvest-yellow' :
                                              'bg-neutral-900';
 
                         return (
@@ -81,7 +81,7 @@ export default function VIPVisitsListView({ vipVisits = [], filter = 'today' }: 
                                 key={visit.id}
                                 className="flex items-start gap-3 group transition-all"
                             >
-                                <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
+                                <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
                                     <div className={`w-1.5 h-1.5 rounded-full ${protocolColor}`} />
                                 </div>
 

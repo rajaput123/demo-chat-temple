@@ -18,7 +18,7 @@ export default function DistributionTab() {
             </div>
 
             {/* Main Status Card */}
-            <div className="bg-gradient-to-br from-orange-400 to-amber-600 rounded-2xl p-8 text-white shadow-lg">
+            <div className="bg-gradient-to-br from-orange-400 to-harvest-yellow rounded-2xl p-8 text-white shadow-lg">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-x divide-white/20">
                     <div>
                         <p className="text-sm font-bold uppercase tracking-widest text-white/60 mb-2">Location</p>

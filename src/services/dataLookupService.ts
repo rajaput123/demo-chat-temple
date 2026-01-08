@@ -1,5 +1,5 @@
 /**
- * Data Lookup Service - Sringeri Sharada Peetham
+ * Data Lookup Service - Sugarcane Factory
  * 
  * Searches through all mock data sources to find relevant information
  * for chat queries
@@ -79,13 +79,13 @@ export class DataLookupService {
         });
 
         const deptNames = [
-            'Ritual Department',
-            'Veda Pathashala',
+            'Production Department',
+            'Quality Control Lab',
             'Finance & Accounts',
-            'Security & Safety',
+            'Safety & Compliance',
             'Operations & Workflow',
-            'Kitchen Department',
-            'Asset Custody Department'
+            'Inventory Department',
+            'Maintenance Department'
         ];
 
         const results = deptNames.filter(dept => 
@@ -197,7 +197,7 @@ export class DataLookupService {
         }
 
         // Check resources
-        if (query.includes('resource') || query.includes('priest') || query.includes('staff')) {
+        if (query.includes('resource') || query.includes('operator') || query.includes('staff')) {
             results.push(...mockResources);
         }
 
@@ -205,23 +205,23 @@ export class DataLookupService {
     }
 
     /**
-     * Search festivals (Navaratri, etc.)
+     * Search production seasons (Crushing Season, etc.)
      */
     static searchFestivals(query: string): DataLookupResult {
-        const results = mockFestivalData.filter(festival => {
-            const nameMatch = festival.festivalName.toLowerCase().includes(query);
-            const actionMatch = festival.actions.some(action => 
+        const results = mockFestivalData.filter(season => {
+            const nameMatch = season.festivalName?.toLowerCase().includes(query);
+            const actionMatch = season.actions?.some(action => 
                 action.description.toLowerCase().includes(query)
             );
             
-            return nameMatch || actionMatch || query.includes('festival') || query.includes('navaratri');
+            return nameMatch || actionMatch || query.includes('season') || query.includes('harvest');
         });
 
         return { type: 'festival', data: results, query };
     }
 
     /**
-     * Search events (Yaga, rituals, yatras)
+     * Search events (Production batches, quality checks, inspections)
      */
     static searchEvents(query: string): DataLookupResult {
         const results = mockEvents.filter(event => {
@@ -231,29 +231,29 @@ export class DataLookupService {
             const locationMatch = event.location.toLowerCase().includes(query);
             
             return nameMatch || typeMatch || descMatch || locationMatch ||
-                   query.includes('yaga') || query.includes('yatra') || query.includes('ritual');
+                   query.includes('batch') || query.includes('production') || query.includes('inspection');
         });
 
         return { type: 'event', data: results, query };
     }
 
     /**
-     * Search devotees
+     * Search suppliers/farmers
      */
     static searchDevotees(query: string): DataLookupResult {
-        const results = mockDevotees.filter(devotee => {
-            const nameMatch = devotee.name.toLowerCase().includes(query);
-            const phoneMatch = devotee.phone?.toLowerCase().includes(query);
-            const emailMatch = devotee.email?.toLowerCase().includes(query);
+        const results = mockDevotees.filter(supplier => {
+            const nameMatch = supplier.name.toLowerCase().includes(query);
+            const phoneMatch = supplier.phone?.toLowerCase().includes(query);
+            const emailMatch = supplier.email?.toLowerCase().includes(query);
             
-            return nameMatch || phoneMatch || emailMatch || query.includes('devotee');
+            return nameMatch || phoneMatch || emailMatch || query.includes('supplier') || query.includes('farmer');
         });
 
         return { type: 'devotee', data: results, query };
     }
 
     /**
-     * Search locations (Sringeri, Kigga, facilities)
+     * Search locations (Factory, Cane Field, facilities)
      */
     static searchLocations(query: string): DataLookupResult {
         const results = mockLocations.filter(location => {
@@ -263,7 +263,7 @@ export class DataLookupService {
             const addressMatch = location.address?.toLowerCase().includes(query);
             
             return nameMatch || typeMatch || descMatch || addressMatch ||
-                   query.includes('sringeri') || query.includes('kigga') || query.includes('temple');
+                   query.includes('factory') || query.includes('cane') || query.includes('field');
         });
 
         return { type: 'location', data: results, query };

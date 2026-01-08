@@ -26,7 +26,7 @@ export default function ProjectsView() {
                         <div>
                             <button
                                 onClick={() => setActiveSubModule(null)}
-                                className="mb-4 text-sm text-earth-600 hover:text-earth-700 font-medium"
+                                className="mb-4 text-sm text-cane-green hover:text-cane-green/80 font-medium"
                             >
                                 ← Back to Projects
                             </button>
@@ -41,11 +41,11 @@ export default function ProjectsView() {
                                     className="group relative p-6 rounded-[24px] bg-white/40 backdrop-blur-xl border border-neutral-200/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] transition-all duration-500 hover:shadow-[0_8px_48px_0_rgba(31,38,135,0.1)] hover:bg-white/60 hover:border-neutral-200/50 hover:-translate-y-1 text-left flex flex-col h-full"
                                 >
                                     <div className="mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-earth-900/5 flex items-center justify-center text-slate-900 group-hover:bg-earth-900 group-hover:text-white transition-all duration-500">
+                                        <div className="w-10 h-10 rounded-xl bg-industrial-gray/5 flex items-center justify-center text-slate-900 group-hover:bg-industrial-gray group-hover:text-white transition-all duration-500">
                                             <ChevronRight size={20} className="transition-transform duration-500 group-hover:rotate-[-45deg]" />
                                         </div>
                                     </div>
-                                    <h3 className="text-lg font-black text-slate-900 mb-2 tracking-tight group-hover:text-earth-600 transition-colors">{module.label}</h3>
+                                    <h3 className="text-lg font-black text-slate-900 mb-2 tracking-tight group-hover:text-cane-green transition-colors">{module.label}</h3>
                                     <p className="text-sm text-slate-600 font-medium leading-relaxed flex-1">Click to oversee time-bound initiatives and festivals.</p>
                                     <div className="mt-6 flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                                         <span>Open module</span>

@@ -44,11 +44,11 @@ export default function ThreePaneLayout({
           {isRightCollapsed && (
             <button
               onClick={onRightPaneToggle}
-              className="fixed right-4 top-1/2 -translate-y-1/2 z-30 p-3 bg-white border border-neutral-200 rounded-lg shadow-lg hover:bg-neutral-50 hover:shadow-xl transition-all duration-200 flex items-center gap-2 group"
-              title="Show Namaha AI"
+              className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-all group fixed right-4 top-1/2 -translate-y-1/2 z-30"
+              title="Show SugarOS AI"
             >
-              <MessageSquare size={18} className="text-neutral-600 group-hover:text-neutral-900" />
-              <span className="text-sm font-medium text-neutral-600 group-hover:text-neutral-900 whitespace-nowrap">Namaha AI</span>
+              <MessageSquare size={16} className="text-cane-green" />
+              <span className="text-sm font-bold text-industrial-gray group-hover:text-cane-green whitespace-nowrap">SugarOS AI</span>
             </button>
           )}
         </main>

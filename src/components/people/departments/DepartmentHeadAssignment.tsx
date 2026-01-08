@@ -57,7 +57,7 @@ export default function DepartmentHeadAssignment({
                                 ) : (
                                     <button
                                         onClick={() => setSelectedDept(selectedDept === dept.id ? '' : dept.id)}
-                                        className="text-xs text-earth-600 hover:text-earth-700"
+                                        className="text-xs text-cane-green hover:text-cane-green/80"
                                     >
                                         Assign
                                     </button>
@@ -80,7 +80,7 @@ export default function DepartmentHeadAssignment({
                                             placeholder="Search employees..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full pl-8 pr-3 py-1.5 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                            className="w-full pl-8 pr-3 py-1.5 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                         />
                                     </div>
                                     <div className="space-y-1 max-h-40 overflow-y-auto">

@@ -78,7 +78,7 @@ export default function RoleDepartmentMapping({ roles, departments, mappings, se
                                     <tr key={role.id} className="hover:bg-neutral-50 transition-colors">
                                         <td className="px-4 py-3 border-b border-neutral-200">
                                             <div className="flex items-center gap-2">
-                                                <Shield size={16} className="text-earth-900" />
+                                                <Shield size={16} className="text-industrial-gray" />
                                                 <span className="text-sm font-medium text-neutral-900">{role.name}</span>
                                             </div>
                                         </td>
@@ -93,8 +93,8 @@ export default function RoleDepartmentMapping({ roles, departments, mappings, se
                                                         onClick={() => handleToggleMapping(role.id, dept.id)}
                                                         className={`w-8 h-8 rounded-lg border-2 transition-all flex items-center justify-center ${
                                                             mapped
-                                                                ? 'bg-earth-900 border-earth-900 text-white'
-                                                                : 'border-neutral-200 hover:border-earth-600'
+                                                                ? 'bg-industrial-gray border-industrial-gray text-white'
+                                                                : 'border-neutral-200 hover:border-cane-green'
                                                         }`}
                                                         title={mapped ? 'Remove mapping' : 'Add mapping'}
                                                     >

@@ -52,7 +52,7 @@ export default function AssetRegistry() {
                     </div>
                     <button 
                         onClick={() => setIsAddModalOpen(true)}
-                        className="px-6 py-4 bg-earth-900 text-white rounded-2xl font-bold text-sm flex items-center gap-2 hover:bg-earth-800 transition-all"
+                        className="px-6 py-4 bg-industrial-gray text-white rounded-2xl font-bold text-sm flex items-center gap-2 hover:bg-industrial-gray/90 transition-all"
                     >
                         <Plus size={18} />
                         <span>Register Asset</span>
@@ -64,7 +64,7 @@ export default function AssetRegistry() {
                 </div>
 
                 {/* Table Header */}
-                <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-earth-900 rounded-t-2xl text-[10px] font-black text-white/80 uppercase tracking-[0.2em]">
+                <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-industrial-gray rounded-t-2xl text-[10px] font-black text-white/80 uppercase tracking-[0.2em]">
                     <div className="col-span-1">ID</div>
                     <div className="col-span-3">Asset Name</div>
                     <div className="col-span-2">Classification</div>
@@ -93,7 +93,7 @@ export default function AssetRegistry() {
                             <div className="col-span-1 flex justify-end gap-2">
                                 <button
                                     onClick={() => setShowRelationships(showRelationships === asset.id ? null : asset.id)}
-                                    className="text-xs font-medium text-earth-600 hover:text-earth-700"
+                                    className="text-xs font-medium text-cane-green hover:text-cane-green/80"
                                 >
                                     {showRelationships === asset.id ? 'Hide' : 'View'} Links
                                 </button>
@@ -135,7 +135,7 @@ export default function AssetRegistry() {
                         <input
                             type="text"
                             required
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -143,7 +143,7 @@ export default function AssetRegistry() {
                             <label className="block text-sm font-medium text-neutral-900 mb-1">
                                 Category *
                             </label>
-                            <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                            <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                                 <option value="physical-general">Physical - General</option>
                                 <option value="sacred-valuable">Sacred & Valuable</option>
                                 <option value="property">Property</option>
@@ -154,7 +154,7 @@ export default function AssetRegistry() {
                             <label className="block text-sm font-medium text-neutral-900 mb-1">
                                 Department *
                             </label>
-                            <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                            <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                                 <option value="">Select Department</option>
                             </select>
                         </div>
@@ -162,7 +162,7 @@ export default function AssetRegistry() {
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Register Asset
                         </button>

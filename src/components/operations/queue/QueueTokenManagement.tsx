@@ -82,7 +82,7 @@ export default function QueueTokenManagement() {
                     <h2 className="text-2xl font-black text-slate-900 tracking-tight">Queue & Token Management</h2>
                     <p className="text-sm text-slate-600 font-medium mt-1">Manage tokens and queue flow</p>
                 </div>
-                <button className="px-4 py-2 bg-earth-900 text-white rounded-lg hover:bg-earth-800 transition-colors flex items-center gap-2">
+                <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg hover:bg-industrial-gray/90 transition-colors flex items-center gap-2">
                     <Plus size={18} />
                     <span className="font-medium">Issue Token</span>
                 </button>

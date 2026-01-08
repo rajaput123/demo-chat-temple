@@ -1,6 +1,6 @@
 /**
  * Special Scenario Handler
- * Handles special scenarios like Jagadguru visits, Chandi Yaga, Navaratri, CEO, Governor, etc.
+ * Handles special scenarios like Factory Manager inspections, Production batches, Crushing season, Factory Admin, Auditor, etc.
  */
 
 import { CanvasSection } from '@/hooks/useSimulation';
@@ -26,16 +26,16 @@ export function handleSpecialScenario(
 
     // Try each scenario handler in order
     const handlers = [
-        () => handleJagadguru(query, lowercaseQuery, options),
-        () => handleChandiYaga(query, lowercaseQuery),
-        () => handleRestoration(query, lowercaseQuery),
-        () => handleNavaratri(query, lowercaseQuery),
-        () => handleCEO(query, lowercaseQuery),
-        () => handleGovernorVVIP(query, lowercaseQuery),
+        () => handleFactoryManager(query, lowercaseQuery, options),
+        () => handleProductionBatch(query, lowercaseQuery),
+        () => handleMaintenance(query, lowercaseQuery),
+        () => handleCrushingSeason(query, lowercaseQuery),
+        () => handleFactoryAdmin(query, lowercaseQuery),
+        () => handleAuditorInspection(query, lowercaseQuery),
         () => handleApproval(query, lowercaseQuery),
         () => handleScheduleReview(query, lowercaseQuery),
         () => handleDirective(query, lowercaseQuery),
-        () => handleGovernorKarnataka(query, lowercaseQuery),
+        () => handleGovernmentAuditor(query, lowercaseQuery),
     ];
 
     for (const handler of handlers) {
@@ -49,24 +49,24 @@ export function handleSpecialScenario(
 }
 
 /**
- * Handle Jagadguru/Swamiji queries
+ * Handle Factory Manager/Quality Inspector queries
  */
-function handleJagadguru(
+function handleFactoryManager(
     query: string,
     lowercaseQuery: string,
     options?: { onVIPVisitParsed?: (vip: ParsedVIPVisit) => void }
 ): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('jagadguru') && !lowercaseQuery.includes('swamiji')) {
+    if (!lowercaseQuery.includes('factory manager') && !lowercaseQuery.includes('quality inspector')) {
         return { handled: false };
     }
 
-    const isKiggaVisit = lowercaseQuery.includes('kigga');
+    const isFieldVisit = lowercaseQuery.includes('field') || lowercaseQuery.includes('farm');
     const vipVisit: ParsedVIPVisit = {
-        visitor: "Jagadguru Sri Sri Vidhushekhara Bharati Sannidhanam",
-        title: "Pontiff of Sringeri Sharada Peetham",
-        date: isKiggaVisit ? new Date() : new Date(new Date().setDate(new Date().getDate() + 1)),
-        time: isKiggaVisit ? "16:00" : "17:00",
-        location: isKiggaVisit ? "Kigga" : "Main Entrance (Raja Gopuram)",
+        visitor: "Factory Manager",
+        title: "Operations Manager & Quality Inspector",
+        date: isFieldVisit ? new Date() : new Date(new Date().setDate(new Date().getDate() + 1)),
+        time: isFieldVisit ? "16:00" : "17:00",
+        location: isFieldVisit ? "Cane Field" : "Main Factory Entrance",
         protocolLevel: "maximum",
         confidence: 1.0
     };
@@ -75,118 +75,118 @@ function handleJagadguru(
         options.onVIPVisitParsed(vipVisit);
     }
 
-    const vipData = {
-        visitor: "Jagadguru Sri Sri Vidhushekhara Bharati Sannidhanam",
-        title: "Pontiff of Sringeri Sharada Peetham",
-        dateTime: isKiggaVisit ? "Today at 4:00 PM" : "Tomorrow at 5:00 PM",
-        location: isKiggaVisit ? "Kigga" : "Main Entrance (Raja Gopuram)",
+    const inspectionData = {
+        visitor: "Factory Manager",
+        title: "Operations Manager & Quality Inspector",
+        dateTime: isFieldVisit ? "Today at 4:00 PM" : "Tomorrow at 5:00 PM",
+        location: isFieldVisit ? "Cane Field" : "Main Factory Entrance",
         protocolLevel: "maximum",
-        delegationSize: isKiggaVisit ? "~20 persons" : "~10 persons",
-        todayHighlights: isKiggaVisit ? [
-            { time: '03:30 PM', description: 'Pre-arrival shubha samaya readiness check.' },
-            { time: '04:00 PM', description: 'Arrival at Kigga Temple and Poornakumbha Swagata.' },
-            { time: '04:30 PM', description: 'Darshan and special pooja at the sanctum.' },
-            { time: '05:30 PM', description: 'Ashirvachana and meeting with devotees.' }
+        delegationSize: isFieldVisit ? "~20 persons" : "~10 persons",
+        todayHighlights: isFieldVisit ? [
+            { time: '03:30 PM', description: 'Pre-inspection readiness check and safety briefing.' },
+            { time: '04:00 PM', description: 'Arrival at cane field and quality assessment.' },
+            { time: '04:30 PM', description: 'Cane quality inspection and sampling.' },
+            { time: '05:30 PM', description: 'Review meeting with suppliers and farmers.' }
         ] : [
-            { time: '05:00 PM', description: 'Arrival at Raja Gopuram, Sringeri.' },
-            { time: '05:30 PM', description: 'Poornakumbha Swagata and processional welcome.' },
-            { time: '06:30 PM', description: 'Dharma Sabha and Anugraha Bhashana.' }
+            { time: '05:00 PM', description: 'Arrival at main factory entrance.' },
+            { time: '05:30 PM', description: 'Factory tour and production review.' },
+            { time: '06:30 PM', description: 'Operations briefing and planning session.' }
         ],
         highlightTitle: "TODAY | HIGHLIGHTS",
-        highlights: isKiggaVisit ? [
-            { time: '03:30 PM', description: 'Pre-arrival shubha samaya readiness check.' },
-            { time: '04:00 PM', description: 'Arrival at Kigga Temple and Poornakumbha Swagata.' },
-            { time: '04:30 PM', description: 'Darshan and special pooja at the sanctum.' },
-            { time: '05:30 PM', description: 'Ashirvachana and meeting with devotees.' }
+        highlights: isFieldVisit ? [
+            { time: '03:30 PM', description: 'Pre-inspection readiness check and safety briefing.' },
+            { time: '04:00 PM', description: 'Arrival at cane field and quality assessment.' },
+            { time: '04:30 PM', description: 'Cane quality inspection and sampling.' },
+            { time: '05:30 PM', description: 'Review meeting with suppliers and farmers.' }
         ] : [
-            { time: '05:00 PM', description: 'Arrival at Raja Gopuram, Sringeri.' },
-            { time: '05:30 PM', description: 'Poornakumbha Swagata and processional welcome.' },
-            { time: '06:30 PM', description: 'Dharma Sabha and Anugraha Bhashana.' }
+            { time: '05:00 PM', description: 'Arrival at main factory entrance.' },
+            { time: '05:30 PM', description: 'Factory tour and production review.' },
+            { time: '06:30 PM', description: 'Operations briefing and planning session.' }
         ]
     };
 
-    const kiggaPlannerContent = `[·] Confirm Jagadguru arrival seva & reception krama
-[·] Align mutt coordination & travel readiness
-[·] Prepare darshan & movement path inside temple
-[·] Confirm archaka & purohita availability
-[·] Prepare alankara & minimal pooja samagri
-[·] Inform temple trustees & senior sevaks
-[·] Activate crowd seva & volunteer arrangement
-[·] Coordinate prasad preparation (small batch)
+    const fieldInspectionPlannerContent = `[·] Confirm Factory Manager arrival & reception protocol
+[·] Align factory coordination & travel readiness
+[·] Prepare inspection route & movement path inside factory
+[·] Confirm quality control team availability
+[·] Prepare inspection checklist & sampling equipment
+[·] Inform factory supervisors & senior staff
+[·] Activate safety protocols & volunteer arrangement
+[·] Coordinate sugar product preparation (sample batch)
 [·] Ensure protocol & security alignment
-[·] Conduct pre-arrival shubha samaya readiness check (3:30 PM)`;
+[·] Conduct pre-arrival safety readiness check (3:30 PM)`;
 
     const sections: CanvasSection[] = [
-        createSection('focus-vip', 'VIP Protocol Brief', JSON.stringify(vipData), 'text'),
+        createSection('focus-inspection', 'Quality Inspection Brief', JSON.stringify(inspectionData), 'text'),
         createPlannerSection(
-            isKiggaVisit ? kiggaPlannerContent : '[·] Arrange Poornakumbha Swagata at Raja Gopuram\n[·] Coordinate Dhuli Pada Puja at Pravachana Mandiram\n[·] Ensure security clearance for devotee darshan line\n[·] Prepare Sanctum for special Mangala Arathi',
-            isKiggaVisit ? 'Kigga Adhoc Visit Plan' : 'Poornakumbha Swagata Plan',
-            'planner-jagadguru'
+            isFieldVisit ? fieldInspectionPlannerContent : '[·] Arrange factory tour at main entrance\n[·] Coordinate production line inspection\n[·] Ensure quality clearance for production areas\n[·] Prepare production reports for review',
+            isFieldVisit ? 'Field Inspection Plan' : 'Factory Tour Plan',
+            'planner-manager'
         )
     ];
 
     return {
         handled: true,
         sections,
-        message: `I've prepared the ${isKiggaVisit ? 'Kigga visit' : 'Sringeri arrival'} briefing and planner actions for Jagadgurugalu.`,
+        message: `I've prepared the ${isFieldVisit ? 'field inspection' : 'factory tour'} briefing and planner actions for the Factory Manager.`,
         vipVisit
     };
 }
 
 /**
- * Handle Chandi Yaga queries
+ * Handle Production Batch queries
  */
-function handleChandiYaga(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('chandi') && !lowercaseQuery.includes('yaga') && !lowercaseQuery.includes('homa')) {
+function handleProductionBatch(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('batch') && !lowercaseQuery.includes('production') && !lowercaseQuery.includes('crushing')) {
         return { handled: false };
     }
 
-    const isFeb3rd = lowercaseQuery.includes('3rd feb') || lowercaseQuery.includes('february 3');
+    const isSpecialBatch = lowercaseQuery.includes('special') || lowercaseQuery.includes('priority');
 
-    if (isFeb3rd) {
-        const vipData = {
-            visitor: "Special Dignitaries & Devotees",
-            title: "Sahasra Chandi Maha Yaga",
+    if (isSpecialBatch) {
+        const batchData = {
+            visitor: "Production Team & Quality Inspectors",
+            title: "Special Production Batch",
             dateTime: "3rd Feb, 2024 (7:00 AM - 1:00 PM)",
-            location: "Main Yaga Shala / Temple Inner Courtyard",
+            location: "Main Crushing Unit / Production Floor",
             protocolLevel: "high",
-            delegationSize: "Multiple VIP Groups",
+            delegationSize: "Multiple Quality Teams",
             todayHighlights: [
-                { time: '07:00 AM', description: 'Commencement of Sahasra Chandi Yaga with Maha Sankalpa and Avahana.' },
-                { time: '09:00 AM', description: 'Ritwik Varanam and start of Maha Chandi Parayanam.' },
-                { time: '11:00 AM', description: 'VIP participation in the Yaga and special darshan flow.' },
-                { time: '12:30 PM', description: 'Maha Purnahuti, Deeparadhana, and Shanti Mantra Patha.' }
+                { time: '07:00 AM', description: 'Commencement of special production batch with quality checks.' },
+                { time: '09:00 AM', description: 'Crushing operation start and initial sampling.' },
+                { time: '11:00 AM', description: 'Quality inspection and batch testing.' },
+                { time: '12:30 PM', description: 'Final quality approval and batch completion.' }
             ],
             highlightTitle: "FEBRUARY 3 | HIGHLIGHTS",
             highlights: [
-                { time: '07:00 AM', description: 'Commencement of Sahasra Chandi Yaga with Maha Sankalpa and Avahana.' },
-                { time: '09:00 AM', description: 'Ritwik Varanam and start of Maha Chandi Parayanam.' },
-                { time: '11:00 AM', description: 'VIP participation in the Yaga and special darshan flow.' },
-                { time: '12:30 PM', description: 'Maha Purnahuti, Deeparadhana, and Shanti Mantra Patha.' }
+                { time: '07:00 AM', description: 'Commencement of special production batch with quality checks.' },
+                { time: '09:00 AM', description: 'Crushing operation start and initial sampling.' },
+                { time: '11:00 AM', description: 'Quality inspection and batch testing.' },
+                { time: '12:30 PM', description: 'Final quality approval and batch completion.' }
             ]
         };
 
         const sections: CanvasSection[] = [
-            createSection('focus-yaga', 'Sahasra Chandi Maha Yaga Protocol', JSON.stringify(vipData), 'text'),
+            createSection('focus-batch', 'Production Batch Protocol', JSON.stringify(batchData), 'text'),
             createPlannerSection(
-                '[·] Confirm seating for 50+ Vedic scholars\n[·] Secure Yaga Shala perimeter for VIP entry\n[·] Arrange for specialized ritual samagri (Chandi Homa specific)\n[·] Coordinate with Annadanam department for special Prasad distribution',
-                'Yaga Preparation Plan',
-                'planner-yaga'
+                '[·] Confirm staffing for production line\n[·] Secure production area for quality inspection\n[·] Arrange for specialized quality testing equipment\n[·] Coordinate with inventory department for sugar product distribution',
+                'Batch Preparation Plan',
+                'planner-batch'
             )
         ];
 
         return {
             handled: true,
             sections,
-            message: "I've generated the Sahasra Chandi Maha Yaga protocol briefing and planning steps for Feb 3rd."
+            message: "I've generated the special production batch protocol briefing and planning steps for Feb 3rd."
         };
     } else {
         const sections: CanvasSection[] = [
-            createSection('focus-event', 'Event Brief: Sahasra Chandi Yaga', 'The Sahasra Chandi Maha Yaga is scheduled to commence at 7:00 AM tomorrow at the Yaga Shala. 108 Ritwiks have arrived. Purnahuti is scheduled for 12:30 PM on Sunday.', 'text'),
+            createSection('focus-event', 'Event Brief: Production Batch', 'The production batch is scheduled to commence at 7:00 AM tomorrow at the crushing unit. Quality control team has arrived. Final approval is scheduled for 12:30 PM on Sunday.', 'text'),
             createPlannerSection(
-                '[·] Inspect Yaga Shala arrangements and seating\n[·] Verify stock of 500kg Ghee and 1000kg Samidha\n[·] Coordinate accommodation for 108 Ritwiks\n[·] Setup medical camp near North Gate',
-                'Yaga Preparation',
-                'planner-yaga'
+                '[·] Inspect crushing unit arrangements and safety\n[·] Verify stock of 500kg cane and 1000kg processing capacity\n[·] Coordinate staffing for production line\n[·] Setup quality control station near main gate',
+                'Batch Preparation',
+                'planner-batch'
             )
         ];
 
@@ -198,33 +198,33 @@ function handleChandiYaga(query: string, lowercaseQuery: string): SpecialScenari
 }
 
 /**
- * Handle Restoration/Project queries
+ * Handle Maintenance/Upgrade Project queries
  */
-function handleRestoration(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('restoration') && !lowercaseQuery.includes('project') && !lowercaseQuery.includes('renovation') && !lowercaseQuery.includes('infrastructure')) {
+function handleMaintenance(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('maintenance') && !lowercaseQuery.includes('upgrade') && !lowercaseQuery.includes('renovation') && !lowercaseQuery.includes('infrastructure')) {
         return { handled: false };
     }
 
     const projectData = {
-        title: "Gold Archak (Kavacha) Restoration",
+        title: "Crushing Unit Equipment Upgrade",
         subTitle: "Status: Ongoing (65% Complete) | Deadline: Feb 20, 2024",
         highlightTitle: "PROJECT | RECENT MILESTONES",
         highlights: [
-            { time: 'Jan 2', description: 'Primary cleaning and purification completed.' },
-            { time: 'Jan 5', description: 'Gold plating of base structure initiated.' },
-            { time: 'Today', description: 'Ready for stage-3 artisan review.' }
+            { time: 'Jan 2', description: 'Primary equipment inspection and cleaning completed.' },
+            { time: 'Jan 5', description: 'Equipment upgrade of base structure initiated.' },
+            { time: 'Today', description: 'Ready for stage-3 quality review.' }
         ]
     };
 
     const sections: CanvasSection[] = [
         createSection('focus-project', 'Project Executive Brief', JSON.stringify(projectData), 'text'),
         createPlannerSection(
-            `[·] Audit current gold stock and utilization
-[·] Approve stage-3 artisan progress report
-[·] Schedule security transfer of completed components
-[·] Finalize sanctum closure window for installation
+            `[·] Audit current equipment stock and utilization
+[·] Approve stage-3 maintenance progress report
+[·] Schedule safety transfer of completed components
+[·] Finalize production closure window for installation
 [·] Arrange documentation photography of progress`,
-            'Restoration Milestones',
+            'Maintenance Milestones',
             'planner-project'
         )
     ];
@@ -232,101 +232,101 @@ function handleRestoration(query: string, lowercaseQuery: string): SpecialScenar
     return {
         handled: true,
         sections,
-        message: "Project status updated. I've added the restoration milestones to your planner."
+        message: "Project status updated. I've added the maintenance milestones to your planner."
     };
 }
 
 /**
- * Handle Navaratri/Festival queries
+ * Handle Crushing Season queries
  */
-function handleNavaratri(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('navaratri') && !lowercaseQuery.includes('festival') && !lowercaseQuery.includes('dasara') && !lowercaseQuery.includes('sharannavarathri')) {
+function handleCrushingSeason(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('season') && !lowercaseQuery.includes('harvest') && !lowercaseQuery.includes('crushing season')) {
         return { handled: false };
     }
 
-    const isSharadaNavaratri = lowercaseQuery.includes('sharada') || lowercaseQuery.includes('sharannavarathri');
+    const isPeakSeason = lowercaseQuery.includes('peak') || lowercaseQuery.includes('crushing season');
     const isStatusQuery = lowercaseQuery.includes('progress') || lowercaseQuery.includes('status') || lowercaseQuery.startsWith('show') || lowercaseQuery.includes('view');
-    const isNavaratriInfo = (lowercaseQuery.includes('navaratri') || lowercaseQuery.includes('festival')) && 
+    const isSeasonInfo = (lowercaseQuery.includes('season') || lowercaseQuery.includes('harvest') || lowercaseQuery.includes('crushing season')) && 
         (isInfoQuery(query) || isSummaryQuery(query) || lowercaseQuery.includes('prepare') || lowercaseQuery.includes('plan'));
 
-    if (isSharadaNavaratri || isNavaratriInfo) {
-        const festivalData = {
-            visitor: "Special Festival Protocol",
-            title: "Sharada Sharannavarathri",
-            dateTime: "Upcoming: Ashwayuja Shukla Prathama",
-            location: "Main Temple & Sringeri Town",
+    if (isPeakSeason || isSeasonInfo) {
+        const seasonData = {
+            visitor: "Production Season Protocol",
+            title: "Crushing Season Operations",
+            dateTime: "Upcoming: Peak Season Start",
+            location: "Main Factory & Cane Yard",
             protocolLevel: "maximum",
-            delegationSize: "Lakhs of devotees",
+            delegationSize: "Multiple supplier groups",
             todayHighlights: [
-                { time: 'Day 1', description: 'Sharada Sharannavarathri Prarambha, Kalasha Sthapana.' },
-                { time: 'Day 7', description: 'Moola Nakshatra (Saraswati Avahana).' },
-                { time: 'Day 10', description: 'Vijayadashami, Maha Rathotsava.' }
+                { time: 'Week 1', description: 'Season commencement, initial cane intake setup.' },
+                { time: 'Week 4', description: 'Peak production period, maximum capacity operations.' },
+                { time: 'Week 10', description: 'Season wind-down, final batch processing.' }
             ],
-            highlightTitle: "FESTIVAL | HIGHLIGHTS",
+            highlightTitle: "SEASON | HIGHLIGHTS",
             highlights: [
-                { time: 'Day 1', description: 'Sharada Sharannavarathri Prarambha, Kalasha Sthapana.' },
-                { time: 'Day 7', description: 'Moola Nakshatra (Saraswati Avahana).' },
-                { time: 'Day 10', description: 'Vijayadashami, Maha Rathotsava.' }
+                { time: 'Week 1', description: 'Season commencement, initial cane intake setup.' },
+                { time: 'Week 4', description: 'Peak production period, maximum capacity operations.' },
+                { time: 'Week 10', description: 'Season wind-down, final batch processing.' }
             ]
         };
 
         const sections: CanvasSection[] = [
-            createSection('focus-festival', 'Festival Event Brief', JSON.stringify(festivalData), 'text'),
+            createSection('focus-season', 'Production Season Brief', JSON.stringify(seasonData), 'text'),
             createPlannerSection(
-                `[·] Verify Alankara schedule for all 10 days
-[·] Finalize Annadanam procurement for 5L+ devotees
-[·] Deploy additional 200 crowd control volunteers
-[·] Setup temporary medical camps at 3 locations
-[·] Coordinate with KSRTC for special bus services`,
-                'Navaratri Execution Roadmap',
-                'planner-festival'
+                `[·] Verify production schedule for all 10 weeks
+[·] Finalize cane procurement for peak season
+[·] Deploy additional quality control staff
+[·] Setup temporary storage facilities at 3 locations
+[·] Coordinate with transport for cane delivery services`,
+                'Season Execution Roadmap',
+                'planner-season'
             )
         ];
 
         return {
             handled: true,
             sections,
-            message: "I've generated the Sharada Sharannavarathri execution roadmap and briefing."
+            message: "I've generated the crushing season execution roadmap and briefing."
         };
     } else {
         const sections: CanvasSection[] = [
-            createSection('focus-summary', 'Navaratri Preparation Status', 'Overall preparation is 85% complete. The main Alankara for Day 1 is ready. Security barriers are installed. Annadanam supplies are stocked for the first 3 days.', 'text')
+            createSection('focus-summary', 'Season Preparation Status', 'Overall preparation is 85% complete. The main production line for Week 1 is ready. Quality control barriers are installed. Cane supplies are stocked for the first 3 weeks.', 'text')
         ];
 
         if (!isStatusQuery) {
             sections.push(createPlannerSection(
-                '[·] Final inspection of Queue Complex A\n[·] Review CCTV coverage with Police Commissioner\n[·] Distributors meeting for Prasadam counters\n[·] Electrical safety audit of illumination',
-                'Festival Readiness',
-                'planner-navaratri'
+                '[·] Final inspection of Cane Yard A\n[·] Review quality control coverage with Quality Manager\n[·] Suppliers meeting for cane delivery schedules\n[·] Equipment safety audit of production line',
+                'Season Readiness',
+                'planner-season'
             ));
         }
 
         return {
             handled: true,
             sections,
-            message: "Navaratri preparations are on track. Dashboard updated with current status."
+            message: "Season preparations are on track. Dashboard updated with current status."
         };
     }
 }
 
 /**
- * Handle CEO queries
+ * Handle Factory Admin queries
  */
-function handleCEO(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('ceo') && !(lowercaseQuery.includes('appointment') && lowercaseQuery.includes('eo'))) {
+function handleFactoryAdmin(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('admin') && !(lowercaseQuery.includes('factory admin') || lowercaseQuery.includes('manager'))) {
         return { handled: false };
     }
 
-    const isCEOAction = lowercaseQuery.includes('ask') || lowercaseQuery.includes('tell') || lowercaseQuery.includes('directive') || lowercaseQuery.includes('order');
-    const dept = lowercaseQuery.includes('kitchen') ? 'Kitchen' : lowercaseQuery.includes('security') ? 'Security' : 'Admin';
+    const isAdminAction = lowercaseQuery.includes('ask') || lowercaseQuery.includes('tell') || lowercaseQuery.includes('directive') || lowercaseQuery.includes('order');
+    const dept = lowercaseQuery.includes('production') ? 'Production' : lowercaseQuery.includes('quality') ? 'Quality Control' : lowercaseQuery.includes('inventory') ? 'Inventory' : 'Admin';
 
-    if (isCEOAction) {
+    if (isAdminAction) {
         const sections: CanvasSection[] = [
-            createSection(`focus-ceo-action-${Date.now()}`, `Executive Directive: ${dept}`, `CEO has directed the ${dept} department to ${query.split(' to ')[1] || 'respond immediately to current requirements'}. Tracking for completion by EOD.`, 'text'),
+            createSection(`focus-admin-action-${Date.now()}`, `Admin Directive: ${dept}`, `Factory Admin has directed the ${dept} department to ${query.split(' to ')[1] || 'respond immediately to current requirements'}. Tracking for completion by EOD.`, 'text'),
             createPlannerSection(
-                `[·] Confirm receipt of directive by ${dept} head\n[·] Monitor ${dept} progress updates\n[·] Report completion to CEO office`,
+                `[·] Confirm receipt of directive by ${dept} head\n[·] Monitor ${dept} progress updates\n[·] Report completion to Factory Admin office`,
                 'Admin Follow-up',
-                `planner-ceo-${Date.now()}`
+                `planner-admin-${Date.now()}`
             )
         ];
 
@@ -336,73 +336,73 @@ function handleCEO(query: string, lowercaseQuery: string): SpecialScenarioResult
             message: `Directive issued to ${dept}. Tracking as high priority.`
         };
     } else {
-        const ceoData = {
-            visitor: "Sri V. R. Gowrishankar",
-            title: "Executive Officer & CEO, Sringeri Mutt",
+        const adminData = {
+            visitor: "Factory Admin",
+            title: "Operations Manager & Factory Admin",
             dateTime: "Today: Office Hours (10:00 AM - 6:00 PM)",
-            location: "Peetham Administrative Office",
+            location: "Factory Administrative Office",
             protocolLevel: "maximum",
             delegationSize: "Executive Staff",
             todayHighlights: [
-                { time: '11:30 AM', description: 'Review of Navaratri preparation with HODs.' },
-                { time: '03:00 PM', description: 'Meeting with District Administration (Protocol).' },
+                { time: '11:30 AM', description: 'Review of production season preparation with department heads.' },
+                { time: '03:00 PM', description: 'Meeting with Quality Control (Compliance).' },
                 { time: '05:00 PM', description: 'Financial audit final review.' }
             ],
             highlightTitle: "OFFICE | HIGHLIGHTS"
         };
 
         const sections: CanvasSection[] = [
-            createSection('focus-ceo', 'CEO Office Briefing', JSON.stringify(ceoData), 'text')
+            createSection('focus-admin', 'Factory Admin Office Briefing', JSON.stringify(adminData), 'text')
         ];
 
         return {
             handled: true,
             sections,
-            message: "CEO office briefing loaded. Dashboard shows today's high-level engagements."
+            message: "Factory Admin office briefing loaded. Dashboard shows today's high-level engagements."
         };
     }
 }
 
 /**
- * Handle Governor/VVIP queries (general)
+ * Handle Auditor/Inspector queries (general)
  */
-function handleGovernorVVIP(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('governor') && !(lowercaseQuery.includes('minister') && !lowercaseQuery.includes('prime minister')) && !lowercaseQuery.includes('cm') && !lowercaseQuery.includes('vvip')) {
+function handleAuditorInspection(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('auditor') && !(lowercaseQuery.includes('inspector') && !lowercaseQuery.includes('quality inspector')) && !lowercaseQuery.includes('government') && !lowercaseQuery.includes('compliance')) {
         return { handled: false };
     }
 
-    const visitorName = lowercaseQuery.includes('governor') ? "Governor of Karnataka" : "Hon'ble Minister";
+    const visitorName = lowercaseQuery.includes('auditor') ? "Government Auditor" : "Compliance Inspector";
     const protocolData = {
         visitor: visitorName,
-        title: "State Guest Protocol",
+        title: "Government Inspection Protocol",
         dateTime: "Confirmed: 12th Feb, 2024 at 11:00 AM",
-        location: "Helipad / Raja Gopuram Entrance",
+        location: "Main Factory Entrance / Reception Area",
         protocolLevel: "maximum",
         delegationSize: "~15 persons + security",
-        leadEscort: "CEO / Executive Officer",
-        securityStatus: "Z-Category / Local Police Liaison",
+        leadEscort: "Factory Admin / Operations Manager",
+        securityStatus: "High Priority / Local Authority Liaison",
         todayHighlights: [
-            { time: '10:30 AM', description: `Pre-arrival security sweep by local police.` },
-            { time: '11:00 AM', description: `Arrival and reception by Peetham CEO.` },
-            { time: '11:30 AM', description: `Temple Darshan and Ashirvada.` },
-            { time: '12:30 PM', description: `Lunch at Special VIP Guesthouse.` }
+            { time: '10:30 AM', description: `Pre-arrival safety sweep by compliance team.` },
+            { time: '11:00 AM', description: `Arrival and reception by Factory Admin.` },
+            { time: '11:30 AM', description: `Factory inspection and compliance review.` },
+            { time: '12:30 PM', description: `Lunch at Executive Conference Room.` }
         ],
         highlightTitle: "PROTOCOL | HIGHLIGHTS"
     };
 
     const sections: CanvasSection[] = [
-        createSection('focus-vvip', 'VVIP Visit Protocol', JSON.stringify(protocolData), 'text'),
+        createSection('focus-auditor', 'Government Inspection Protocol', JSON.stringify(protocolData), 'text'),
         createPlannerSection(
-            `[·] Coordinate with District Police for pilot & escort\n[·] Brief Sringeri protocol officers on guest profile\n[·] Secure private darshan window (30 mins)\n[·] Confirm special prasadam & shalu arrangements`,
-            'State Guest Protocol',
-            'planner-vvip'
+            `[·] Coordinate with local authorities for escort & access\n[·] Brief factory protocol officers on inspection requirements\n[·] Secure inspection window for production areas (30 mins)\n[·] Confirm documentation & compliance records ready`,
+            'Inspection Protocol',
+            'planner-auditor'
         )
     ];
 
     return {
         handled: true,
         sections,
-        message: `I've prepared the protocol briefing and planner actions for the ${visitorName}'s visit.`
+        message: `I've prepared the inspection protocol briefing and planner actions for the ${visitorName}'s visit.`
     };
 }
 
@@ -415,7 +415,7 @@ function handleApproval(query: string, lowercaseQuery: string): SpecialScenarioR
     }
 
     const isViewOnly = lowercaseQuery.startsWith('show') || lowercaseQuery.includes('view') || lowercaseQuery.includes('list') || lowercaseQuery.includes('check');
-    const focusContent = 'You have 3 high-priority approvals pending for the Gold Kavacha restoration. Delay may impact the upcoming festival schedule.';
+    const focusContent = 'You have 3 high-priority approvals pending for the crushing unit equipment upgrade. Delay may impact the upcoming production season schedule.';
 
     const sections: CanvasSection[] = [
         createSection('focus-approval', 'Approval Briefing', focusContent, 'text')
@@ -423,7 +423,7 @@ function handleApproval(query: string, lowercaseQuery: string): SpecialScenarioR
 
     if (!isViewOnly) {
         sections.push(createPlannerSection(
-            '[·] Review Priest\'s technical request\n[·] Verify insurance coverage extension\n[·] Confirm artisan availability for Jan 15',
+            '[·] Review Production Manager\'s technical request\n[·] Verify equipment warranty coverage extension\n[·] Confirm maintenance team availability for Jan 15',
             undefined,
             'approval-steps'
         ));
@@ -445,8 +445,8 @@ function handleScheduleReview(query: string, lowercaseQuery: string): SpecialSce
 
     let cardType = 'appointment';
     if (lowercaseQuery.includes('review')) cardType = 'review';
-    else if (lowercaseQuery.includes('event') || lowercaseQuery.includes('yaga')) cardType = 'event';
-    else if (lowercaseQuery.includes('ritual') || lowercaseQuery.includes('pooja')) cardType = 'ritual';
+    else if (lowercaseQuery.includes('event') || lowercaseQuery.includes('batch')) cardType = 'event';
+    else if (lowercaseQuery.includes('quality') || lowercaseQuery.includes('inspection')) cardType = 'inspection';
 
     const subject = query.replace(/^(schedule|review|plan)\s+/i, '').split(' on ')[0].split(' at ')[0];
 
@@ -455,12 +455,12 @@ function handleScheduleReview(query: string, lowercaseQuery: string): SpecialSce
         subject: subject.charAt(0).toUpperCase() + subject.slice(1),
         dateTime: "Tomorrow, 10:00 AM",
         intent: "Align key stakeholders on execution roadmap and identify blockers.",
-        plannedBy: "Temple CEO",
+        plannedBy: "Factory Admin",
         visibility: "Executive"
     };
 
     const sections: CanvasSection[] = [
-        createSection('focus-ceo-card', 'Executive Plan', JSON.stringify(cardData), 'text')
+        createSection('focus-admin-card', 'Executive Plan', JSON.stringify(cardData), 'text')
     ];
 
     return {
@@ -481,9 +481,10 @@ function handleDirective(query: string, lowercaseQuery: string): SpecialScenario
     const cleanDirective = query.replace(/^(direct|instruct|ask|tell|ensure)\s+/i, '');
 
     let dept = 'Operations';
-    if (cleanDirective.toLowerCase().includes('security') || cleanDirective.toLowerCase().includes('guard')) dept = 'Security';
+    if (cleanDirective.toLowerCase().includes('quality') || cleanDirective.toLowerCase().includes('inspection')) dept = 'Quality Control';
     else if (cleanDirective.toLowerCase().includes('finance') || cleanDirective.toLowerCase().includes('money')) dept = 'Finance';
-    else if (cleanDirective.toLowerCase().includes('priest') || cleanDirective.toLowerCase().includes('ritual')) dept = 'Rituals';
+    else if (cleanDirective.toLowerCase().includes('production') || cleanDirective.toLowerCase().includes('crushing')) dept = 'Production';
+    else if (cleanDirective.toLowerCase().includes('inventory') || cleanDirective.toLowerCase().includes('storage')) dept = 'Inventory';
 
     const taggedAction = `[·] [DIRECTIVE] [PRIORITY:HIGH] [DEPT:${dept}] ${cleanDirective.charAt(0).toUpperCase() + cleanDirective.slice(1)}`;
 
@@ -499,52 +500,52 @@ function handleDirective(query: string, lowercaseQuery: string): SpecialScenario
 }
 
 /**
- * Handle Governor Karnataka specific queries
+ * Handle Government Auditor specific queries
  */
-function handleGovernorKarnataka(query: string, lowercaseQuery: string): SpecialScenarioResult {
-    if (!lowercaseQuery.includes('governor') || (!lowercaseQuery.includes('karnataka') && !lowercaseQuery.includes('visit'))) {
+function handleGovernmentAuditor(query: string, lowercaseQuery: string): SpecialScenarioResult {
+    if (!lowercaseQuery.includes('auditor') || (!lowercaseQuery.includes('government') && !lowercaseQuery.includes('visit'))) {
         return { handled: false };
     }
 
-    const vipData = {
-        visitor: "Thawar Chand Gehlot",
-        title: "Governor of Karnataka",
+    const auditorData = {
+        visitor: "Government Compliance Auditor",
+        title: "State Compliance Inspector",
         dateTime: "15th Jan, 2024 at 11:30 AM",
-        location: "Main Entrance (Raja Gopuram)",
+        location: "Main Factory Entrance",
         protocolLevel: "high",
         delegationSize: "~12 persons",
         todayHighlights: [
-            { time: '11:00 AM', description: 'Pre-arrival security sweep of Raj Niwas Guest House.' },
-            { time: '11:30 AM', description: 'Arrival at Raja Gopuram and ceremonial welcome.' },
-            { time: '12:00 PM', description: 'Special Darshan at Sri Sharadamba Temple.' },
-            { time: '01:00 PM', description: 'Lunch at Executive Guest House with Temple Trust.' }
+            { time: '11:00 AM', description: 'Pre-arrival safety sweep of factory premises.' },
+            { time: '11:30 AM', description: 'Arrival at main factory entrance and welcome.' },
+            { time: '12:00 PM', description: 'Factory inspection and compliance review.' },
+            { time: '01:00 PM', description: 'Lunch at Executive Conference Room with Factory Management.' }
         ],
         highlightTitle: "JANUARY 15 | HIGHLIGHTS",
         highlights: [
-            { time: '11:00 AM', description: 'Pre-arrival security sweep of Raj Niwas Guest House.' },
-            { time: '11:30 AM', description: 'Arrival at Raja Gopuram and ceremonial welcome.' },
-            { time: '12:00 PM', description: 'Special Darshan at Sri Sharadamba Temple.' },
-            { time: '01:00 PM', description: 'Lunch at Executive Guest House with Temple Trust.' }
+            { time: '11:00 AM', description: 'Pre-arrival safety sweep of factory premises.' },
+            { time: '11:30 AM', description: 'Arrival at main factory entrance and welcome.' },
+            { time: '12:00 PM', description: 'Factory inspection and compliance review.' },
+            { time: '01:00 PM', description: 'Lunch at Executive Conference Room with Factory Management.' }
         ]
     };
 
     const sections: CanvasSection[] = [
-        createSection('focus-vip', 'VIP Protocol Brief: Governor Visit', JSON.stringify(vipData), 'text'),
+        createSection('focus-auditor', 'Inspection Protocol Brief: Government Auditor Visit', JSON.stringify(auditorData), 'text'),
         createPlannerSection(
-            `[·] Coordinate with Raj Bhavan protocol office
-[·] Arrange Z-category security escort from entry
-[·] Reserve Executive Guest House for lunch
-[·] Prepare Poornakumbha Swagata at main gate
-[·] Ensure media-free corridor during darshan`,
-            'Governor Protocol Plan',
-            'planner-governor'
+            `[·] Coordinate with government compliance office
+[·] Arrange high-priority safety escort from entry
+[·] Reserve Executive Conference Room for meeting
+[·] Prepare compliance documentation at main gate
+[·] Ensure inspection-ready corridor during factory tour`,
+            'Auditor Inspection Plan',
+            'planner-auditor'
         )
     ];
 
     return {
         handled: true,
         sections,
-        message: "I've prepared the protocol briefing and planner actions for the Governor's visit."
+        message: "I've prepared the inspection protocol briefing and planner actions for the Government Auditor's visit."
     };
 }
 

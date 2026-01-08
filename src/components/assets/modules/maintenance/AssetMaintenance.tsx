@@ -14,7 +14,7 @@ export default function AssetMaintenance() {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-sm font-bold hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-sm font-bold hover:bg-industrial-gray/90 transition-all"
                 >
                     <Wrench size={18} />
                     <span>Schedule Maintenance</span>
@@ -55,7 +55,7 @@ export default function AssetMaintenance() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Select Asset *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="">Select Asset</option>
                         </select>
                     </div>
@@ -63,7 +63,7 @@ export default function AssetMaintenance() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Maintenance Type *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="preventive">Preventive</option>
                             <option value="corrective">Corrective</option>
                             <option value="predictive">Predictive</option>
@@ -76,7 +76,7 @@ export default function AssetMaintenance() {
                             </label>
                             <input
                                 type="date"
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                         <div>
@@ -85,7 +85,7 @@ export default function AssetMaintenance() {
                             </label>
                             <input
                                 type="number"
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                     </div>
@@ -95,13 +95,13 @@ export default function AssetMaintenance() {
                         </label>
                         <textarea
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Schedule Maintenance
                         </button>

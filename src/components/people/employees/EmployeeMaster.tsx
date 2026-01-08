@@ -160,7 +160,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                 >
                     <Plus size={18} />
                     <span>Add Employee</span>
@@ -180,8 +180,8 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                             className="flex items-center justify-between p-4 rounded-lg border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 transition-all"
                         >
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-earth-900/10 flex items-center justify-center">
-                                    <User size={18} className="text-earth-900" />
+                                <div className="w-10 h-10 rounded-full bg-industrial-gray/10 flex items-center justify-center">
+                                    <User size={18} className="text-industrial-gray" />
                                 </div>
                                 <div>
                                     <div className="text-sm font-medium text-neutral-900">{employee.name}</div>
@@ -225,7 +225,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                 required
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.name ? 'border-red-300' : 'border-neutral-200'}`}
+                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.name ? 'border-red-300' : 'border-neutral-200'}`}
                             />
                             {errors.name && <p className="text-xs text-red-600 mt-1">{errors.name}</p>}
                         </div>
@@ -240,7 +240,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                 required
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.email ? 'border-red-300' : 'border-neutral-200'}`}
+                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.email ? 'border-red-300' : 'border-neutral-200'}`}
                             />
                             {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
                         </div>
@@ -256,7 +256,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                     required
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.password ? 'border-red-300' : 'border-neutral-200'}`}
+                                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.password ? 'border-red-300' : 'border-neutral-200'}`}
                                 />
                                 {errors.password && <p className="text-xs text-red-600 mt-1">{errors.password}</p>}
                             </div>
@@ -269,7 +269,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                     required
                                     value={formData.confirmPassword}
                                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.confirmPassword ? 'border-red-300' : 'border-neutral-200'}`}
+                                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.confirmPassword ? 'border-red-300' : 'border-neutral-200'}`}
                                 />
                                 {errors.confirmPassword && <p className="text-xs text-red-600 mt-1">{errors.confirmPassword}</p>}
                             </div>
@@ -284,7 +284,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                 required
                                 value={formData.departmentId}
                                 onChange={(e) => setFormData({ ...formData, departmentId: e.target.value, roleId: '' })}
-                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.departmentId ? 'border-red-300' : 'border-neutral-200'}`}
+                                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.departmentId ? 'border-red-300' : 'border-neutral-200'}`}
                             >
                                 <option value="">Select Department</option>
                                 {departments.filter(d => d.isActive).map((dept) => (
@@ -308,7 +308,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                     type="text"
                                     value={formData.employeeId}
                                     onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
-                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                 />
                             </div>
                             <div>
@@ -319,7 +319,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                     type="tel"
                                     value={formData.phone}
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                 />
                             </div>
                         </div>
@@ -332,7 +332,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                 value={formData.address}
                                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                                 rows={2}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
 
@@ -344,7 +344,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                 type="date"
                                 value={formData.dateOfBirth}
                                 onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                     </div>
@@ -365,7 +365,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                         </div>
 
                         {formData.assignRole && (
-                            <div className="space-y-4 pl-6 border-l-2 border-earth-200 bg-earth-50/30 p-4 rounded-lg">
+                            <div className="space-y-4 pl-6 border-l-2 border-cane-green/20 bg-soft-white/30 p-4 rounded-lg">
                                 <div>
                                     <label className="block text-sm font-medium text-neutral-900 mb-1">
                                         Role *
@@ -374,7 +374,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                         required={formData.assignRole}
                                         value={formData.roleId}
                                         onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
-                                        className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.roleId ? 'border-red-300' : 'border-neutral-200'}`}
+                                        className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.roleId ? 'border-red-300' : 'border-neutral-200'}`}
                                     >
                                         <option value="">Select Role</option>
                                         {availableRoles.map((role) => (
@@ -392,7 +392,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                         <select
                                             value={formData.assignmentType}
                                             onChange={(e) => setFormData({ ...formData, assignmentType: e.target.value as RoleAssignmentType })}
-                                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                         >
                                             <option value="primary">Primary</option>
                                             <option value="secondary">Secondary</option>
@@ -406,7 +406,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                                             type="date"
                                             value={formData.roleStartDate}
                                             onChange={(e) => setFormData({ ...formData, roleStartDate: e.target.value })}
-                                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                         />
                                     </div>
                                 </div>
@@ -423,7 +423,7 @@ export default function EmployeeMaster({ employees, departments, roles, setEmplo
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Create Employee
                         </button>

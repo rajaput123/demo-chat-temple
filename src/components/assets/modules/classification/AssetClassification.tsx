@@ -15,7 +15,7 @@ export default function AssetClassification() {
                         {['Movable', 'Immovable', 'Semi-Movable'].map(t => (
                             <div key={t} className="p-4 rounded-xl border border-slate-100 flex items-center justify-between hover:border-slate-900 transition-all cursor-pointer group bg-slate-50/30">
                                 <span className="text-sm font-bold text-slate-900">{t}</span>
-                                <div className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-earth-900" />
+                                <div className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-industrial-gray" />
                             </div>
                         ))}
                     </div>
@@ -49,14 +49,14 @@ export default function AssetClassification() {
                         {['Capital Asset', 'Revenue/Consumable', 'Endowment'].map(t => (
                             <div key={t} className="p-4 rounded-xl border border-slate-100 flex items-center justify-between hover:border-slate-900 transition-all cursor-pointer group bg-slate-50/30">
                                 <span className="text-sm font-bold text-slate-900">{t}</span>
-                                <div className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-earth-900" />
+                                <div className="w-2 h-2 rounded-full bg-slate-300 group-hover:bg-industrial-gray" />
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
 
-            <div className="mt-8 p-8 bg-earth-900 rounded-[32px] text-white">
+            <div className="mt-8 p-8 bg-industrial-gray rounded-[32px] text-white">
                 <div className="flex items-start gap-6">
                     <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="text-white" size={24} />

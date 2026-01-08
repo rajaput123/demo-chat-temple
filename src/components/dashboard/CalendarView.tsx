@@ -11,9 +11,9 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
     const [activeCalendar, setActiveCalendar] = useState(selectedCalendar);
 
     const calendars = [
-        { name: 'Temple Calendar', color: 'bg-earth-600' },
-        { name: 'Shri Gurugal', color: 'bg-earth-800' },
-        { name: 'Temple Executive', color: 'bg-earth-400' }
+        { name: 'Temple Calendar', color: 'bg-cane-green' },
+        { name: 'Shri Gurugal', color: 'bg-industrial-gray/90' },
+        { name: 'Temple Executive', color: 'bg-cane-green' }
     ];
 
     const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -57,7 +57,7 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                             <div className="flex-1 h-6 rounded bg-neutral-50/0 group-hover:bg-neutral-50 transition-colors" />
                             {/* Example event for demo */}
                             {hour === 10 && (
-                                <div className="absolute left-16 top-1 right-2 bg-earth-100 border-l-2 border-earth-900 p-1.5 rounded-r text-xs text-earth-900 pointer-events-none">
+                                <div className="absolute left-16 top-1 right-2 bg-cane-green/10 border-l-2 border-industrial-gray p-1.5 rounded-r text-xs text-industrial-gray pointer-events-none">
                                     <span className="font-bold">Team Sync</span> • 10:00 - 11:00 AM
                                 </div>
                             )}
@@ -86,8 +86,8 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                                 setActiveView('month');
                             }}
                             className={`p-4 rounded-lg text-sm font-medium transition-all text-center border ${currentDate.getMonth() === idx && currentDate.getFullYear() === 2026 // Highlight active month
-                                ? 'bg-earth-900 text-white border-earth-900 shadow-sm'
-                                : 'bg-white text-neutral-600 border-neutral-100 hover:border-earth-200 hover:text-earth-900'
+                                ? 'bg-industrial-gray text-white border-industrial-gray shadow-sm'
+                                : 'bg-white text-neutral-600 border-neutral-100 hover:border-cane-green/20 hover:text-industrial-gray'
                                 }`}
                         >
                             {m.slice(0, 3)}
@@ -134,7 +134,7 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                                 className={`aspect-square flex items-center justify-center rounded-lg text-sm transition-all cursor-pointer ${isEmpty
                                     ? ''
                                     : isSelected
-                                        ? 'bg-earth-900 text-white font-medium shadow-sm'
+                                        ? 'bg-industrial-gray text-white font-medium shadow-sm'
                                         : 'text-neutral-600 hover:bg-neutral-50 font-normal'
                                     }`}
                             >
@@ -158,8 +158,8 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                             key={view}
                             onClick={() => setActiveView(view.toLowerCase() as 'day' | 'month' | 'year')}
                             className={`px-3 py-1.5 text-[11px] sm:text-xs font-medium rounded-md transition-all ${activeView === view.toLowerCase()
-                                ? 'bg-white text-earth-900 shadow-sm ring-1 ring-black/5'
-                                : 'text-neutral-500 hover:text-earth-900'
+                                ? 'bg-white text-industrial-gray shadow-sm ring-1 ring-black/5'
+                                : 'text-neutral-500 hover:text-industrial-gray'
                                 }`}
                         >
                             {view}
@@ -175,8 +175,8 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                         key={cal.name}
                         onClick={() => setActiveCalendar(cal.name)}
                         className={`px-3 py-2 rounded-lg text-[11px] sm:text-xs font-medium transition-all border ${activeCalendar === cal.name
-                            ? 'bg-earth-900 text-white border-earth-900'
-                            : 'bg-white text-neutral-600 border-neutral-200 hover:border-earth-200 hover:text-earth-700'
+                            ? 'bg-industrial-gray text-white border-industrial-gray'
+                            : 'bg-white text-neutral-600 border-neutral-200 hover:border-cane-green/20 hover:text-cane-green/80'
                             }`}
                     >
                         {cal.name}
@@ -191,25 +191,25 @@ export default function CalendarView({ selectedCalendar = 'Temple Calendar' }: C
                     <div className="flex items-center gap-1 bg-neutral-50 p-0.5 rounded-lg border border-neutral-200/50">
                         <button
                             onClick={() => navigateDate('prev')}
-                            className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all text-neutral-400 hover:text-earth-900"
+                            className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all text-neutral-400 hover:text-industrial-gray"
                         >
                             <ChevronLeft size={16} />
                         </button>
                         <button
                             onClick={goToToday}
-                            className="px-3 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider text-neutral-600 hover:text-earth-900 transition-colors"
+                            className="px-3 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider text-neutral-600 hover:text-industrial-gray transition-colors"
                         >
                             Today
                         </button>
                         <button
                             onClick={() => navigateDate('next')}
-                            className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all text-neutral-400 hover:text-earth-900"
+                            className="p-1.5 hover:bg-white hover:shadow-sm rounded-md transition-all text-neutral-400 hover:text-industrial-gray"
                         >
                             <ChevronRight size={16} />
                         </button>
                     </div>
                 </div>
-                <button className="flex items-center justify-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-[0.1em] hover:bg-earth-800 transition-all shadow-lg active:scale-95 w-full sm:w-auto">
+                <button className="flex items-center justify-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-[0.1em] hover:bg-industrial-gray/90 transition-all shadow-lg active:scale-95 w-full sm:w-auto">
                     <Plus size={14} strokeWidth={3} />
                     <span>Add Event</span>
                 </button>

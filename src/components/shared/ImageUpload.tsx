@@ -86,8 +86,8 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 10, ma
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
                     isDragging
-                        ? 'border-earth-600 bg-earth-50'
-                        : 'border-neutral-300 hover:border-earth-400 hover:bg-neutral-50'
+                        ? 'border-cane-green bg-soft-white'
+                        : 'border-neutral-300 hover:border-cane-green hover:bg-neutral-50'
                 }`}
             >
                 <input
@@ -99,8 +99,8 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 10, ma
                     className="hidden"
                 />
                 <div className="flex flex-col items-center gap-3">
-                    <div className={`p-3 rounded-full ${isDragging ? 'bg-earth-100' : 'bg-neutral-100'}`}>
-                        <Upload size={24} className={isDragging ? 'text-earth-600' : 'text-neutral-600'} />
+                    <div className={`p-3 rounded-full ${isDragging ? 'bg-cane-green/10' : 'bg-neutral-100'}`}>
+                        <Upload size={24} className={isDragging ? 'text-cane-green' : 'text-neutral-600'} />
                     </div>
                     <div>
                         <p className="text-sm font-medium text-neutral-900">

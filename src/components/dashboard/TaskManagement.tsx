@@ -50,7 +50,7 @@ export default function TaskManagement() {
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">Roadmap</span>
                     <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Active Tasks</h3>
                 </div>
-                <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-earth-900 text-white rounded-full hover:bg-earth-800 transition-all shadow-xl active:scale-95 shrink-0">
+                <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-industrial-gray text-white rounded-full hover:bg-industrial-gray/90 transition-all shadow-xl active:scale-95 shrink-0">
                     <Plus size={20} />
                 </button>
             </div>
@@ -69,8 +69,8 @@ export default function TaskManagement() {
                                 </svg>
                             </div>
                         ) : (
-                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
-                                <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 group-hover:bg-earth-600" />
+                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
+                                <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 group-hover:bg-cane-green" />
                             </div>
                         )}
 

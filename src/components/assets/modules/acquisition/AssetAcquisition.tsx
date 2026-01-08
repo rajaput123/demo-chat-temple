@@ -41,7 +41,7 @@ export default function AssetAcquisition() {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-sm font-bold hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-sm font-bold hover:bg-industrial-gray/90 transition-all"
                 >
                     <PlusCircle size={18} />
                     <span>Acquire Asset</span>
@@ -81,7 +81,7 @@ export default function AssetAcquisition() {
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -93,7 +93,7 @@ export default function AssetAcquisition() {
                                 required
                                 value={formData.category}
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value as AssetCategory })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             >
                                 <option value="physical-general">Physical - General</option>
                                 <option value="sacred-valuable">Sacred & Valuable</option>
@@ -109,7 +109,7 @@ export default function AssetAcquisition() {
                                 required
                                 value={formData.departmentId}
                                 onChange={(e) => setFormData({ ...formData, departmentId: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             >
                                 <option value="">Select Department</option>
                                 {/* Departments will be loaded from People module */}
@@ -128,7 +128,7 @@ export default function AssetAcquisition() {
                                 step="0.01"
                                 value={formData.acquisitionCost}
                                 onChange={(e) => setFormData({ ...formData, acquisitionCost: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                         <div>
@@ -140,7 +140,7 @@ export default function AssetAcquisition() {
                                 required
                                 value={formData.acquisitionDate}
                                 onChange={(e) => setFormData({ ...formData, acquisitionDate: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                     </div>
@@ -152,7 +152,7 @@ export default function AssetAcquisition() {
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
@@ -163,7 +163,7 @@ export default function AssetAcquisition() {
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Acquire Asset
                         </button>

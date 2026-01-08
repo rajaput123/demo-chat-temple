@@ -284,7 +284,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                     onClick={() => setActiveTab('details')}
                     className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 ${
                         activeTab === 'details'
-                            ? 'text-earth-900 border-earth-900'
+                            ? 'text-industrial-gray border-industrial-gray'
                             : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                     }`}
                 >
@@ -294,7 +294,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                     onClick={() => setActiveTab('images')}
                     className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 flex items-center gap-2 ${
                         activeTab === 'images'
-                            ? 'text-earth-900 border-earth-900'
+                            ? 'text-industrial-gray border-industrial-gray'
                             : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                     }`}
                 >
@@ -363,7 +363,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                                 key={idx}
                                 onClick={() => setSelectedImageIndex(idx)}
                                 className={`relative h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                                    idx === selectedImageIndex ? 'border-earth-600' : 'border-transparent hover:border-neutral-300'
+                                    idx === selectedImageIndex ? 'border-cane-green' : 'border-transparent hover:border-neutral-300'
                                 }`}
                             >
                                 <img
@@ -386,7 +386,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Type</h3>
-                            <span className="px-3 py-1 bg-earth-100 text-earth-700 rounded text-sm font-bold uppercase">
+                            <span className="px-3 py-1 bg-cane-green/10 text-cane-green/80 rounded text-sm font-bold uppercase">
                                 {seva.type}
                             </span>
                         </div>
@@ -394,15 +394,15 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                         <div>
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Price</h3>
                             <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                <IndianRupee size={16} className="text-earth-600" />
-                                <span className="font-bold text-earth-600">₹{seva.price}</span>
+                                <IndianRupee size={16} className="text-cane-green" />
+                                <span className="font-bold text-cane-green">₹{seva.price}</span>
                             </div>
                         </div>
 
                         <div>
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Duration</h3>
                             <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                <Clock size={16} className="text-earth-600" />
+                                <Clock size={16} className="text-cane-green" />
                                 <span>{seva.duration} minutes</span>
                             </div>
                         </div>
@@ -411,7 +411,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                             <div>
                                 <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Max Participants</h3>
                                 <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                    <Users size={16} className="text-earth-600" />
+                                    <Users size={16} className="text-cane-green" />
                                     <span>{seva.maxParticipants} people</span>
                                 </div>
                             </div>
@@ -436,7 +436,7 @@ const SevaDetailsModal = ({ seva, isOpen, onClose, onUpdateImages }: { seva: Sev
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Available Time Slots</h3>
                             <div className="flex flex-wrap gap-2">
                                 {seva.availableTimeSlots.map((slot) => (
-                                    <span key={slot} className="px-3 py-1 bg-earth-100 text-earth-700 rounded text-sm font-medium">
+                                    <span key={slot} className="px-3 py-1 bg-cane-green/10 text-cane-green/80 rounded text-sm font-medium">
                                         {slot}
                                     </span>
                                 ))}
@@ -481,7 +481,7 @@ export default function SevaDarshanManagement() {
         const statusConfig: { [key: string]: { bg: string; text: string; icon: any } } = {
             'available': { bg: 'bg-green-100', text: 'text-green-700', icon: CheckCircle },
             'booked': { bg: 'bg-blue-100', text: 'text-blue-700', icon: AlertCircle },
-            'completed': { bg: 'bg-earth-100', text: 'text-earth-700', icon: CheckCircle },
+            'completed': { bg: 'bg-cane-green/10', text: 'text-cane-green/80', icon: CheckCircle },
             'cancelled': { bg: 'bg-red-100', text: 'text-red-700', icon: XCircle },
             'in-queue': { bg: 'bg-yellow-100', text: 'text-yellow-700', icon: AlertCircle },
             'in-progress': { bg: 'bg-blue-100', text: 'text-blue-700', icon: Clock },
@@ -515,7 +515,7 @@ export default function SevaDarshanManagement() {
                         onClick={() => setActiveTab(tab)}
                         className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors ${
                             activeTab === tab
-                                ? 'text-earth-900 border-b-2 border-earth-900'
+                                ? 'text-industrial-gray border-b-2 border-industrial-gray'
                                 : 'text-neutral-500 hover:text-neutral-700'
                         }`}
                     >
@@ -529,7 +529,7 @@ export default function SevaDarshanManagement() {
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-black text-slate-900">Available Seva Services</h3>
-                        <button className="px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all">
+                        <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all">
                             Add Seva
                         </button>
                     </div>
@@ -561,7 +561,7 @@ export default function SevaDarshanManagement() {
                                 <div className="flex items-start justify-between mb-3">
                                     <div>
                                         <h4 className="text-base font-black text-slate-900 mb-1">{seva.name}</h4>
-                                        <span className="px-2 py-0.5 bg-earth-100 text-earth-700 rounded text-[10px] font-bold uppercase">
+                                        <span className="px-2 py-0.5 bg-cane-green/10 text-cane-green/80 rounded text-[10px] font-bold uppercase">
                                             {seva.type}
                                         </span>
                                     </div>
@@ -585,7 +585,7 @@ export default function SevaDarshanManagement() {
                                     </div>
                                     <div className="flex items-center gap-1.5">
                                         <IndianRupee size={14} />
-                                        <span className="font-bold text-earth-600">₹{seva.price}</span>
+                                        <span className="font-bold text-cane-green">₹{seva.price}</span>
                                     </div>
                                     {seva.maxParticipants && (
                                         <div className="flex items-center gap-1.5">
@@ -605,7 +605,7 @@ export default function SevaDarshanManagement() {
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-black text-slate-900">Darshan Types</h3>
-                        <button className="px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all">
+                        <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all">
                             Add Darshan
                         </button>
                     </div>
@@ -620,7 +620,7 @@ export default function SevaDarshanManagement() {
                                     <div className="flex items-start justify-between mb-3">
                                         <div>
                                             <h4 className="text-base font-black text-slate-900 mb-1">{darshan.name}</h4>
-                                            <span className="px-2 py-0.5 bg-earth-100 text-earth-700 rounded text-[10px] font-bold uppercase">
+                                            <span className="px-2 py-0.5 bg-cane-green/10 text-cane-green/80 rounded text-[10px] font-bold uppercase">
                                                 {darshan.type}
                                             </span>
                                         </div>
@@ -637,7 +637,7 @@ export default function SevaDarshanManagement() {
                                     <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500 mb-3">
                                         <div className="flex items-center gap-1.5">
                                             <IndianRupee size={14} />
-                                            <span className="font-bold text-earth-600">
+                                            <span className="font-bold text-cane-green">
                                                 {darshan.price === 0 ? 'Free' : `₹${darshan.price}`}
                                             </span>
                                         </div>
@@ -653,7 +653,7 @@ export default function SevaDarshanManagement() {
                                                 <span>
                                                     {darshan.currentQueueLength || 0} / {darshan.queueCapacity}
                                                     {darshan.currentQueueLength && (
-                                                        <span className="ml-1 text-earth-600 font-bold">
+                                                        <span className="ml-1 text-cane-green font-bold">
                                                             ({queuePercentage}%)
                                                         </span>
                                                     )}
@@ -673,7 +673,7 @@ export default function SevaDarshanManagement() {
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-black text-slate-900">Seva Bookings</h3>
-                        <button className="px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all">
+                        <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all">
                             New Booking
                         </button>
                     </div>
@@ -704,7 +704,7 @@ export default function SevaDarshanManagement() {
                                         </div>
                                         <div className="flex items-center gap-1.5">
                                             <IndianRupee size={14} />
-                                            <span className="font-bold text-earth-600">₹{booking.totalAmount}</span>
+                                            <span className="font-bold text-cane-green">₹{booking.totalAmount}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -744,14 +744,14 @@ export default function SevaDarshanManagement() {
                                             </div>
                                         )}
                                         {entry.tokenNumber && (
-                                            <span className="px-2 py-0.5 bg-earth-100 text-earth-700 rounded text-[10px] font-bold">
+                                            <span className="px-2 py-0.5 bg-cane-green/10 text-cane-green/80 rounded text-[10px] font-bold">
                                                 Token: {entry.tokenNumber}
                                             </span>
                                         )}
                                         {entry.amount && (
                                             <div className="flex items-center gap-1.5">
                                                 <IndianRupee size={14} />
-                                                <span className="font-bold text-earth-600">₹{entry.amount}</span>
+                                                <span className="font-bold text-cane-green">₹{entry.amount}</span>
                                             </div>
                                         )}
                                     </div>

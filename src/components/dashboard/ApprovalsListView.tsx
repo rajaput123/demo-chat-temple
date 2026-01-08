@@ -79,11 +79,11 @@ export default function ApprovalsListView({ filter = 'today' }: ApprovalsListVie
                             key={approval.id}
                             className="flex items-start gap-3 group transition-all"
                         >
-                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
+                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
                                 {approval.priority === 'high' ? (
                                     <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
                                 ) : approval.priority === 'medium' ? (
-                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-harvest-yellow" />
                                 ) : (
                                     <div className="w-1.5 h-1.5 rounded-full bg-neutral-900" />
                                 )}

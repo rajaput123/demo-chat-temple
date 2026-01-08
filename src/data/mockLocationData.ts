@@ -1,102 +1,102 @@
 /**
- * Mock Data for Locations - Sringeri Sharada Peetham
+ * Mock Data for Locations - Sugarcane Factory
  * 
- * Temple locations including Sringeri main complex and Kigga
+ * Factory locations including main factory complex, cane yard, and processing units
  */
 
-export interface TempleLocation {
+export interface FactoryLocation {
     id: string;
     name: string;
-    type: 'temple' | 'facility' | 'accommodation' | 'educational' | 'other';
+    type: 'production' | 'facility' | 'storage' | 'office' | 'other';
     description: string;
     address?: string;
     capacity?: number;
     status: 'operational' | 'under-maintenance' | 'closed';
-    associatedWith?: string; // Associated deity, purpose, etc.
+    associatedWith?: string; // Associated department, purpose, etc.
 }
 
-export const mockLocations: TempleLocation[] = [
+export const mockLocations: FactoryLocation[] = [
     {
-        id: 'loc-sringeri-main',
-        name: 'Sringeri Main Temple Complex',
-        type: 'temple',
-        description: 'Main temple complex housing Sharada Temple and Vidyashankara Temple',
-        address: 'Sringeri, Chikkamagaluru district, Karnataka',
+        id: 'loc-factory-main',
+        name: 'Main Factory Complex',
+        type: 'production',
+        description: 'Main factory complex housing crushing unit and production floor',
+        address: 'Factory District, Industrial Area, Karnataka',
         status: 'operational',
-        associatedWith: 'Sharada Devi, Vidyashankara'
+        associatedWith: 'Production, Quality Control'
     },
     {
-        id: 'loc-sharada-temple',
-        name: 'Sharada Temple',
-        type: 'temple',
-        description: 'Dedicated to Goddess Sharada (Saraswati) - the deity of knowledge and learning',
-        address: 'Sringeri Main Complex',
+        id: 'loc-crushing-unit',
+        name: 'Crushing Unit',
+        type: 'production',
+        description: 'Primary crushing unit for sugarcane processing',
+        address: 'Main Factory Complex',
         status: 'operational',
-        associatedWith: 'Sharada Devi'
+        associatedWith: 'Production Department'
     },
     {
-        id: 'loc-vidyashankara-temple',
-        name: 'Vidyashankara Temple',
-        type: 'temple',
-        description: 'Famous for its astronomical and architectural design',
-        address: 'Sringeri Main Complex',
+        id: 'loc-production-floor',
+        name: 'Production Floor',
+        type: 'production',
+        description: 'Main production floor for sugar processing and packaging',
+        address: 'Main Factory Complex',
         status: 'operational',
-        associatedWith: 'Vidyashankara'
+        associatedWith: 'Production Department'
     },
     {
-        id: 'loc-kigga',
-        name: 'Kigga',
-        type: 'temple',
-        description: 'Associated temple location, often visited by Jagadguru',
-        address: 'Kigga, near Sringeri',
+        id: 'loc-cane-field',
+        name: 'Cane Field',
+        type: 'storage',
+        description: 'Cane field location, often visited by Factory Manager for quality inspection',
+        address: 'Cane Field, near Factory',
         status: 'operational',
-        associatedWith: 'Jagadguru visits'
+        associatedWith: 'Factory Manager visits'
     },
     {
         id: 'loc-guest-house',
         name: 'Guest House',
-        type: 'accommodation',
-        description: 'Accommodation facility for visiting devotees and dignitaries',
+        type: 'facility',
+        description: 'Accommodation facility for visiting suppliers and inspectors',
         capacity: 50,
         status: 'operational'
     },
     {
-        id: 'loc-dining-hall',
-        name: 'Annadanam Hall',
+        id: 'loc-canteen',
+        name: 'Factory Canteen',
         type: 'facility',
-        description: 'Dining hall for annadanam (free meals) to devotees',
+        description: 'Dining hall for factory staff and visitors',
         capacity: 500,
         status: 'operational'
     },
     {
-        id: 'loc-veda-pathashala',
-        name: 'Veda Pathashala',
-        type: 'educational',
-        description: 'Educational wing for teaching Vedas, Upanishads, and Vedanta',
+        id: 'loc-quality-lab',
+        name: 'Quality Control Lab',
+        type: 'facility',
+        description: 'Laboratory for quality testing and inspection',
         status: 'operational',
-        associatedWith: 'Vedic Education'
+        associatedWith: 'Quality Control'
     },
     {
-        id: 'loc-prasad-hall',
-        name: 'Prasad Distribution Hall',
-        type: 'facility',
-        description: 'Hall for distributing prasad to devotees',
+        id: 'loc-storage-hall',
+        name: 'Product Storage Hall',
+        type: 'storage',
+        description: 'Hall for storing finished sugar products',
         capacity: 200,
         status: 'operational'
     },
     {
-        id: 'loc-main-hall',
-        name: 'Main Hall',
-        type: 'facility',
-        description: 'Main hall for aarti, discourses, and gatherings',
-        capacity: 1000,
+        id: 'loc-conference-room',
+        name: 'Conference Room',
+        type: 'office',
+        description: 'Main conference room for meetings and briefings',
+        capacity: 100,
         status: 'operational'
     },
     {
         id: 'loc-parking',
-        name: 'Temple Parking Area',
+        name: 'Factory Parking Area',
         type: 'facility',
-        description: 'Parking facility for devotees and VIP vehicles',
+        description: 'Parking facility for staff and visitor vehicles',
         capacity: 150,
         status: 'operational'
     }

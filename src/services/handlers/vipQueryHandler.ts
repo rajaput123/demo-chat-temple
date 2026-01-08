@@ -1,6 +1,6 @@
 /**
- * VIP Query Handler
- * Handles VIP visit queries
+ * Supplier/Inspector Query Handler
+ * Handles supplier visit and inspection queries
  */
 
 import { CanvasSection } from '@/hooks/useSimulation';
@@ -25,16 +25,16 @@ export function handleVIPQuery(
 ): VIPQueryResult {
     const lowercaseQuery = query.toLowerCase();
 
-    // Skip if this is a "Show VIP visits" query (handled by QuickActionHandler)
-    const isShowVIPVisitsQuery = lowercaseQuery.startsWith('show') &&
-        (lowercaseQuery.includes('vip') && (lowercaseQuery.includes('visit') || lowercaseQuery.includes('visits')));
+    // Skip if this is a "Show supplier visits" query (handled by QuickActionHandler)
+    const isShowSupplierVisitsQuery = lowercaseQuery.startsWith('show') &&
+        (lowercaseQuery.includes('supplier') && (lowercaseQuery.includes('visit') || lowercaseQuery.includes('visits')));
 
-    if (isShowVIPVisitsQuery) {
+    if (isShowSupplierVisitsQuery) {
         return { handled: false };
     }
 
-    // Only handle if query contains VIP-related keywords
-    if (!lowercaseQuery.includes('vip') && !lowercaseQuery.includes('minister') && !lowercaseQuery.includes('visit')) {
+    // Only handle if query contains supplier/inspection-related keywords
+    if (!lowercaseQuery.includes('supplier') && !lowercaseQuery.includes('auditor') && !lowercaseQuery.includes('inspection') && !lowercaseQuery.includes('visit')) {
         return { handled: false };
     }
 
@@ -52,42 +52,42 @@ export function handleVIPQuery(
         // Format date
         const dateStr = parsedVisit.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-        // Create structured VIP data for the info card
-        const vipCardData = {
+        // Create structured supplier/inspection data for the info card
+        const supplierCardData = {
             visitor: parsedVisit.visitor,
             title: parsedVisit.title || '',
             dateTime: `${dateStr} at ${parsedVisit.time}`,
-            location: parsedVisit.location || 'Main Entrance',
+            location: parsedVisit.location || 'Main Factory Entrance',
             protocolLevel: parsedVisit.protocolLevel,
             delegationSize: '~15 persons',
-            leadEscort: 'Executive Officer',
+            leadEscort: 'Operations Manager',
             securityStatus: 'Briefed & Ready',
             todayHighlights: [
-                { time: '07:00 AM', description: 'Sri Gurugalu will perform the Morning Anushtana as part of the daily spiritual observances.' },
-                { time: '09:00 AM', description: 'The Sahasra Chandi Yaga Purnahuti will be conducted in the temple sanctum.' },
-                { time: '09:30 AM', description: 'VIP Darshan is scheduled for the Honourable Prime Minister, with special protocol arrangements in place.' },
-                { time: '04:00 PM', description: 'Sri Gurugalu will deliver the Evening Discourse, offering spiritual guidance and blessings to devotees.' }
+                { time: '07:00 AM', description: 'Factory Manager will perform the morning production review as part of daily operations.' },
+                { time: '09:00 AM', description: 'The production batch quality check will be conducted in the crushing unit.' },
+                { time: '09:30 AM', description: 'Supplier inspection is scheduled for the quality audit, with special protocol arrangements in place.' },
+                { time: '04:00 PM', description: 'Factory Manager will deliver the evening operations briefing, offering guidance and updates to staff.' }
             ],
-            templeEvents: [
-                { time: '09:00 AM', event: 'Sahasra Chandi Yaga Purnahuti' },
-                { time: '10:30 AM', event: 'Special Pooja for VIP Visit' },
-                { time: '04:00 PM', event: 'Evening Discourse' }
+            factoryEvents: [
+                { time: '09:00 AM', event: 'Production Batch Quality Check' },
+                { time: '10:30 AM', event: 'Special Quality Inspection for Supplier Visit' },
+                { time: '04:00 PM', event: 'Evening Operations Briefing' }
             ],
             executiveSchedule: [
-                { time: '08:30 AM', event: 'Security Briefing with Police Chief' },
-                { time: '09:00 AM', event: 'Receive Prime Minister at Helipad' },
-                { time: '11:00 AM', event: 'Press Briefing Review' },
+                { time: '08:30 AM', event: 'Safety Briefing with Quality Manager' },
+                { time: '09:00 AM', event: 'Receive Supplier at Main Entrance' },
+                { time: '11:00 AM', event: 'Production Review Meeting' },
                 { time: '02:00 PM', event: 'Internal Review Meeting' }
             ],
-            gurugaluSchedule: [
-                { time: '07:00 AM', event: 'Morning Anushtana' },
-                { time: '09:30 AM', event: 'VIP Darshan (Prime Minister)' },
-                { time: '10:30 AM', event: 'Public Discourse (Anugraha Bhashana)' },
-                { time: '05:00 PM', event: 'Evening Pooja' }
+            managerSchedule: [
+                { time: '07:00 AM', event: 'Morning Production Review' },
+                { time: '09:30 AM', event: 'Supplier Inspection (Quality Audit)' },
+                { time: '10:30 AM', event: 'Operations Briefing (Team Update)' },
+                { time: '05:00 PM', event: 'Evening Quality Check' }
             ]
         };
 
-        focusContent = JSON.stringify(vipCardData);
+        focusContent = JSON.stringify(supplierCardData);
 
         // Generate planner actions
         const tempVisit = {
@@ -106,33 +106,33 @@ export function handleVIPQuery(
         const actions = VIPPlannerService.generateVIPPlannerActions(tempVisit);
         plannerActions = VIPPlannerService.formatActionsForPlanner(actions);
     } else {
-        // Fallback VIP data
-        const fallbackVipData = {
-            visitor: 'Justice A. K. Reddy',
-            title: 'High Court Judge',
+        // Fallback supplier/inspection data
+        const fallbackSupplierData = {
+            visitor: 'Quality Inspector',
+            title: 'Government Compliance Auditor',
             dateTime: 'Today at 4:00 PM',
-            location: 'North Gate VIP Entrance',
+            location: 'Main Factory Entrance',
             protocolLevel: 'high',
             delegationSize: '~5 persons',
-            leadEscort: 'Executive Officer',
+            leadEscort: 'Operations Manager',
             securityStatus: 'Briefed & Ready'
         };
-        focusContent = JSON.stringify(fallbackVipData);
-        plannerActions = '[·] Reserve North Gate parking\n[·] Brief Sanctum security staff\n[·] Arrange Prasadam for 5 guests';
+        focusContent = JSON.stringify(fallbackSupplierData);
+        plannerActions = '[·] Reserve main entrance parking\n[·] Brief quality control staff\n[·] Arrange quality reports for 5 guests';
     }
 
     const sections: CanvasSection[] = [
-        createSection('focus-vip', 'VIP Protocol Brief', focusContent, 'text')
+        createSection('focus-supplier', 'Supplier Inspection Brief', focusContent, 'text')
     ];
 
-    // Always add planner for VIP queries
+    // Always add planner for supplier/inspection queries
     if (plannerActions) {
-        sections.push(createPlannerSection(plannerActions, 'VIP Plan', 'vip-checklist'));
+        sections.push(createPlannerSection(plannerActions, 'Inspection Plan', 'supplier-checklist'));
     }
 
-    let message = "I've prepared the VIP protocol briefing and planner actions.";
-    if (lowercaseQuery.includes('show') && lowercaseQuery.includes('vip')) {
-        message = "Here are the VIP visits and related planning actions.";
+    let message = "I've prepared the supplier inspection protocol briefing and planner actions.";
+    if (lowercaseQuery.includes('show') && lowercaseQuery.includes('supplier')) {
+        message = "Here are the supplier visits and related planning actions.";
     }
 
     return {

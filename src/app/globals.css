@@ -1,39 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  /* Earth Tone Palette
-     #683611 (Deep Brown)
-     #96581C (Bronze)
-     #D2973E (Gold)
-     #EEC76F (Sand)
-     #F6E8B8 (Cream)
-  */
+  /* Sugar Factory Industrial Palette */
+  --background: #F5F7F6;
+  --foreground: #37474F;
 
-  /* REDUCED PALETTE - MINIMALIST */
-  --background: #FFFFFF;
-  /* Pure White */
-  --foreground: #683611;
-  /* Deep Brown */
+  --sidebar-background: #37474F;
+  --sidebar-foreground: #F5F7F6;
 
-  --sidebar-background: #fdfaef;
-  /* User's Ultra Light */
-  --sidebar-foreground: #683611;
+  --card: #FFFFFF;
+  --card-foreground: #37474F;
 
-  --card: #fdfaef;
-  /* Match sidebar */
-  --card-foreground: #683611;
+  --muted: #E0E4E2;
+  --muted-foreground: #546E7A;
 
-  --muted: #fdfaef;
-  --muted-foreground: #96581C;
+  --primary: #2E7D32;
+  --primary-foreground: #FFFFFF;
 
-  --primary: #96581C;
-  /* Bronze */
-  --primary-foreground: #F6E8B8;
-  /* Cream text on dark buttons */
-
-  --accent: #D2973E;
-  /* Gold */
-  --accent-foreground: #683611;
+  --accent: #F9A825;
+  --accent-foreground: #37474F;
 }
 
 @theme inline {
@@ -48,11 +33,18 @@
   --color-accent: var(--accent);
 
   /* Custom palette aliases */
-  --color-earth-900: #683611;
-  --color-earth-800: #96581C;
-  --color-earth-600: #D2973E;
-  --color-earth-400: #EEC76F;
-  --color-earth-100: #F6E8B8;
+  --color-industrial-gray: #683611;
+  --color-industrial-gray/90: #96581C;
+  --color-cane-green: #D2973E;
+  --color-cane-green: #EEC76F;
+  --color-cane-green/10: #F6E8B8;
+
+  /* Sugar Factory Industrial Palette */
+  --color-cane-green: #2E7D32;
+  --color-harvest-yellow: #F9A825;
+  --color-industrial-gray: #37474F;
+  --color-soft-white: #F5F7F6;
+  --color-risk-red: #D32F2F;
 
   /* Font families - Inter for all text */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -239,9 +231,12 @@ body {
 }
 
 @keyframes gradient {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -257,6 +252,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -272,6 +268,7 @@ body {
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -287,6 +284,7 @@ body {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);

@@ -273,7 +273,7 @@ function InventoryContent() {
                     <div className="space-y-6">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-black text-slate-900 tracking-tight">Inventory Items</h3>
-                            <button className="px-4 py-2 bg-earth-900 text-white rounded-lg hover:bg-earth-800 transition-colors flex items-center gap-2">
+                            <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg hover:bg-industrial-gray/90 transition-colors flex items-center gap-2">
                                 <Plus size={18} />
                                 <span className="font-medium">Add Item</span>
                             </button>
@@ -821,7 +821,7 @@ function InventoryContent() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${isActive
-                                ? 'border-earth-600 text-earth-900 bg-earth-50/30'
+                                ? 'border-cane-green text-industrial-gray bg-soft-white/30'
                                 : 'border-transparent text-neutral-500 hover:text-neutral-900 hover:border-neutral-300'
                                 }`}
                         >

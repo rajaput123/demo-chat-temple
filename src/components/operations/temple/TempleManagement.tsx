@@ -181,9 +181,9 @@ const TempleNode = ({ temple, level = 0, onViewDetails }: { temple: TempleHierar
                                     )}
                                 </button>
                             )}
-                            <Building2 size={18} className="text-earth-600" />
+                            <Building2 size={18} className="text-cane-green" />
                             <h3 className="text-base font-black text-slate-900">{temple.name}</h3>
-                            <span className="px-2 py-0.5 bg-earth-100 text-earth-700 rounded text-[10px] font-bold uppercase">
+                            <span className="px-2 py-0.5 bg-cane-green/10 text-cane-green/80 rounded text-[10px] font-bold uppercase">
                                 {temple.code}
                             </span>
                         </div>
@@ -210,7 +210,7 @@ const TempleNode = ({ temple, level = 0, onViewDetails }: { temple: TempleHierar
                                         <span>
                                             {temple.currentOccupancy || 0} / {temple.capacity}
                                             {temple.currentOccupancy && (
-                                                <span className="ml-1 text-earth-600 font-bold">
+                                                <span className="ml-1 text-cane-green font-bold">
                                                     ({occupancyPercentage}%)
                                                 </span>
                                             )}
@@ -285,7 +285,7 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                     onClick={() => setActiveTab('details')}
                     className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 ${
                         activeTab === 'details'
-                            ? 'text-earth-900 border-earth-900'
+                            ? 'text-industrial-gray border-industrial-gray'
                             : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                     }`}
                 >
@@ -295,7 +295,7 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                     onClick={() => setActiveTab('images')}
                     className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 flex items-center gap-2 ${
                         activeTab === 'images'
-                            ? 'text-earth-900 border-earth-900'
+                            ? 'text-industrial-gray border-industrial-gray'
                             : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                     }`}
                 >
@@ -364,7 +364,7 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                                 key={idx}
                                 onClick={() => setSelectedImageIndex(idx)}
                                 className={`relative h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                                    idx === selectedImageIndex ? 'border-earth-600' : 'border-transparent hover:border-neutral-300'
+                                    idx === selectedImageIndex ? 'border-cane-green' : 'border-transparent hover:border-neutral-300'
                                 }`}
                             >
                                 <img
@@ -388,14 +388,14 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                         <div>
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Location</h3>
                             <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                <MapPin size={16} className="text-earth-600" />
+                                <MapPin size={16} className="text-cane-green" />
                                 <span>{temple.location}</span>
                             </div>
                         </div>
 
                         <div>
                             <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Code</h3>
-                            <span className="px-3 py-1 bg-earth-100 text-earth-700 rounded text-sm font-bold uppercase">
+                            <span className="px-3 py-1 bg-cane-green/10 text-cane-green/80 rounded text-sm font-bold uppercase">
                                 {temple.code}
                             </span>
                         </div>
@@ -404,7 +404,7 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                             <div>
                                 <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Timings</h3>
                                 <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                    <Clock size={16} className="text-earth-600" />
+                                    <Clock size={16} className="text-cane-green" />
                                     <span>{temple.openingTime} - {temple.closingTime}</span>
                                 </div>
                             </div>
@@ -414,11 +414,11 @@ const TempleDetailsModal = ({ temple, isOpen, onClose, onUpdateImages }: { templ
                             <div>
                                 <h3 className="text-sm font-black text-neutral-400 uppercase tracking-[0.2em] mb-2">Capacity</h3>
                                 <div className="flex items-center gap-2 text-base text-neutral-900 font-medium">
-                                    <Users size={16} className="text-earth-600" />
+                                    <Users size={16} className="text-cane-green" />
                                     <span>
                                         {temple.currentOccupancy || 0} / {temple.capacity}
                                         {temple.currentOccupancy && (
-                                            <span className="ml-2 text-earth-600 font-bold">
+                                            <span className="ml-2 text-cane-green font-bold">
                                                 ({occupancyPercentage}%)
                                             </span>
                                         )}
@@ -470,7 +470,7 @@ export default function TempleManagement() {
                     <h2 className="text-2xl font-black text-slate-900 mb-2">Temple Management</h2>
                     <p className="text-sm text-neutral-500 font-medium">Infrastructure and sacred space management with temple hierarchy</p>
                 </div>
-                <button className="px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all">
+                <button className="px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all">
                     Add Temple
                 </button>
             </div>

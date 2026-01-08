@@ -111,7 +111,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                 >
                     <Plus size={18} />
                     <span>Assign Role</span>
@@ -137,9 +137,9 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             >
                                 <div className="flex items-center gap-3">
                                     <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                                        assignment.assignmentType === 'primary' ? 'bg-earth-900/10' : 'bg-neutral-100'
+                                        assignment.assignmentType === 'primary' ? 'bg-industrial-gray/10' : 'bg-neutral-100'
                                     }`}>
-                                        <Shield size={18} className={assignment.assignmentType === 'primary' ? 'text-earth-900' : 'text-neutral-600'} />
+                                        <Shield size={18} className={assignment.assignmentType === 'primary' ? 'text-industrial-gray' : 'text-neutral-600'} />
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2">
@@ -148,7 +148,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                                             </span>
                                             <span className={`px-2 py-0.5 rounded text-xs font-medium ${
                                                 assignment.assignmentType === 'primary'
-                                                    ? 'bg-earth-900 text-white'
+                                                    ? 'bg-industrial-gray text-white'
                                                     : 'bg-neutral-100 text-neutral-600'
                                             }`}>
                                                 {assignment.assignmentType === 'primary' ? 'Primary' : 'Secondary'}
@@ -205,7 +205,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             required
                             value={formData.departmentId}
                             onChange={(e) => setFormData({ ...formData, departmentId: e.target.value, employeeId: '', roleId: '' })}
-                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.departmentId ? 'border-red-300' : 'border-neutral-200'}`}
+                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.departmentId ? 'border-red-300' : 'border-neutral-200'}`}
                         >
                             <option value="">Select Department</option>
                             {departments.filter(d => d.isActive).map((dept) => (
@@ -224,7 +224,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             required
                             value={formData.employeeId}
                             onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
-                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.employeeId ? 'border-red-300' : 'border-neutral-200'}`}
+                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.employeeId ? 'border-red-300' : 'border-neutral-200'}`}
                             disabled={!formData.departmentId}
                         >
                             <option value="">Select Employee</option>
@@ -247,7 +247,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             required
                             value={formData.roleId}
                             onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
-                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.roleId ? 'border-red-300' : 'border-neutral-200'}`}
+                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.roleId ? 'border-red-300' : 'border-neutral-200'}`}
                             disabled={!formData.departmentId}
                         >
                             <option value="">Select Role</option>
@@ -266,7 +266,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             <select
                                 value={formData.assignmentType}
                                             onChange={(e) => setFormData({ ...formData, assignmentType: e.target.value as RoleAssignmentTypeEnum })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                 disabled={hasPrimaryRole}
                             >
                                 <option value="primary">Primary</option>
@@ -286,7 +286,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                                 required
                                 value={formData.startDate}
                                 onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             />
                         </div>
                     </div>
@@ -299,7 +299,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                             type="date"
                             value={formData.endDate}
                             onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.endDate ? 'border-red-300' : 'border-neutral-200'}`}
+                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.endDate ? 'border-red-300' : 'border-neutral-200'}`}
                             min={formData.startDate}
                         />
                         {errors.endDate && <p className="text-xs text-red-600 mt-1">{errors.endDate}</p>}
@@ -315,7 +315,7 @@ export default function RoleAssignment({ employees, departments, roles, assignme
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Assign Role
                         </button>

@@ -37,7 +37,7 @@ export default function FinanceSummaryView({ filter = 'today' }: FinanceSummaryV
                             key={idx}
                             className="flex items-start gap-3 group transition-all"
                         >
-                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
+                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
                                 {idx === 0 ? (
                                     <Wallet size={12} className="text-neutral-900" />
                                 ) : (

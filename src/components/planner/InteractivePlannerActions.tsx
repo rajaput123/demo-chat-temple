@@ -213,7 +213,7 @@ export default function InteractivePlannerActions({
                             <li
                                 key={action.id}
                                 className={`flex items-start gap-3 group p-3 rounded-lg transition-all border ${action.isDirective
-                                    ? 'bg-earth-50/10 border-earth-100 hover:border-earth-300'
+                                    ? 'bg-soft-white/10 border-cane-green/10 hover:border-cane-green/40'
                                     : 'hover:bg-neutral-50 border-transparent'
                                     }`}
                             >
@@ -222,13 +222,13 @@ export default function InteractivePlannerActions({
                                     onClick={() => handleToggleComplete(action.id)}
                                     className={`w-5 h-5 rounded-full border mt-0.5 shrink-0 flex items-center justify-center transition-all ${action.isCompleted
                                         ? 'bg-slate-50 border-slate-200 opacity-60'
-                                        : action.isDirective ? 'bg-earth-100 border-earth-300 hover:border-earth-600' : 'bg-slate-100 border-slate-200 hover:border-earth-600 cursor-pointer'
+                                        : action.isDirective ? 'bg-cane-green/10 border-cane-green/30 hover:border-cane-green' : 'bg-slate-100 border-slate-200 hover:border-cane-green cursor-pointer'
                                         }`}
                                 >
                                     {action.isCompleted ? (
                                         <Check size={12} className="text-slate-400" />
                                     ) : (
-                                        <div className={`w-1.5 h-1.5 rounded-full ${action.isDirective ? 'bg-earth-800' : 'bg-earth-900'}`} />
+                                        <div className={`w-1.5 h-1.5 rounded-full ${action.isDirective ? 'bg-industrial-gray/90' : 'bg-industrial-gray'}`} />
                                     )}
                                 </button>
 
@@ -247,14 +247,14 @@ export default function InteractivePlannerActions({
                                                     handleCancelEdit();
                                                 }
                                             }}
-                                            className="w-full px-2 py-1 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                            className="w-full px-2 py-1 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                             autoFocus
                                         />
                                     ) : (
                                         <>
                                             <div className="flex items-center gap-2 mb-1">
                                                 {action.isDirective && (
-                                                    <span className="px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-earth-900 text-white rounded">
+                                                    <span className="px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-industrial-gray text-white rounded">
                                                         CEO Directive
                                                     </span>
                                                 )}
@@ -303,7 +303,7 @@ export default function InteractivePlannerActions({
                                             className="p-1.5 hover:bg-neutral-100 rounded-lg transition-colors"
                                             title="Add Step"
                                         >
-                                            <Plus size={14} className="text-earth-600" />
+                                            <Plus size={14} className="text-cane-green" />
                                         </button>
                                         <button
                                             onClick={() => handleEdit(action)}
@@ -317,7 +317,7 @@ export default function InteractivePlannerActions({
                                             className="p-1.5 hover:bg-neutral-100 rounded-lg transition-colors"
                                             title="Assign to Employee"
                                         >
-                                            <UserPlus size={14} className="text-earth-600" />
+                                            <UserPlus size={14} className="text-cane-green" />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(action.id)}
@@ -335,7 +335,7 @@ export default function InteractivePlannerActions({
                     {/* Add Step Button Below Last Item */}
                     <button
                         onClick={() => handleAddNew()}
-                        className="w-full mt-3 px-4 py-2 border border-dashed border-neutral-300 rounded-lg text-sm text-neutral-600 hover:border-earth-600 hover:text-earth-900 hover:bg-earth-50/50 transition-all flex items-center justify-center gap-2"
+                        className="w-full mt-3 px-4 py-2 border border-dashed border-neutral-300 rounded-lg text-sm text-neutral-600 hover:border-cane-green hover:text-industrial-gray hover:bg-soft-white/50 transition-all flex items-center justify-center gap-2"
                     >
                         <Plus size={16} />
                         <span>Add Step</span>
@@ -360,7 +360,7 @@ export default function InteractivePlannerActions({
                                 required
                                 value={assignFormData.employeeId}
                                 onChange={(e) => setAssignFormData({ ...assignFormData, employeeId: e.target.value })}
-                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             >
                                 <option value="">Select Employee</option>
                                 {employees.filter(e => e.isActive).map((emp) => (
@@ -379,7 +379,7 @@ export default function InteractivePlannerActions({
                                     required
                                     value={assignFormData.startDate}
                                     onChange={(e) => setAssignFormData({ ...assignFormData, startDate: e.target.value })}
-                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                 />
                             </div>
                             <div>
@@ -391,7 +391,7 @@ export default function InteractivePlannerActions({
                                     value={assignFormData.dueDate}
                                     onChange={(e) => setAssignFormData({ ...assignFormData, dueDate: e.target.value })}
                                     min={assignFormData.startDate}
-                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                                 />
                             </div>
                         </div>
@@ -400,7 +400,7 @@ export default function InteractivePlannerActions({
                             <button
                                 onClick={() => handleSaveAssignment(assignModalOpen!)}
                                 disabled={!assignFormData.employeeId || !assignFormData.startDate}
-                                className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Assign
                             </button>

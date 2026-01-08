@@ -64,7 +64,7 @@ export default function AssetManagementView() {
                         {activeSubModule && (
                             <button
                                 onClick={() => setActiveSubModule(null)}
-                                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-slate-900 hover:bg-earth-900 hover:text-white transition-all hover:scale-105 active:scale-95"
+                                className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-slate-900 hover:bg-industrial-gray hover:text-white transition-all hover:scale-105 active:scale-95"
                             >
                                 <ArrowLeft size={18} />
                             </button>
@@ -94,13 +94,13 @@ export default function AssetManagementView() {
                                     className="group relative p-6 rounded-[24px] bg-white/40 backdrop-blur-xl border border-neutral-200/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] transition-all duration-500 hover:shadow-[0_8px_48px_0_rgba(31,38,135,0.1)] hover:bg-white/60 hover:border-neutral-200/50 hover:-translate-y-1 text-left flex flex-col h-full"
                                 >
                                     <div className="mb-4 flex items-start justify-between">
-                                        <div className="w-10 h-10 rounded-xl bg-earth-900/5 flex items-center justify-center text-slate-900 group-hover:bg-earth-900 group-hover:text-white transition-all duration-500">
+                                        <div className="w-10 h-10 rounded-xl bg-industrial-gray/5 flex items-center justify-center text-slate-900 group-hover:bg-industrial-gray group-hover:text-white transition-all duration-500">
                                             <module.icon size={20} />
                                         </div>
-                                        <ChevronRight size={18} className="text-slate-300 group-hover:text-earth-600 transition-all opacity-0 group-hover:opacity-100" />
+                                        <ChevronRight size={18} className="text-slate-300 group-hover:text-cane-green transition-all opacity-0 group-hover:opacity-100" />
                                     </div>
                                     <div className="flex-1">
-                                        <h3 className="text-lg font-black text-slate-900 mb-2 tracking-tight group-hover:text-earth-600 transition-colors uppercase tracking-tight">{module.label}</h3>
+                                        <h3 className="text-lg font-black text-slate-900 mb-2 tracking-tight group-hover:text-cane-green transition-colors uppercase tracking-tight">{module.label}</h3>
                                         <p className="text-sm text-slate-600 font-medium leading-relaxed group-hover:text-slate-900 transition-colors line-clamp-3">
                                             {module.description}
                                         </p>

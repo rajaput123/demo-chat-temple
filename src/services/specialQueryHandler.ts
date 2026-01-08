@@ -29,32 +29,32 @@ export class SpecialQueryHandler {
         const vipResult = this.handleVIPVisit(query, onVIPVisitParsed);
         if (vipResult) return vipResult;
 
-        // Try Jagadguru visit handler
-        const jagadguruResult = this.handleJagadguruVisit(query);
-        if (jagadguruResult) return jagadguruResult;
+        // Try Factory Manager visit handler
+        const managerResult = this.handleFactoryManagerVisit(query);
+        if (managerResult) return managerResult;
 
-        // Try Yaga event handler
-        const yagaResult = this.handleYagaEvent(query);
-        if (yagaResult) return yagaResult;
+        // Try Production Batch event handler
+        const batchResult = this.handleProductionBatchEvent(query);
+        if (batchResult) return batchResult;
 
-        // Try Navaratri progress handler
-        const navaratriResult = this.handleNavaratriProgress(query);
-        if (navaratriResult) return navaratriResult;
+        // Try Crushing Season progress handler
+        const seasonResult = this.handleCrushingSeasonProgress(query);
+        if (seasonResult) return seasonResult;
 
         return null;
     }
 
     /**
-     * Handle VIP visit queries (e.g., "Tomorrow 9 AM, Prime Minister Modi is visiting Sringeri")
+     * Handle Supplier/Inspector visit queries (e.g., "Tomorrow 9 AM, Quality Inspector is visiting Factory")
      */
     static handleVIPVisit(query: string, onVIPVisitParsed?: (vip: ParsedVIPVisit) => void): SpecialQueryResult | null {
         const lowercaseQuery = query.toLowerCase();
         
-        // Check if this is a VIP visit query
-        if (!lowercaseQuery.includes('vip') && 
-            !lowercaseQuery.includes('minister') && 
-            !lowercaseQuery.includes('visit') &&
-            !lowercaseQuery.includes('prime minister')) {
+        // Check if this is a supplier/inspection visit query
+        if (!lowercaseQuery.includes('supplier') && 
+            !lowercaseQuery.includes('auditor') && 
+            !lowercaseQuery.includes('inspection') &&
+            !lowercaseQuery.includes('visit')) {
             return null;
         }
 
@@ -84,23 +84,23 @@ export class SpecialQueryHandler {
 
             // Create info card data with brown/amber format
             const infoCardData = {
-                highlightTitle: "VIP VISIT | HIGHLIGHTS",
+                highlightTitle: "SUPPLIER INSPECTION | HIGHLIGHTS",
                 todayHighlights: [
                     { 
                         time: '07:00 AM', 
-                        description: 'Sri Gurugalu will perform the Morning Anushtana as part of the daily spiritual observances.' 
+                        description: 'Factory Manager will perform the morning production review as part of daily operations.' 
                     },
                     { 
                         time: parsedVisit.time || '09:00 AM', 
-                        description: `VIP Darshan is scheduled for ${parsedVisit.visitor}${parsedVisit.title ? ` (${parsedVisit.title})` : ''}, with special protocol arrangements in place.` 
+                        description: `Supplier inspection is scheduled for ${parsedVisit.visitor}${parsedVisit.title ? ` (${parsedVisit.title})` : ''}, with special protocol arrangements in place.` 
                     },
                     { 
                         time: '09:00 AM', 
-                        description: 'The Sahasra Chandi Yaga Purnahuti will be conducted in the temple sanctum.' 
+                        description: 'The production batch quality check will be conducted in the crushing unit.' 
                     },
                     { 
                         time: '04:00 PM', 
-                        description: 'Sri Gurugalu will deliver the Evening Discourse, offering spiritual guidance and blessings to devotees.' 
+                        description: 'Factory Manager will deliver the evening operations briefing, offering guidance and updates to staff.' 
                     }
                 ]
             };
@@ -125,9 +125,9 @@ export class SpecialQueryHandler {
             return {
                 infoCardData: JSON.stringify(infoCardData),
                 plannerActions,
-                sectionId: 'focus-visit-vip',
-                cardTitle: 'VIP Protocol Brief',
-                planTitle: 'VIP Plan'
+                sectionId: 'focus-visit-supplier',
+                cardTitle: 'Supplier Inspection Brief',
+                planTitle: 'Inspection Plan'
             };
         }
 
@@ -135,14 +135,14 @@ export class SpecialQueryHandler {
     }
 
     /**
-     * Handle Jagadguru adhoc visit queries (e.g., "Plan adhoc visit of Jagadgurugalu to Kigga - today @ 4:00 pm")
+     * Handle Factory Manager adhoc visit queries (e.g., "Plan adhoc visit of Factory Manager to Cane Field - today @ 4:00 pm")
      */
-    static handleJagadguruVisit(query: string): SpecialQueryResult | null {
+    static handleFactoryManagerVisit(query: string): SpecialQueryResult | null {
         const lowercaseQuery = query.toLowerCase();
         
-        // Check if this is a Jagadguru visit planning query
+        // Check if this is a Factory Manager visit planning query
         if (!lowercaseQuery.includes('plan') || 
-            (!lowercaseQuery.includes('jagadgurugalu') && !lowercaseQuery.includes('gurugalu') && !lowercaseQuery.includes('swamiji'))) {
+            (!lowercaseQuery.includes('factory manager') && !lowercaseQuery.includes('quality inspector'))) {
             return null;
         }
 
@@ -151,28 +151,28 @@ export class SpecialQueryHandler {
         
         if (planningQuery && planningQuery.type === 'adhoc-visit' && planningQuery.person) {
             const visitTime = planningQuery.time || '4:00 PM';
-            const visitLocation = planningQuery.location || 'Kigga';
+            const visitLocation = planningQuery.location || 'Cane Field';
             const visitDate = planningQuery.date || 'Today';
 
             // Create info card data
             const infoCardData = {
-                highlightTitle: "VISIT | HIGHLIGHTS",
+                highlightTitle: "INSPECTION | HIGHLIGHTS",
                 todayHighlights: [
                     { 
                         time: this.calculateTimeBefore(visitTime, 1), 
-                        description: `Pre-arrival shubha samaya readiness check and final preparations for ${planningQuery.person}'s visit to ${visitLocation}.` 
+                        description: `Pre-inspection safety readiness check and final preparations for ${planningQuery.person}'s visit to ${visitLocation}.` 
                     },
                     { 
                         time: visitTime, 
-                        description: `Arrival at ${visitLocation} and Poornakumbha Swagata for ${planningQuery.person}.` 
+                        description: `Arrival at ${visitLocation} and inspection briefing for ${planningQuery.person}.` 
                     },
                     { 
                         time: this.calculateTimeAfter(visitTime, 1), 
-                        description: `Darshan and special pooja at the sanctum.` 
+                        description: `Factory tour and quality inspection.` 
                     },
                     { 
                         time: this.calculateTimeAfter(visitTime, 2), 
-                        description: `Ashirvachana and meeting with devotees.` 
+                        description: `Review meeting with suppliers and farmers.` 
                     }
                 ]
             };
@@ -180,23 +180,23 @@ export class SpecialQueryHandler {
             // Generate planner actions
             const plannerActions = [
                 `[·] Coordinate travel arrangements for ${planningQuery.person} to ${visitLocation}`,
-                `[·] Arrange security and protocol for the visit`,
+                `[·] Arrange safety and protocol for the visit`,
                 `[·] Prepare welcome arrangements at ${visitLocation}`,
-                `[·] Coordinate with local temple authorities`,
+                `[·] Coordinate with factory supervisors`,
                 `[·] Arrange accommodation if needed`,
-                `[·] Notify security department about the visit`,
+                `[·] Notify quality control department about the visit`,
                 `[·] Confirm visit date: ${visitDate}`,
                 `[·] Schedule arrival time: ${visitTime}`,
-                `[·] Prepare special prasad for the visit`,
-                `[·] Arrange media coverage if required`
+                `[·] Prepare quality reports for the visit`,
+                `[·] Arrange documentation if required`
             ].join('\n');
 
             return {
                 infoCardData: JSON.stringify(infoCardData),
                 plannerActions,
-                sectionId: 'focus-visit-jagadguru',
-                cardTitle: 'Visit Protocol Brief',
-                planTitle: 'Visit Plan'
+                sectionId: 'focus-visit-manager',
+                cardTitle: 'Inspection Protocol Brief',
+                planTitle: 'Inspection Plan'
             };
         }
 
@@ -204,14 +204,14 @@ export class SpecialQueryHandler {
     }
 
     /**
-     * Handle Yaga event planning queries (e.g., "Plan for sahasra chandi yaga on 3rd Feb associated with VIP")
+     * Handle Production Batch event planning queries (e.g., "Plan for production batch on 3rd Feb associated with inspection")
      */
-    static handleYagaEvent(query: string): SpecialQueryResult | null {
+    static handleProductionBatchEvent(query: string): SpecialQueryResult | null {
         const lowercaseQuery = query.toLowerCase();
         
-        // Check if this is a Yaga event planning query
+        // Check if this is a production batch event planning query
         if (!lowercaseQuery.includes('plan') || 
-            (!lowercaseQuery.includes('yaga') && !lowercaseQuery.includes('chandi'))) {
+            (!lowercaseQuery.includes('batch') && !lowercaseQuery.includes('production'))) {
             return null;
         }
 
@@ -220,7 +220,7 @@ export class SpecialQueryHandler {
         
         if (planningQuery && planningQuery.type === 'event-planning' && planningQuery.eventType) {
             const eventDate = planningQuery.date || 'TBD';
-            const hasVIP = planningQuery.vipAssociation || false;
+            const hasInspection = planningQuery.vipAssociation || false;
 
             // Format date for display - handle both string and Date objects
             let dateDisplay = 'TBD';
@@ -236,21 +236,21 @@ export class SpecialQueryHandler {
                 todayHighlights: [
                     { 
                         time: '07:00 AM', 
-                        description: `Commencement of ${planningQuery.eventType} with Maha Sankalpa and Avahana.` 
+                        description: `Commencement of ${planningQuery.eventType} with quality checks.` 
                     },
                     { 
                         time: '09:00 AM', 
-                        description: 'Ritwik Varanam and start of main rituals.' 
+                        description: 'Production start and initial sampling.' 
                     },
                     { 
                         time: '11:00 AM', 
-                        description: hasVIP 
-                            ? 'VIP participation in the event and special darshan flow.' 
+                        description: hasInspection 
+                            ? 'Inspection team participation in the event and quality review.' 
                             : 'Main event proceedings.' 
                     },
                     { 
                         time: '12:30 PM', 
-                        description: 'Purnahuti, Deeparadhana, and Shanti Mantra Patha.' 
+                        description: 'Final quality approval and batch completion.' 
                     }
                 ]
             };
@@ -258,26 +258,26 @@ export class SpecialQueryHandler {
             // Generate planner actions
             const plannerActions = [
                 `[·] Prepare ${planningQuery.eventType} arrangements`,
-                `[·] Coordinate with ritual department for ${planningQuery.eventType}`,
+                `[·] Coordinate with production department for ${planningQuery.eventType}`,
                 `[·] Confirm event date: ${eventDate}`,
-                ...(hasVIP ? [
-                    `[·] Arrange VIP protocol and security`,
-                    `[·] Coordinate VIP invitations`,
-                    `[·] Prepare special arrangements for VIP guests`
+                ...(hasInspection ? [
+                    `[·] Arrange inspection protocol and safety`,
+                    `[·] Coordinate inspection invitations`,
+                    `[·] Prepare special arrangements for inspection teams`
                 ] : []),
-                `[·] Arrange special prasad preparation`,
-                `[·] Coordinate media and documentation if needed`,
-                `[·] Confirm seating for 50+ Vedic scholars`,
-                `[·] Secure Yaga Shala perimeter${hasVIP ? ' for VIP entry' : ''}`,
-                `[·] Arrange for specialized ritual samagri (Chandi Homa specific)`,
-                `[·] Coordinate with Annadanam department for special Prasad distribution`
+                `[·] Arrange quality testing preparation`,
+                `[·] Coordinate documentation and reporting if needed`,
+                `[·] Confirm staffing for production line`,
+                `[·] Secure production area perimeter${hasInspection ? ' for inspection entry' : ''}`,
+                `[·] Arrange for specialized quality testing equipment`,
+                `[·] Coordinate with inventory department for sugar product distribution`
             ].join('\n');
 
             return {
                 infoCardData: JSON.stringify(infoCardData),
                 plannerActions,
-                sectionId: 'focus-event-yaga',
-                cardTitle: 'Event Protocol Brief',
+                sectionId: 'focus-event-batch',
+                cardTitle: 'Production Event Brief',
                 planTitle: 'Event Plan'
             };
         }
@@ -286,35 +286,35 @@ export class SpecialQueryHandler {
     }
 
     /**
-     * Handle Navaratri progress queries (e.g., "Show me the progress of navaratri preparation actions--summary")
+     * Handle Crushing Season progress queries (e.g., "Show me the progress of crushing season preparation actions--summary")
      */
-    static handleNavaratriProgress(query: string): SpecialQueryResult | null {
+    static handleCrushingSeasonProgress(query: string): SpecialQueryResult | null {
         const lowercaseQuery = query.toLowerCase();
         
-        // Check if this is a Navaratri progress query
-        if (!lowercaseQuery.includes('navaratri') || !lowercaseQuery.includes('progress')) {
+        // Check if this is a crushing season progress query
+        if (!lowercaseQuery.includes('season') && !lowercaseQuery.includes('harvest') && !lowercaseQuery.includes('progress')) {
             return null;
         }
 
         // Parse using flexible query parser
         const progressQuery = FlexibleQueryParser.parseProgressQuery(query);
         
-        if (progressQuery && progressQuery.festivalName === 'Navaratri') {
+        if (progressQuery && (progressQuery.festivalName === 'Crushing Season' || progressQuery.festivalName === 'Season')) {
             // Create info card data with progress summary
             const infoCardData = {
                 highlightTitle: "PROGRESS | HIGHLIGHTS",
                 todayHighlights: [
                     { 
                         time: 'Status', 
-                        description: 'Overall preparation is 85% complete. Main Alankara for Day 1 is ready.' 
+                        description: 'Overall preparation is 85% complete. Main production line for Week 1 is ready.' 
                     },
                     { 
-                        time: 'Security', 
-                        description: 'Security barriers are installed. Crowd control volunteers deployed.' 
+                        time: 'Quality Control', 
+                        description: 'Quality control barriers are installed. Inspection staff deployed.' 
                     },
                     { 
-                        time: 'Annadanam', 
-                        description: 'Supplies are stocked for the first 3 days. Procurement for remaining days in progress.' 
+                        time: 'Cane Supply', 
+                        description: 'Cane supplies are stocked for the first 3 weeks. Procurement for remaining weeks in progress.' 
                     },
                     { 
                         time: 'Actions', 
@@ -325,21 +325,21 @@ export class SpecialQueryHandler {
 
             // Generate remaining planner actions
             const plannerActions = [
-                `[·] Verify Alankara schedule for all 10 days`,
-                `[·] Finalize Annadanam procurement for 5L+ devotees`,
-                `[·] Deploy additional 200 crowd control volunteers`,
-                `[·] Setup temporary medical camps at 3 locations`,
-                `[·] Coordinate with KSRTC for special bus services`,
+                `[·] Verify production schedule for all 10 weeks`,
+                `[·] Finalize cane procurement for peak season`,
+                `[·] Deploy additional quality control staff`,
+                `[·] Setup temporary storage facilities at 3 locations`,
+                `[·] Coordinate with transport for cane delivery services`,
                 `[·] Complete remaining 3 critical action items`,
-                `[·] Review and approve final security arrangements`,
-                `[·] Confirm media coverage and documentation teams`
+                `[·] Review and approve final quality arrangements`,
+                `[·] Confirm documentation and reporting teams`
             ].join('\n');
 
             return {
                 infoCardData: JSON.stringify(infoCardData),
                 plannerActions,
-                sectionId: 'focus-summary-navaratri',
-                cardTitle: 'Navaratri Preparation Status',
+                sectionId: 'focus-summary-season',
+                cardTitle: 'Season Preparation Status',
                 planTitle: 'Remaining Actions'
             };
         }

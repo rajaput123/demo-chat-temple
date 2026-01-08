@@ -56,7 +56,7 @@ export default function AssetLifecycle({ asset, onStateChange, canModify }: Asse
                                     disabled={!canModify || !canTransition}
                                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                                         isActive
-                                            ? `${state.color} ring-2 ring-earth-600`
+                                            ? `${state.color} ring-2 ring-cane-green`
                                             : isPast
                                                 ? `${state.color} opacity-60`
                                                 : isNext && canModify

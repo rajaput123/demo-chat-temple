@@ -14,7 +14,7 @@ export default function AssetAudit() {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-sm font-bold hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-sm font-bold hover:bg-industrial-gray/90 transition-all"
                 >
                     <Search size={18} />
                     <span>Conduct Audit</span>
@@ -57,7 +57,7 @@ export default function AssetAudit() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Select Asset *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="">Select Asset</option>
                         </select>
                     </div>
@@ -65,7 +65,7 @@ export default function AssetAudit() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Condition *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="excellent">Excellent</option>
                             <option value="good">Good</option>
                             <option value="fair">Fair</option>
@@ -77,7 +77,7 @@ export default function AssetAudit() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Verification Status *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="verified">Verified</option>
                             <option value="discrepancy">Discrepancy Found</option>
                             <option value="missing">Missing</option>
@@ -89,13 +89,13 @@ export default function AssetAudit() {
                         </label>
                         <textarea
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Record Audit
                         </button>

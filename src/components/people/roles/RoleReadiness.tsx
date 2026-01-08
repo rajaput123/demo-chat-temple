@@ -82,7 +82,7 @@ export default function RoleReadiness({ employees, departments, roles, assignmen
                 <button
                     onClick={checkAllReadiness}
                     disabled={loading}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all disabled:opacity-50"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all disabled:opacity-50"
                 >
                     <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
                     <span>Refresh Status</span>

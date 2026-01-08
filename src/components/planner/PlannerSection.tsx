@@ -17,8 +17,8 @@ export default function PlannerSection() {
                 <div className="space-y-2">
                     {tasks.map((task) => (
                         <div key={task.id} className="flex items-start gap-3 group">
-                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
-                                <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 group-hover:bg-earth-600 transition-colors" />
+                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
+                                <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 group-hover:bg-cane-green transition-colors" />
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="text-sm font-medium text-neutral-900">{task.title}</div>

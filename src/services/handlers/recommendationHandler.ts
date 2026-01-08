@@ -27,22 +27,22 @@ export function handleRecommendation(query: string): RecommendationResult {
     if (lowercaseQuery.includes('parking')) {
         return {
             handled: true,
-            response: "Yes, the North Gate VIP parking area has been reserved and secured. Security personnel will be stationed there 30 minutes prior to arrival."
+            response: "Yes, the main factory entrance parking area has been reserved and secured. Safety personnel will be stationed there 30 minutes prior to arrival."
         };
     } else if (lowercaseQuery.includes('escort') || lowercaseQuery.includes('who should escort')) {
         return {
             handled: true,
-            response: "The Executive Officer will be the lead escort for the VIP. Two additional temple guards have been assigned for the inner circle."
+            response: "The Operations Manager will be the lead escort for the supplier. Two additional quality control staff have been assigned for the inspection team."
         };
-    } else if (lowercaseQuery.includes('security briefing')) {
+    } else if (lowercaseQuery.includes('safety briefing')) {
         return {
             handled: true,
-            response: "The security briefing document is ready. It covers the entry protocols, sanctum access limits, and emergency exit routes."
+            response: "The safety briefing document is ready. It covers the entry protocols, production area access limits, and emergency exit routes."
         };
-    } else if (lowercaseQuery.includes('prasadam')) {
+    } else if (lowercaseQuery.includes('inventory') || lowercaseQuery.includes('product')) {
         return {
             handled: true,
-            response: "Based on the delegation size, 20 special prasadam packets have been prepared and are currently being held in the VIP lounge."
+            response: "Based on the delegation size, 20 special product samples have been prepared and are currently being held in the quality control lab."
         };
     } else if (lowercaseQuery.includes('approval workflow')) {
         return {
@@ -52,12 +52,12 @@ export function handleRecommendation(query: string): RecommendationResult {
     } else if (lowercaseQuery.includes('notified')) {
         return {
             handled: true,
-            response: "The Departments of Ritual, Security, and Public Relations have been notified. The local police station has also received the protocol notice."
+            response: "The Departments of Production, Quality Control, and Inventory have been notified. The local compliance office has also received the inspection notice."
         };
     } else if (lowercaseQuery.includes('budget') || lowercaseQuery.includes('financial report')) {
         return {
             handled: true,
-            response: "The financial summary shows all allocations are within the festive season budget. Hundi collections are being processed as scheduled."
+            response: "The financial summary shows all allocations are within the production season budget. Revenue collections are being processed as scheduled."
         };
     } else if (lowercaseQuery.includes('when should') || lowercaseQuery.includes('deadline')) {
         return {
@@ -66,13 +66,13 @@ export function handleRecommendation(query: string): RecommendationResult {
         };
     }
 
-    // Check for flexible query parsing (planning, actions, kitchen)
+    // Check for flexible query parsing (planning, actions, inventory)
     const planningQuery = FlexibleQueryParser.parsePlanningQuery(query);
     const actionQuery = FlexibleQueryParser.parseActionQuery(query);
-    const kitchenQuery = FlexibleQueryParser.parseKitchenQuery(query);
+    const inventoryQuery = FlexibleQueryParser.parseKitchenQuery(query); // Reusing kitchen parser for inventory
 
     // These require async processing in the hook
-    if (planningQuery || actionQuery || kitchenQuery) {
+    if (planningQuery || actionQuery || inventoryQuery) {
         return {
             handled: true,
             needsAsyncProcessing: true,

@@ -21,11 +21,11 @@ export function isInfoQuery(query: string): boolean {
         lowercaseQuery.includes('about') ||
         lowercaseQuery.includes('information') ||
         lowercaseQuery.includes('details') ||
-        (lowercaseQuery.includes('temple') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('jagadguru') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('ceo') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('sringeri') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('peetham') && !lowercaseQuery.includes('plan'));
+        (lowercaseQuery.includes('factory') && !lowercaseQuery.includes('plan')) ||
+        (lowercaseQuery.includes('factory manager') && !lowercaseQuery.includes('plan')) ||
+        (lowercaseQuery.includes('admin') && !lowercaseQuery.includes('plan')) ||
+        (lowercaseQuery.includes('production') && !lowercaseQuery.includes('plan')) ||
+        (lowercaseQuery.includes('cane') && !lowercaseQuery.includes('plan'));
 }
 
 /**

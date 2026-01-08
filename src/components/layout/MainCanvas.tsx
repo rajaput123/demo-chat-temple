@@ -79,7 +79,7 @@ const SectionRenderer = ({
                             >
                                 {isDotTodo ? (
                                     <div className="w-5 h-5 rounded-full bg-slate-100 border border-slate-200 mt-0.5 shrink-0 flex items-center justify-center">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-earth-900" />
+                                        <div className="w-1.5 h-1.5 rounded-full bg-cane-green" />
                                     </div>
                                 ) : isChecked ? (
                                     <div className="w-5 h-5 rounded-full bg-slate-50 border border-slate-200 mt-0.5 shrink-0 flex items-center justify-center opacity-60 scale-95 transition-all">
@@ -143,9 +143,33 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
 
     const [departments] = useState<Department[]>([
         {
-            id: 'dept-ritual',
-            name: 'Ritual Department',
-            code: 'RIT',
+            id: 'dept-procurement',
+            name: 'Cane Procurement',
+            code: 'PRC',
+            parentId: null,
+            headEmployeeId: null,
+            isActive: true,
+            createdAt: '2024-01-01T10:00:00Z',
+            updatedAt: '2024-01-01T10:00:00Z',
+            createdBy: 'admin',
+            updatedBy: 'admin',
+        },
+        {
+            id: 'dept-production',
+            name: 'Production & Crushing',
+            code: 'PRO',
+            parentId: null,
+            headEmployeeId: null,
+            isActive: true,
+            createdAt: '2024-01-01T10:00:00Z',
+            updatedAt: '2024-01-01T10:00:00Z',
+            createdBy: 'admin',
+            updatedBy: 'admin',
+        },
+        {
+            id: 'dept-logistics',
+            name: 'Logistics & Fleet',
+            code: 'LOG',
             parentId: null,
             headEmployeeId: null,
             isActive: true,
@@ -156,32 +180,8 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
         },
         {
             id: 'dept-finance',
-            name: 'Finance & Accounts',
+            name: 'Finance & Compliance',
             code: 'FIN',
-            parentId: null,
-            headEmployeeId: null,
-            isActive: true,
-            createdAt: '2024-01-01T10:00:00Z',
-            updatedAt: '2024-01-01T10:00:00Z',
-            createdBy: 'admin',
-            updatedBy: 'admin',
-        },
-        {
-            id: 'dept-security',
-            name: 'Security Department',
-            code: 'SEC',
-            parentId: null,
-            headEmployeeId: null,
-            isActive: true,
-            createdAt: '2024-01-01T10:00:00Z',
-            updatedAt: '2024-01-01T10:00:00Z',
-            createdBy: 'admin',
-            updatedBy: 'admin',
-        },
-        {
-            id: 'dept-kitchen',
-            name: 'Kitchen & Annadanam',
-            code: 'KIT',
             parentId: null,
             headEmployeeId: null,
             isActive: true,
@@ -230,9 +230,18 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                     <div className="max-w-4xl mx-auto space-y-6">
                         {/* Header Section */}
                         <div className="animate-fadeIn flex items-end justify-between border-slate-200/60 pb-2">
-                            <div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black text-cane-green uppercase tracking-[0.4em] mb-1">
+                                    {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
+                                </span>
                                 <h1 className="text-4xl font-black text-slate-900 tracking-tight ">
-                                    Good Morning.
+                                    {(() => {
+                                        const hour = new Date().getHours();
+                                        if (hour >= 5 && hour < 12) return "Good Morning.";
+                                        if (hour >= 12 && hour < 17) return "Good Afternoon.";
+                                        if (hour >= 17 && hour < 22) return "Good Evening.";
+                                        return "Good Night.";
+                                    })()}
                                 </h1>
                             </div>
                         </div>
@@ -241,9 +250,9 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                         <div className="space-y-4">
                             <div className="flex items-center justify-between px-1">
                                 <h2 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.3em] opacity-40">
-                                    {hasFocus && focusSection?.title ? focusSection.title : "Today's Appointments"}
+                                    {hasFocus && focusSection?.title ? focusSection.title : "Live Factory Status"}
                                 </h2>
-                                <div className={`w-1.5 h-1.5 rounded-full ${hasFocus ? 'bg-earth-600 animate-pulse' : 'bg-slate-200'}`} />
+                                <div className={`w-1.5 h-1.5 rounded-full ${hasFocus ? 'bg-cane-green animate-pulse' : 'bg-slate-200'}`} />
                             </div>
 
                             <GlassCard className="transition-all duration-500">
@@ -263,7 +272,7 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                                                         <div className="px-2 py-1 bg-white/10 rounded text-[10px] font-black uppercase tracking-widest text-white/80">
                                                             {cardData.type}
                                                         </div>
-                                                        <div className="px-2 py-1 bg-earth-500 rounded text-[10px] font-black uppercase tracking-widest text-white">
+                                                        <div className="px-2 py-1 bg-cane-green rounded text-[10px] font-black uppercase tracking-widest text-white">
                                                             {cardData.visibility} Scope
                                                         </div>
                                                     </div>
@@ -292,21 +301,65 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                                     }
                                     if (focusSection?.id === 'focus-approval') return <ApprovalsListView filter={filter} />;
 
-                                    // Rich Card Renderer - handles VIP, Visit, Event, and Summary cards
-                                    const renderRichCard = (cardData: any, cardType: 'vip' | 'visit' | 'event' | 'summary') => {
-                                        const highlightTitle = cardData.highlightTitle || "TODAY | HIGHLIGHTS";
+                                    // Rich Card Renderer - handles VIP, Visit, Event, Summary, and Procurement cards (no colors, plain white)
+                                    const renderRichCard = (cardData: any, cardType: 'vip' | 'visit' | 'event' | 'summary' | 'procurement') => {
+                                        const highlightTitle = cardData.highlightTitle || cardData.title || "TODAY | HIGHLIGHTS";
+                                        const subTitle = cardData.subTitle || '';
+
+                                        // Special rendering for procurement cards
+                                        if (cardType === 'procurement' || cardData.seasonTarget) {
+                                            return (
+                                                <div className="p-6 md:p-8 bg-white animate-fadeIn">
+                                                    {cardData.title && (
+                                                        <div className="mb-6">
+                                                            <h3 className="text-2xl font-black tracking-tight mb-1 text-slate-900">{cardData.title}</h3>
+                                                        </div>
+                                                    )}
+                                                    <div className="space-y-4">
+                                                        {cardData.seasonTarget && (
+                                                            <div className="flex items-start gap-4">
+                                                                <span className="text-slate-400 text-sm font-medium uppercase tracking-wider min-w-[140px]">Season Target:</span>
+                                                                <span className="text-slate-900 text-sm font-semibold">{cardData.seasonTarget}</span>
+                                                            </div>
+                                                        )}
+                                                        {cardData.procuredPercentage && (
+                                                            <div className="flex items-start gap-4">
+                                                                <span className="text-slate-400 text-sm font-medium uppercase tracking-wider min-w-[140px]">Procured Till Date:</span>
+                                                                <span className="text-slate-900 text-sm font-semibold">{cardData.procuredPercentage}</span>
+                                                            </div>
+                                                        )}
+                                                        {cardData.riskLevel && (
+                                                            <div className="flex items-start gap-4">
+                                                                <span className="text-slate-400 text-sm font-medium uppercase tracking-wider min-w-[140px]">Risk Level:</span>
+                                                                <span className={`text-sm font-semibold ${cardData.riskLevel === 'High' ? 'text-red-600' :
+                                                                    cardData.riskLevel === 'Medium' ? 'text-amber-600' :
+                                                                        'text-green-600'
+                                                                    }`}>{cardData.riskLevel}</span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+
                                         return (
-                                            <div className="p-6 md:p-8 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900 text-white animate-fadeIn">
-                                                {cardData.todayHighlights && cardData.todayHighlights.length > 0 && (
+                                            <div className="p-6 md:p-8 bg-white animate-fadeIn">
+                                                {cardData.title && (
+                                                    <div className="mb-4">
+                                                        <h3 className="text-2xl font-black tracking-tight mb-1 text-slate-900">{cardData.title}</h3>
+                                                        {subTitle && <p className="text-slate-600 text-sm font-medium">{subTitle}</p>}
+                                                    </div>
+                                                )}
+                                                {(cardData.todayHighlights || cardData.highlights) && (cardData.todayHighlights?.length > 0 || cardData.highlights?.length > 0) && (
                                                     <div className="mb-8">
-                                                        <h4 className="text-white/60 font-bold uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
-                                                            <span className="text-lg">📅</span> {highlightTitle}
+                                                        <h4 className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
+                                                            {highlightTitle}
                                                         </h4>
                                                         <div className="space-y-4">
-                                                            {cardData.todayHighlights.map((highlight: { time: string; description: string }, idx: number) => (
+                                                            {(cardData.todayHighlights || cardData.highlights || []).map((highlight: { time: string; description: string }, idx: number) => (
                                                                 <div key={idx} className="flex gap-4">
-                                                                    <span className="text-amber-300 font-mono text-sm font-bold whitespace-nowrap pt-0.5">{highlight.time}</span>
-                                                                    <span className="text-white/90 text-sm leading-relaxed border-l-2 border-white/10 pl-4">{highlight.description}</span>
+                                                                    <span className="text-slate-600 font-mono text-sm font-bold whitespace-nowrap pt-0.5">{highlight.time}</span>
+                                                                    <span className="text-slate-900 text-sm leading-relaxed border-l-2 border-slate-200 pl-4">{highlight.description}</span>
                                                                 </div>
                                                             ))}
                                                         </div>
@@ -320,26 +373,44 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                                     if (focusSection?.id === 'focus-vip') return <VIPVisitsListView vipVisits={vipVisits} filter={filter} />;
 
                                     // Handle other visit/event/summary cards (adhoc visits, events, summaries)
-                                    if (focusSection?.id?.startsWith('focus-visit') || focusSection?.id?.startsWith('focus-event') || focusSection?.id?.startsWith('focus-summary')) {
+                                    // Also handle factory-related focus cards (cane-intake, production-batch, quality, supplier, etc.)
+                                    if (focusSection?.id?.startsWith('focus-visit') ||
+                                        focusSection?.id?.startsWith('focus-event') ||
+                                        focusSection?.id?.startsWith('focus-summary') ||
+                                        focusSection?.id?.startsWith('focus-cane') ||
+                                        focusSection?.id?.startsWith('focus-production') ||
+                                        focusSection?.id?.startsWith('focus-quality') ||
+                                        focusSection?.id?.startsWith('focus-supplier') ||
+                                        focusSection?.id?.startsWith('focus-inspection') ||
+                                        focusSection?.id?.startsWith('focus-manager') ||
+                                        focusSection?.id?.startsWith('focus-batch') ||
+                                        focusSection?.id?.startsWith('focus-season') ||
+                                        focusSection?.id?.startsWith('focus-project') ||
+                                        focusSection?.id?.startsWith('focus-admin') ||
+                                        focusSection?.id?.startsWith('focus-auditor') ||
+                                        focusSection?.id?.startsWith('focus-procurement')) {
                                         // If content is available (parsed data), render rich card
                                         if (focusSection.content && focusSection.content.length > 0 && !focusSection.content.includes('Loading')) {
                                             try {
                                                 // Try parsing as JSON first (for structured data)
                                                 const cardData = JSON.parse(focusSection.content);
                                                 const cardType = focusSection.id?.startsWith('focus-visit') ? 'visit' :
-                                                                 focusSection.id?.startsWith('focus-event') ? 'event' :
-                                                                 'summary';
+                                                    focusSection.id?.startsWith('focus-event') ? 'event' :
+                                                        focusSection.id?.startsWith('focus-batch') ? 'event' :
+                                                            focusSection.id?.startsWith('focus-procurement') ? 'procurement' :
+                                                                cardData.seasonTarget ? 'procurement' :
+                                                                    'summary';
                                                 return renderRichCard(cardData, cardType);
                                             } catch (e) {
-                                                // Fallback: render as plain text card
+                                                // Fallback: render as plain text card (no colors)
                                                 return (
-                                                    <div className="p-6 md:p-8 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900 text-white animate-fadeIn">
+                                                    <div className="p-6 md:p-8 bg-white animate-fadeIn">
                                                         <div className="flex items-center gap-2 mb-4">
-                                                            <div className="px-2 py-1 bg-white/10 rounded text-[10px] font-black uppercase tracking-widest text-white/80">
-                                                                {focusSection.title || 'Protocol Brief'}
+                                                            <div className="px-2 py-1 bg-slate-100 rounded text-[10px] font-black uppercase tracking-widest text-slate-600">
+                                                                {focusSection.title || 'Info Brief'}
                                                             </div>
                                                         </div>
-                                                        <p className="text-sm font-medium leading-relaxed text-white/90">{focusSection.content}</p>
+                                                        <p className="text-sm font-medium leading-relaxed text-slate-900">{focusSection.content}</p>
                                                     </div>
                                                 );
                                             }
@@ -348,12 +419,45 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
 
                                     // Handle appointments explicitly
                                     if (focusSection?.id === 'focus-appointments') return <AppointmentsListView filter={filter} />;
-                                    
-                                    // Handle approvals (both singular and plural)
-                                    if (focusSection?.id === 'focus-approvals' || focusSection?.id === 'focus-approval') return <ApprovalsListView filter={filter} />;
-                                    
-                                    if (focusSection?.id === 'focus-finance') return <FinanceSummaryView filter={filter} />;
-                                    if (focusSection?.id === 'focus-alert') return <AlertsListView filter={filter} />;
+
+                                    // Handle approvals (both singular and plural) - check if content is JSON first
+                                    if (focusSection?.id === 'focus-approvals' || focusSection?.id === 'focus-approval') {
+                                        if (focusSection.content && focusSection.content.length > 0 && !focusSection.content.includes('Loading')) {
+                                            try {
+                                                const cardData = JSON.parse(focusSection.content);
+                                                return renderRichCard(cardData, 'summary');
+                                            } catch (e) {
+                                                return <ApprovalsListView filter={filter} />;
+                                            }
+                                        }
+                                        return <ApprovalsListView filter={filter} />;
+                                    }
+
+                                    // Handle finance - check if content is JSON first
+                                    if (focusSection?.id === 'focus-finance') {
+                                        if (focusSection.content && focusSection.content.length > 0 && !focusSection.content.includes('Loading')) {
+                                            try {
+                                                const cardData = JSON.parse(focusSection.content);
+                                                return renderRichCard(cardData, 'summary');
+                                            } catch (e) {
+                                                return <FinanceSummaryView filter={filter} />;
+                                            }
+                                        }
+                                        return <FinanceSummaryView filter={filter} />;
+                                    }
+
+                                    // Handle alerts - check if content is JSON first
+                                    if (focusSection?.id === 'focus-alert') {
+                                        if (focusSection.content && focusSection.content.length > 0 && !focusSection.content.includes('Loading')) {
+                                            try {
+                                                const cardData = JSON.parse(focusSection.content);
+                                                return renderRichCard(cardData, 'summary');
+                                            } catch (e) {
+                                                return <AlertsListView filter={filter} />;
+                                            }
+                                        }
+                                        return <AlertsListView filter={filter} />;
+                                    }
 
                                     // Handle custom focus areas (Events, Summaries) using standard renderer
                                     if (focusSection && (focusSection.id === 'focus-event' || focusSection.id === 'focus-summary')) {
@@ -374,15 +478,15 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                         {(hasInsights || hasPlanner || status === 'generating' || (uploadedFile && uploadedFile.status === 'completed')) && (
                             <div className="space-y-4 animate-snappy pt-4 border-t border-slate-100">
                                 <div className="flex items-center gap-3">
-                                    <div className="h-px w-8 bg-earth-900/20" />
-                                    <h2 className="text-[10px] font-black text-earth-600 uppercase tracking-[0.4em]">Your Planner Actions</h2>
-                                    <div className="h-px flex-1 bg-earth-900/20" />
+                                    <div className="h-px w-8 bg-cane-green/20" />
+                                    <h2 className="text-[10px] font-black text-cane-green uppercase tracking-[0.4em]">Your Planner Actions</h2>
+                                    <div className="h-px flex-1 bg-cane-green/20" />
                                 </div>
 
                                 {/* Show uploaded file summary if exists */}
                                 {uploadedFile && uploadedFile.status === 'completed' && (
                                     <div className="space-y-3">
-                                        <GlassCard className="border-earth-600/20 bg-earth-50/5">
+                                        <GlassCard className="border-cane-green/20 bg-cane-green/5">
                                             <div className="p-6 md:p-8">
                                                 <FileSummaryView file={uploadedFile} />
                                             </div>
@@ -393,7 +497,7 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                                 {/* Show planner if it exists and has content (check both visibleContent and content) */}
                                 {plannerSection && (plannerSection.isVisible || plannerSection.content) && (plannerSection.visibleContent || plannerSection.content) && (
                                     <div className="space-y-3">
-                                        <GlassCard className="border-earth-600/20 bg-earth-50/5">
+                                        <GlassCard className="border-cane-green/20 bg-cane-green/5">
                                             <div className="p-6 md:p-8">
                                                 <SectionRenderer section={plannerSection} employees={employees} departments={departments} />
                                             </div>
@@ -405,7 +509,7 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
                                 {insightSections.filter(s => s.title !== 'Your Planner Actions').map(s => (
                                     <div key={s.id} className="space-y-3">
                                         <h2 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.3em] px-1 opacity-50">{s.title}</h2>
-                                        <GlassCard className="border-earth-600/20 bg-earth-50/5">
+                                        <GlassCard className="border-cane-green/20 bg-cane-green/5">
                                             <div className="p-6 md:p-8">
                                                 <SectionRenderer section={s} employees={employees} departments={departments} />
                                             </div>
@@ -432,7 +536,7 @@ export default function MainCanvas({ status, sections, activeModule = '', vipVis
     return (
         <div className="flex flex-col h-full relative gamma-light-bg overflow-hidden group/active text-center items-center justify-center">
             <div className="grain-overlay" />
-            <p className="text-slate-400 font-medium italic">Please select a module from the left or ask Namaha AI for a dashboard update.</p>
+            <p className="text-slate-400 font-medium italic">Please select a module from the left or ask SugarOS AI for an operational update.</p>
         </div>
     );
 }

@@ -89,9 +89,9 @@ export default function PlanSection({ data, isStreaming = false }: PlanSectionPr
                     {/* Streaming indicator */}
                     {isStreaming && (
                         <div className="flex items-center gap-2 text-sm text-neutral-500 italic animate-pulse pt-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-earth-600"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-cane-green"></div>
                             <span>Planning</span>
-                            <span className="ml-1 inline-block w-0.5 h-4 bg-earth-600 animate-pulse">▍</span>
+                            <span className="ml-1 inline-block w-0.5 h-4 bg-cane-green animate-pulse">▍</span>
                         </div>
                     )}
                 </div>

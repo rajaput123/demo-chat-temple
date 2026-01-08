@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { X, Phone, Lock, ArrowRight } from 'lucide-react';
+import { X, Phone, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface LoginFormProps {
     onClose: () => void;
@@ -24,7 +24,7 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
             alert('Password must be at least 6 characters');
             return;
         }
-        
+
         setIsLoading(true);
         // Simulate login
         setTimeout(() => {
@@ -34,7 +34,7 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-industrial-gray/60 backdrop-blur-sm animate-fadeIn">
             <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-scaleIn">
                 {/* Close Button */}
                 <button
@@ -45,24 +45,24 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
                 </button>
 
                 {/* Header */}
-                <div className="bg-gradient-to-br from-amber-900 to-amber-800 px-8 py-12 text-center">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Lock size={32} className="text-white" />
+                <div className="bg-gradient-to-br from-industrial-gray to-slate-900 px-8 py-10 text-center">
+                    <div className="w-16 h-16 bg-white/10 rounded-2xl border border-white/20 flex items-center justify-center mx-auto mb-4">
+                        <ShieldCheck size={32} className="text-cane-green" />
                     </div>
-                    <h2 className="text-2xl font-black text-white mb-2">Login</h2>
-                    <p className="text-amber-100 text-sm">Access your temple management dashboard</p>
+                    <h2 className="text-2xl font-black text-white mb-2 uppercase tracking-tight">Terminal Access</h2>
+                    <p className="text-slate-400 text-sm">Authorized personnel only</p>
                 </div>
 
                 {/* Form Content */}
                 <div className="p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label htmlFor="mobile" className="block text-sm font-bold text-slate-700 mb-2">
-                                Mobile Number
+                            <label htmlFor="mobile" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                                Operator ID / Mobile
                             </label>
                             <div className="relative">
                                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400">
-                                    <Phone size={20} />
+                                    <Phone size={18} />
                                 </div>
                                 <input
                                     id="mobile"
@@ -70,7 +70,7 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
                                     value={mobile}
                                     onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                     placeholder="Enter 10-digit mobile number"
-                                    className="w-full pl-12 pr-4 py-3 border-2 border-slate-200 rounded-xl focus:border-amber-600 focus:outline-none text-slate-900 font-medium"
+                                    className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:border-cane-green focus:outline-none text-slate-900 font-medium transition-colors"
                                     required
                                     maxLength={10}
                                 />
@@ -78,20 +78,20 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-bold text-slate-700 mb-2">
-                                Password
+                            <label htmlFor="password" className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                                Secure Key
                             </label>
                             <div className="relative">
                                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400">
-                                    <Lock size={20} />
+                                    <Lock size={18} />
                                 </div>
                                 <input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter your password"
-                                    className="w-full pl-12 pr-12 py-3 border-2 border-slate-200 rounded-xl focus:border-amber-600 focus:outline-none text-slate-900 font-medium"
+                                    placeholder="Enter your security key"
+                                    className="w-full pl-12 pr-12 py-3 border border-slate-200 rounded-xl focus:border-cane-green focus:outline-none text-slate-900 font-medium transition-colors"
                                     required
                                     minLength={6}
                                 />
@@ -112,29 +112,29 @@ export default function LoginForm({ onClose, onLoginSuccess }: LoginFormProps) {
                                     )}
                                 </button>
                             </div>
-                            <p className="mt-2 text-xs text-slate-500">
-                                Password must be at least 6 characters
-                            </p>
                         </div>
 
                         <button
                             type="submit"
                             disabled={isLoading || mobile.length !== 10 || password.length < 6}
-                            className="w-full py-3 bg-gradient-to-r from-amber-900 to-amber-800 text-white font-bold rounded-xl hover:from-amber-800 hover:to-amber-700 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+                            className="w-full py-4 bg-cane-green text-white font-black rounded-xl hover:bg-green-800 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 shadow-lg shadow-cane-green/20"
                         >
                             {isLoading ? (
                                 <>
                                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    <span>Logging in...</span>
+                                    <span>Verifying...</span>
                                 </>
                             ) : (
                                 <>
-                                    <span>Login</span>
+                                    <span>Access Dashboard</span>
                                     <ArrowRight size={18} />
                                 </>
                             )}
                         </button>
                     </form>
+                </div>
+                <div className="p-6 bg-soft-white border-t border-gray-100 text-center">
+                    <p className="text-xs text-gray-500 font-medium">System Version: v2.4.8-industrial-release</p>
                 </div>
             </div>
         </div>

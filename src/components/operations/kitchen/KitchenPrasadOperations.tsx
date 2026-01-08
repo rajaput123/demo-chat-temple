@@ -60,9 +60,9 @@ function KitchenContent() {
                     <h2 className="text-2xl font-black text-slate-900 tracking-tight">Kitchen & Prasad Seva</h2>
                     <p className="text-sm text-slate-600 font-bold mt-1 uppercase tracking-wide">Sacred Operations Logbook</p>
                 </div>
-                <div className="px-4 py-2 bg-amber-50 border border-amber-100 rounded-lg">
-                    <p className="text-xs font-bold text-amber-800 uppercase tracking-wider">Today's Principle</p>
-                    <p className="text-sm font-medium text-amber-900">"Purity in preparation leads to Divinity in offering."</p>
+                <div className="px-4 py-2 bg-soft-white border border-harvest-yellow/20 rounded-lg">
+                    <p className="text-xs font-bold text-harvest-yellow uppercase tracking-wider">Today's Principle</p>
+                    <p className="text-sm font-medium text-industrial-gray">"Purity in preparation leads to Divinity in offering."</p>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@ function KitchenContent() {
                                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/50'
                                 }`}
                         >
-                            <Icon size={16} className={isActive ? 'text-amber-400' : ''} />
+                            <Icon size={16} className={isActive ? 'text-harvest-yellow/80' : ''} />
                             {tab.label}
                         </button>
                     );

@@ -37,13 +37,13 @@ const MessageBubble = ({ role, text, isTyping }: { role: 'assistant' | 'user' | 
 
     return (
         <div className={`flex flex-col gap-1.5 ${role === 'user' ? 'items-end' : 'items-start'} mb-6 animate-fadeIn`}>
-            <div className={`text-[11px] font-black uppercase tracking-widest mb-0.5 px-1 ${role === 'user' ? 'text-slate-400' : 'text-slate-900'}`}>
-                {role === 'user' ? 'You' : 'Namaha AI'}
+            <div className={`text-[11px] font-black uppercase tracking-widest mb-0.5 px-1 ${role === 'user' ? 'text-slate-400' : 'text-industrial-gray'}`}>
+                {role === 'user' ? 'You' : 'SugarOS AI'}
             </div>
             <div
                 className={`max-w-[90%] px-4 py-3 text-[14px] leading-relaxed font-medium transition-all rounded-[16px] shadow-sm
         ${role === 'user'
-                        ? 'bg-earth-900 text-white'
+                        ? 'bg-industrial-gray text-white'
                         : 'bg-white border border-slate-200/60 text-slate-900'
                     }`}
             >
@@ -67,7 +67,8 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
 
     // Generate smart recommendations based on planner actions
     const generateRecommendations = (): { text: string; query: string }[] => {
-        const plannerSections = sections.filter(s => s.title === 'Your Planner Actions' && s.isVisible);
+        // Check all planner sections, not just visible ones (they might be visible but not marked as isVisible yet)
+        const plannerSections = sections.filter(s => s.title === 'Your Planner Actions');
 
         if (plannerSections.length === 0 || !plannerSections[0].content) {
             // Only show recommendations when there are actual planner actions
@@ -76,9 +77,13 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
 
         // Wait for streaming to complete before showing recommendations
         const plannerSection = plannerSections[0];
-        const isStreamingComplete = status === 'complete' || plannerSection.visibleContent === plannerSection.content;
+        // Check if content exists and either status is complete OR visibleContent matches content OR section is visible
+        const hasContent = plannerSection.content && plannerSection.content.length > 0;
+        const isStreamingComplete = status === 'complete' || 
+                                    plannerSection.visibleContent === plannerSection.content ||
+                                    (plannerSection.isVisible && hasContent);
 
-        if (!isStreamingComplete) {
+        if (!isStreamingComplete || !hasContent) {
             return [];
         }
 
@@ -89,17 +94,23 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
         const recommendations: { text: string; query: string }[] = [];
 
         // Generate contextual recommendations based on action keywords
-        if (actions.some(a => a.toLowerCase().includes('security') || a.toLowerCase().includes('protocol'))) {
-            recommendations.push({ text: 'Review security briefing document', query: 'Show security briefing for upcoming visit' });
+        if (actions.some(a => a.toLowerCase().includes('quality') || a.toLowerCase().includes('inspection'))) {
+            recommendations.push({ text: 'Review quality control checklist', query: 'Show quality control checklist' });
         }
 
-        if (actions.some(a => a.toLowerCase().includes('vip') || a.toLowerCase().includes('visit') || a.toLowerCase().includes('escort'))) {
-            recommendations.push({ text: 'Assign escort personnel', query: 'Who should escort the VIP visitor?' });
-            recommendations.push({ text: 'Check VIP parking availability', query: 'Is VIP parking reserved?' });
+        if (actions.some(a => a.toLowerCase().includes('cane') || a.toLowerCase().includes('intake') || a.toLowerCase().includes('supplier') || a.toLowerCase().includes('procurement'))) {
+            recommendations.push({ text: 'Check cane stock availability', query: 'Check cane inventory' });
+            recommendations.push({ text: 'View supplier schedule', query: 'Show supplier visits' });
         }
 
-        if (actions.some(a => a.toLowerCase().includes('prasadam') || a.toLowerCase().includes('arrange'))) {
-            recommendations.push({ text: 'Confirm prasadam quantity', query: 'How much prasadam is needed?' });
+        if (actions.some(a => a.toLowerCase().includes('cane') || a.toLowerCase().includes('intake') || a.toLowerCase().includes('arrange'))) {
+            recommendations.push({ text: 'Check cane stock quantity', query: 'How much cane is available?' });
+        }
+        
+        // Procurement-specific recommendations
+        if (actions.some(a => a.toLowerCase().includes('procurement') || a.toLowerCase().includes('supplier') || a.toLowerCase().includes('delivery') || a.toLowerCase().includes('shortfall') || a.toLowerCase().includes('risk'))) {
+            recommendations.push({ text: 'Check procurement progress', query: 'Show overall sugarcane procurement progress against season target and highlight risks' });
+            recommendations.push({ text: 'Review supplier contracts', query: 'Show supplier contract details' });
         }
 
         if (actions.some(a => a.toLowerCase().includes('approval') || a.toLowerCase().includes('verify') || a.toLowerCase().includes('review'))) {
@@ -131,13 +142,12 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
 
     // Static quick actions that should always be visible
     const staticQuickActions = [
-        { text: 'Tomorrow 9 AM, Prime Minister Modi is visiting Sringeri', query: 'Tomorrow 9 AM, Prime Minister Modi is visiting Sringeri' },
+        { text: 'Check cane intake status', query: 'Check cane intake status' },
+        { text: 'Show production batch', query: 'Show production batch' },
         { text: 'Show pending approvals', query: 'Show pending approvals' },
-        { text: 'Show appointments', query: 'Show appointments' },
-        { text: 'Show all alerts and reminders', query: 'Show all alerts and reminders' },
-        { text: 'Show VIP visits', query: 'Show VIP visits' },
-        { text: 'Show financial summary', query: 'Show financial summary' },
-        { text: 'Approve payment for ABC Provisions', query: 'Approve payment for ABC Provisions' }
+        { text: 'Show quality reports', query: 'Show quality reports' },
+        { text: 'Show supplier visits', query: 'Show supplier visits' },
+        { text: 'Show financial summary', query: 'Show financial summary' }
     ];
 
     // Render quick actions component
@@ -238,7 +248,7 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
         // Extract PDF content and generate summary
         let extractedContent = '';
         let summary = '';
-        
+
         try {
             const { content, summary: generatedSummary } = await PDFExtractor.extractAndSummarize(file);
             extractedContent = content;
@@ -262,7 +272,7 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
                     content: extractedContent,
                     summary: summary,
                 };
-                
+
                 setUploadingFile(fileWithContent);
                 setUploadProgress(100);
                 setShowSuccess(true);
@@ -305,7 +315,7 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
             {/* Header - Fixed at top */}
             <div className="flex items-center justify-between px-6 py-5 shrink-0 border-b border-slate-200/40">
                 <div className="flex items-center gap-2">
-                    <span className="text-lg font-black text-slate-900 tracking-tight">Namaha AI</span>
+                    <span className="text-lg font-black text-slate-900 tracking-tight">SugarOS AI</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <button
@@ -350,9 +360,9 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
                 ) : (
                     <div className="space-y-2">
                         {messages.map((msg) => (
-                            <MessageBubble 
-                                key={msg.id} 
-                                role={msg.role} 
+                            <MessageBubble
+                                key={msg.id}
+                                role={msg.role}
                                 text={msg.text}
                                 isTyping={msg.isTyping}
                             />
@@ -408,7 +418,7 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
                             </div>
                             <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
                                 <div
-                                    className="h-full bg-earth-600 transition-all duration-300 ease-out rounded-full"
+                                    className="h-full bg-cane-green transition-all duration-300 ease-out rounded-full"
                                     style={{ width: `${uploadProgress}%` }}
                                 />
                             </div>
@@ -438,8 +448,8 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
                         <button
                             onClick={handleUploadClick}
-                            className="p-2.5 rounded-xl bg-earth-900 text-white hover:bg-earth-800 transition-all duration-300 shadow-lg scale-100 active:scale-95"
-                            title="Upload PDF file"
+                            className="p-2.5 rounded-xl bg-industrial-gray text-white hover:bg-industrial-gray/90 transition-all duration-300 shadow-lg scale-100 active:scale-95"
+                            title="Upload Factory Data (PDF)"
                         >
                             <Plus size={18} strokeWidth={2.5} />
                         </button>
@@ -447,7 +457,7 @@ export default function RightPane({ messages, status, sections, onSendMessage, o
                             onClick={() => handleSend()}
                             disabled={!inputValue}
                             className={`p-2.5 rounded-xl transition-all duration-300 ${inputValue
-                                ? 'bg-earth-900 text-white hover:bg-earth-800 shadow-lg scale-100 active:scale-95'
+                                ? 'bg-cane-green text-white hover:bg-cane-green/90 shadow-lg scale-100 active:scale-95'
                                 : 'bg-slate-100 text-slate-300 cursor-not-allowed scale-90'
                                 }`}
                         >

@@ -30,7 +30,7 @@ export function handlePlannerRequest(query: string): PlannerRequestResult {
         const formattedActions = actions.map(action => `[·] ${action}`).join('\n');
 
         const sections: CanvasSection[] = [
-            createPlannerSection(formattedActions, 'VIP Plan', `planner-actions-${Date.now()}`)
+            createPlannerSection(formattedActions, 'Factory Operations Plan', `planner-actions-${Date.now()}`)
         ];
 
         return {

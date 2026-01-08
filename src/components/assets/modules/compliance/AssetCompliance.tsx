@@ -14,7 +14,7 @@ export default function AssetCompliance() {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-sm font-bold hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-sm font-bold hover:bg-industrial-gray/90 transition-all"
                 >
                     <FileText size={18} />
                     <span>Add Legal Document</span>
@@ -51,7 +51,7 @@ export default function AssetCompliance() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Select Asset *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="">Select Asset</option>
                         </select>
                     </div>
@@ -59,7 +59,7 @@ export default function AssetCompliance() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Document Type *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="deed">Deed</option>
                             <option value="80g">80G Certificate</option>
                             <option value="title">Title Document</option>
@@ -72,13 +72,13 @@ export default function AssetCompliance() {
                         </label>
                         <input
                             type="file"
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Add Document
                         </button>

@@ -112,7 +112,7 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                         resetForm();
                         setIsModalOpen(true);
                     }}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                 >
                     <Plus size={18} />
                     <span>Create Role</span>
@@ -133,9 +133,9 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                         >
                             <div className="flex items-center gap-3">
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                                    role.isActive ? 'bg-earth-900/10' : 'bg-neutral-100'
+                                    role.isActive ? 'bg-industrial-gray/10' : 'bg-neutral-100'
                                 }`}>
-                                    <Shield size={18} className={role.isActive ? 'text-earth-900' : 'text-neutral-400'} />
+                                    <Shield size={18} className={role.isActive ? 'text-industrial-gray' : 'text-neutral-400'} />
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2">
@@ -204,7 +204,7 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600 ${errors.name ? 'border-red-300' : 'border-neutral-200'}`}
+                            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green ${errors.name ? 'border-red-300' : 'border-neutral-200'}`}
                             placeholder="e.g., Department Head, Supervisor, Staff"
                         />
                         {errors.name && <p className="text-xs text-red-600 mt-1">{errors.name}</p>}
@@ -219,7 +219,7 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                             required
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value as RoleCategory })}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         >
                             <option value="operational">Operational</option>
                             <option value="supervisory">Supervisory</option>
@@ -236,7 +236,7 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             placeholder="Describe the role's purpose and responsibilities"
                         />
                     </div>
@@ -260,7 +260,7 @@ export default function RoleMaster({ roles, setRoles }: RoleMasterProps) {
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             {editingRole ? 'Update Role' : 'Create Role'}
                         </button>

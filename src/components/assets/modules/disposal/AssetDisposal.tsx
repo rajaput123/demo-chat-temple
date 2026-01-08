@@ -14,7 +14,7 @@ export default function AssetDisposal() {
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-earth-900 text-white rounded-xl text-sm font-bold hover:bg-earth-800 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-industrial-gray text-white rounded-xl text-sm font-bold hover:bg-industrial-gray/90 transition-all"
                 >
                     <Trash2 size={18} />
                     <span>Initiate Disposal</span>
@@ -58,7 +58,7 @@ export default function AssetDisposal() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Select Asset *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="">Select Asset</option>
                         </select>
                     </div>
@@ -66,7 +66,7 @@ export default function AssetDisposal() {
                         <label className="block text-sm font-medium text-neutral-900 mb-1">
                             Disposal Reason *
                         </label>
-                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600">
+                        <select className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green">
                             <option value="damaged">Damaged Beyond Repair</option>
                             <option value="obsolete">Obsolete</option>
                             <option value="sold">Sold</option>
@@ -80,7 +80,7 @@ export default function AssetDisposal() {
                         </label>
                         <input
                             type="number"
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                             placeholder="Will be linked to Finance module"
                         />
                     </div>
@@ -90,13 +90,13 @@ export default function AssetDisposal() {
                         </label>
                         <textarea
                             rows={3}
-                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                            className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                         />
                     </div>
                     <div className="flex gap-3 pt-4">
                         <button
                             type="submit"
-                            className="flex-1 px-4 py-2 bg-earth-900 text-white rounded-lg text-sm font-medium hover:bg-earth-800 transition-all"
+                            className="flex-1 px-4 py-2 bg-industrial-gray text-white rounded-lg text-sm font-medium hover:bg-industrial-gray/90 transition-all"
                         >
                             Request Disposal Approval
                         </button>

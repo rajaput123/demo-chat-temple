@@ -29,13 +29,13 @@ export default function AssetUsageRequestView({ requests, onApprove, onReject, c
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'approved':
-                return 'bg-earth-100 text-earth-900';
+                return 'bg-cane-green/10 text-industrial-gray';
             case 'rejected':
-                return 'bg-earth-900/10 text-earth-900';
+                return 'bg-industrial-gray/10 text-industrial-gray';
             case 'completed':
-                return 'bg-earth-400/30 text-earth-900';
+                return 'bg-cane-green/30 text-industrial-gray';
             default:
-                return 'bg-earth-400/20 text-earth-900';
+                return 'bg-cane-green/20 text-industrial-gray';
         }
     };
 
@@ -84,7 +84,7 @@ export default function AssetUsageRequestView({ requests, onApprove, onReject, c
                                                         e.stopPropagation();
                                                         onApprove(request.id);
                                                     }}
-                                                    className="p-1.5 bg-earth-100 text-earth-900 rounded-lg hover:bg-earth-400 transition-colors"
+                                                    className="p-1.5 bg-cane-green/10 text-industrial-gray rounded-lg hover:bg-cane-green transition-colors"
                                                 >
                                                     <CheckCircle2 size={16} />
                                                 </button>
@@ -93,7 +93,7 @@ export default function AssetUsageRequestView({ requests, onApprove, onReject, c
                                                         e.stopPropagation();
                                                         onReject(request.id);
                                                     }}
-                                                    className="p-1.5 bg-earth-900/10 text-earth-900 rounded-lg hover:bg-earth-900/20 transition-colors"
+                                                    className="p-1.5 bg-industrial-gray/10 text-industrial-gray rounded-lg hover:bg-industrial-gray/20 transition-colors"
                                                 >
                                                     <XCircle size={16} />
                                                 </button>

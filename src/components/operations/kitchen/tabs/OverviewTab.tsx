@@ -30,7 +30,7 @@ export default function OverviewTab() {
                     <div className="flex justify-between items-start">
                         <div>
                             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Plan Status</p>
-                            <h3 className={`text-2xl font-black mt-1 ${dailyPlan.status === 'Approved' ? 'text-green-600' : 'text-amber-600'
+                            <h3 className={`text-2xl font-black mt-1 ${dailyPlan.status === 'Approved' ? 'text-green-600' : 'text-harvest-yellow'
                                 }`}>
                                 {dailyPlan.status}
                             </h3>

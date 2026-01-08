@@ -83,7 +83,7 @@ export default function PlanningTab() {
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
-                        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${isLocked ? 'bg-green-50 border-green-200 text-green-700' : 'bg-amber-50 border-amber-200 text-amber-700'
+                        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${isLocked ? 'bg-green-50 border-green-200 text-green-700' : 'bg-soft-white border-harvest-yellow/30 text-harvest-yellow'
                             }`}>
                             {isLocked ? <Lock size={16} /> : <Unlock size={16} />}
                             <span className="text-sm font-bold uppercase">{dailyPlan.status}</span>
@@ -155,7 +155,7 @@ export default function PlanningTab() {
 
                 {/* Note */}
                 {!isLocked && (
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800 flex items-start gap-3">
+                    <div className="bg-soft-white border border-harvest-yellow/30 rounded-lg p-4 text-sm text-harvest-yellow flex items-start gap-3">
                         <AlertTriangle size={18} className="shrink-0 mt-0.5" />
                         <div>
                             <p className="font-bold">Approval Required</p>

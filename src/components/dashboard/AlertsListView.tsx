@@ -73,11 +73,11 @@ export default function AlertsListView({ filter = 'today' }: AlertsListViewProps
                             key={alert.id}
                             className="flex items-start gap-3 group transition-all"
                         >
-                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-earth-600 transition-colors">
+                            <div className="w-5 h-5 rounded-[4px] bg-neutral-100 border border-neutral-200 mt-0.5 shrink-0 flex items-center justify-center cursor-pointer hover:border-cane-green transition-colors">
                                 {alert.type === 'warning' ? (
                                     <AlertTriangle size={12} className="text-red-500" />
                                 ) : alert.type === 'reminder' ? (
-                                    <Calendar size={12} className="text-amber-500" />
+                                    <Calendar size={12} className="text-harvest-yellow" />
                                 ) : (
                                     <Info size={12} className="text-blue-500" />
                                 )}

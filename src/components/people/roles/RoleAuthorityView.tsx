@@ -162,7 +162,7 @@ export default function RoleAuthorityView({
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                                         isActive
-                                            ? 'border-earth-600 text-earth-900 bg-earth-50/30'
+                                            ? 'border-cane-green text-industrial-gray bg-soft-white/30'
                                             : 'border-transparent text-neutral-500 hover:text-neutral-900 hover:border-neutral-300'
                                     }`}
                                 >

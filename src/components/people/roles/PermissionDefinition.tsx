@@ -84,7 +84,7 @@ export default function PermissionDefinition({ roles, permissions, setPermission
                         const role = roles.find(r => r.id === e.target.value);
                         setSelectedRole(role || null);
                     }}
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-earth-600"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cane-green"
                 >
                     <option value="">Select a role</option>
                     {roles.filter(r => r.isActive).map((role) => (
@@ -95,12 +95,12 @@ export default function PermissionDefinition({ roles, permissions, setPermission
 
             {selectedRole ? (
                 <div className="space-y-4">
-                    <div className="p-4 bg-earth-50 border border-earth-200 rounded-lg">
+                    <div className="p-4 bg-soft-white border border-cane-green/20 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
-                            <Shield size={18} className="text-earth-900" />
-                            <span className="text-sm font-black text-earth-900">{selectedRole.name}</span>
+                            <Shield size={18} className="text-industrial-gray" />
+                            <span className="text-sm font-black text-industrial-gray">{selectedRole.name}</span>
                         </div>
-                        <p className="text-xs text-earth-800">
+                        <p className="text-xs text-industrial-gray/90">
                             {selectedRole.category === 'audit' 
                                 ? 'Auditor roles are read-only (View permission only)'
                                 : 'Define permissions for this role'}
@@ -154,8 +154,8 @@ export default function PermissionDefinition({ roles, permissions, setPermission
                                                                     onClick={() => handleTogglePermission(permType, module)}
                                                                     className={`w-8 h-8 rounded-lg border-2 transition-all flex items-center justify-center ${
                                                                         hasPerm
-                                                                            ? 'bg-earth-900 border-earth-900 text-white'
-                                                                            : 'border-neutral-200 hover:border-earth-600'
+                                                                            ? 'bg-industrial-gray border-industrial-gray text-white'
+                                                                            : 'border-neutral-200 hover:border-cane-green'
                                                                     }`}
                                                                     title={hasPerm ? 'Remove permission' : 'Add permission'}
                                                                 >
