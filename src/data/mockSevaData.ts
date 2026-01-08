@@ -1,0 +1,101 @@
+/**
+ * Mock Data for Seva Management
+ * 
+ * Realistic seva data for Sringeri Sharada Peetham
+ */
+
+import { Seva, SevaBooking } from '@/types/seva';
+
+export const mockSevas: Seva[] = [
+    {
+        id: 'seva-001',
+        name: 'Archana',
+        type: 'archana',
+        description: 'Recitation of 108 names of the deity',
+        templeId: 'temple-sharada',
+        duration: 30,
+        price: 500,
+        maxParticipants: 5,
+        isActive: true,
+        availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        availableTimeSlots: ['09:00 AM', '11:00 AM', '02:00 PM', '04:00 PM'],
+        createdAt: '2024-01-01T10:00:00Z',
+        updatedAt: '2024-01-01T10:00:00Z',
+        createdBy: 'emp-001',
+        updatedBy: 'emp-001',
+    },
+    {
+        id: 'seva-002',
+        name: 'Abhishekam',
+        type: 'abhishekam',
+        description: 'Sacred bath of the deity with holy water and milk',
+        templeId: 'temple-sharada',
+        duration: 45,
+        price: 1000,
+        maxParticipants: 10,
+        isActive: true,
+        availableDays: ['Monday', 'Wednesday', 'Friday', 'Sunday'],
+        availableTimeSlots: ['09:00 AM', '11:00 AM'],
+        createdAt: '2024-01-01T10:00:00Z',
+        updatedAt: '2024-01-01T10:00:00Z',
+        createdBy: 'emp-001',
+        updatedBy: 'emp-001',
+    },
+    {
+        id: 'seva-003',
+        name: 'Special Puja',
+        type: 'puja',
+        description: 'Comprehensive puja ceremony',
+        templeId: 'temple-sharada',
+        duration: 60,
+        price: 2000,
+        maxParticipants: 15,
+        isActive: true,
+        availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        availableTimeSlots: ['10:00 AM', '03:00 PM'],
+        createdAt: '2024-01-01T10:00:00Z',
+        updatedAt: '2024-01-01T10:00:00Z',
+        createdBy: 'emp-001',
+        updatedBy: 'emp-001',
+    },
+];
+
+export const mockSevaBookings: SevaBooking[] = [
+    {
+        id: 'booking-001',
+        sevaId: 'seva-001',
+        templeId: 'temple-sharada',
+        devoteeName: 'Rajesh Kumar',
+        devoteePhone: '+91 98765 12345',
+        devoteeEmail: 'rajesh.kumar@example.com',
+        bookingDate: new Date().toISOString().split('T')[0],
+        timeSlot: '09:00 AM',
+        numberOfParticipants: 3,
+        totalAmount: 500,
+        status: 'booked',
+        paymentStatus: 'paid',
+        createdAt: '2024-01-20T10:00:00Z',
+        updatedAt: '2024-01-20T10:00:00Z',
+        createdBy: 'emp-001',
+        updatedBy: 'emp-001',
+    },
+    {
+        id: 'booking-002',
+        sevaId: 'seva-002',
+        templeId: 'temple-sharada',
+        devoteeName: 'Priya Sharma',
+        devoteePhone: '+91 98765 12346',
+        devoteeEmail: 'priya.sharma@example.com',
+        bookingDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+        timeSlot: '09:00 AM',
+        numberOfParticipants: 5,
+        totalAmount: 1000,
+        status: 'booked',
+        paymentStatus: 'paid',
+        createdAt: '2024-01-21T10:00:00Z',
+        updatedAt: '2024-01-21T10:00:00Z',
+        createdBy: 'emp-001',
+        updatedBy: 'emp-001',
+    },
+];
+
