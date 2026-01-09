@@ -9,6 +9,8 @@ import { FlexibleQueryParser } from '@/services/flexibleQueryParser';
 import { generatePlannerActionsFromQuery } from '@/utils/plannerHelpers';
 import { isInfoQuery, isSummaryQuery } from '@/utils/queryHelpers';
 import { createSection, createPlannerSection } from '@/services/sectionManager';
+import { generateInfoCardContent } from '@/services/infoCardContentGenerator';
+import { generateCEOActions, formatActionsForPlanner } from '@/services/ceoActionGenerator';
 
 export interface InfoQueryResult {
     handled: boolean;
@@ -19,6 +21,9 @@ export interface InfoQueryResult {
 
 /**
  * Handle info/summary queries
+ * Always generates canvas sections using temple response format:
+ * PART 1: Info card (4-5 chronological items from combined calendars)
+ * PART 2: Planner actions (8-10 CEO-level actions)
  */
 export function handleInfoQuery(query: string): InfoQueryResult {
     const lowercaseQuery = query.toLowerCase();
@@ -28,71 +33,41 @@ export function handleInfoQuery(query: string): InfoQueryResult {
         return { handled: false };
     }
 
-    // Try flexible query parsing for progress queries first
-    const progressQuery = FlexibleQueryParser.parseProgressQuery(query);
-    let summaryCardData: any = null;
-    let response = '';
+    // Always generate info card using calendar aggregation (PART 1)
+    const infoCardContent = generateInfoCardContent(query);
+    
+    // Always generate CEO actions (PART 2)
+    const ceoActions = generateCEOActions(query);
+    const plannerActions = formatActionsForPlanner(ceoActions);
 
-    if (isSummaryQuery(query) && progressQuery && progressQuery.festivalName) {
-        // Get festival data for summary card
-        const festivalData = DataLookupService.searchFestivals(query);
-        if (festivalData.data.length > 0) {
-            const fest = festivalData.data[0];
-
-            // Create rich summary card data
-            summaryCardData = {
-                title: `${fest.festivalName} Preparation Status`,
-                progress: fest.progress || 0,
-                status: fest.status || "in-progress",
-                todayHighlights: [
-                    { time: 'Status', description: `Overall: ${fest.progress || 0}% complete` },
-                    { time: 'Actions', description: `${fest.actions?.filter((a: any) => a.status === 'completed').length || 0} of ${fest.actions?.length || 0} actions completed` },
-                    ...(fest.actions?.slice(0, 2).map((action: any) => ({
-                        time: action.status === 'completed' ? '✓' : action.status === 'in-progress' ? '⟳' : '○',
-                        description: action.description
-                    })) || [])
-                ],
-                highlightTitle: "PROGRESS | HIGHLIGHTS"
-            };
-
-            response = `**${fest.festivalName} Preparation Progress:**\n\n`;
-            response += `Status: ${fest.status}\n`;
-            response += `Progress: ${fest.progress}%\n\n`;
-            response += `**Actions:**\n`;
-            fest.actions.forEach((action: any) => {
-                const statusIcon = action.status === 'completed' ? '✓' : action.status === 'in-progress' ? '⟳' : '○';
-                response += `${statusIcon} ${action.description} [${action.status}]\n`;
-            });
-        } else {
-            response = `I couldn't find specific data for "${progressQuery.festivalName}". The system is checking available information.`;
-        }
-    } else {
-        const lookupResult = DataLookupService.lookupData(query);
-        if (lookupResult.data.length > 0) {
-            if (isSummaryQuery(query)) {
-                response = `**Summary:**\n\n${DataLookupService.formatDataForDisplay(lookupResult)}`;
-            } else {
-                response = `**Information:**\n\n${DataLookupService.formatDataForDisplay(lookupResult)}`;
-            }
-        } else {
-            response = "I couldn't find specific data matching your query. Please try rephrasing or be more specific.";
-        }
-    }
-
-    // Generate planner actions
-    const plannerActions = generatePlannerActionsFromQuery(query, isSummaryQuery(query) ? 'summary' : 'info');
-
+    // Create sections for canvas display
     const sections: CanvasSection[] = [];
 
-    // Create summary card section if we have summary data
-    if (summaryCardData) {
-        sections.push(createSection(`focus-summary-${Date.now()}`, 'Summary Status', JSON.stringify(summaryCardData), 'text'));
-    }
+    // PART 1: Info card section (set as visible immediately for focus sections)
+    const infoSection: CanvasSection = {
+        id: `focus-info-${Date.now()}`,
+        title: infoCardContent.highlightTitle,
+        content: JSON.stringify(infoCardContent),
+        type: 'text',
+        visibleContent: JSON.stringify(infoCardContent), // Set full content immediately for focus sections
+        isVisible: true // Set as visible immediately
+    };
+    sections.push(infoSection);
 
-    // Always add planner actions
-    if (plannerActions) {
-        sections.push(createPlannerSection(plannerActions, 'Query Follow-up'));
-    }
+    // PART 2: Planner actions section
+    const plannerSection: CanvasSection = {
+        id: `planner-${Date.now()}`,
+        title: 'Your Planner Actions',
+        subTitle: 'Query Follow-up',
+        content: plannerActions,
+        type: 'list',
+        visibleContent: plannerActions, // Set actions as visible content
+        isVisible: true // Set as visible immediately
+    };
+    sections.push(plannerSection);
+
+    // Chat message (simple header)
+    const response = `I've retrieved information about "${query}".`;
 
     return {
         handled: true,

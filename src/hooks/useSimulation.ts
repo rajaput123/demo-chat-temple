@@ -16,6 +16,8 @@ import { handleRecommendation } from '@/services/handlers/recommendationHandler'
 import { handleInfoQuery } from '@/services/handlers/infoQueryHandler';
 import { handleVIPQuery } from '@/services/handlers/vipQueryHandler';
 import { handlePlannerRequest } from '@/services/handlers/plannerRequestHandler';
+import { handleDataLookup } from '@/services/handlers/dataLookupHandler';
+import { handleSimpleQuery } from '@/services/handlers/simpleQueryHandler';
 // Import utilities
 import { generatePlannerActionsFromQuery, parseActionsFromQuery } from '@/utils/plannerHelpers';
 import { isInfoQuery, isSummaryQuery, isPlannerRequest, normalizeQuery, isInformationalQuery } from '@/utils/queryHelpers';
@@ -106,6 +108,32 @@ export function useSimulation(options?: UseSimulationOptions) {
                 }
                 setStatus('complete');
             }, 500);
+            return;
+        }
+
+        // Handler 1.5: Simple Query Handler (plan, summary, complete information, next information)
+        const simpleResult = handleSimpleQuery(query, sections);
+        if (simpleResult.handled) {
+            const newSections: CanvasSection[] = [];
+            
+            // Add info section (top - focus area)
+            if (simpleResult.infoSection) {
+                newSections.push(simpleResult.infoSection);
+            }
+            
+            // Add action section (bottom - planner)
+            if (simpleResult.actionSection) {
+                newSections.push(simpleResult.actionSection);
+            }
+            
+            setTimeout(() => {
+                setSections(prev => replaceFocusCards(prev, newSections));
+                setTimeout(() => {
+                    setCurrentSectionIndex(0);
+                    setTypingIndex(0);
+                }, 100);
+                addMessage('assistant', simpleResult.chatMessage, true);
+            }, 600);
             return;
         }
 
@@ -243,7 +271,49 @@ export function useSimulation(options?: UseSimulationOptions) {
         // Define intent flags for remaining handlers
         let newSections: CanvasSection[] = [];
 
-        // Handler 6: Special Scenario Handler
+        // Handler 6: Info Query Handler (moved earlier to catch info queries before other handlers)
+        // Check info queries early to ensure they generate canvas sections
+        if ((isInfoQuery(query) || isSummaryQuery(query)) && newSections.length === 0) {
+            const infoResult = handleInfoQuery(query);
+            if (infoResult.handled) {
+                // Set status to generating first to trigger typewriter effect
+                setStatus('generating');
+                
+                setTimeout(() => {
+                    if (infoResult.response) {
+                        addMessage('assistant', infoResult.response, true);
+                    }
+                    if (infoResult.sections && infoResult.sections.length > 0) {
+                        setSections(prev => {
+                            // Use replaceFocusCards for info sections (they should replace focus area)
+                            const hasInfoSection = infoResult.sections!.some(s => s.id.startsWith('focus-info-'));
+                            if (hasInfoSection) {
+                                return replaceFocusCards(prev, infoResult.sections!);
+                            }
+                            return addSections(prev, infoResult.sections!);
+                        });
+                        setTimeout(() => {
+                            // Start typewriter effect from first section
+                            // For focus sections, immediately set visibleContent
+                            setSections(prev => prev.map((s, i) => {
+                                if (s.id.startsWith('focus-')) {
+                                    return { ...s, isVisible: true, visibleContent: s.content };
+                                }
+                                return s;
+                            }));
+                            setCurrentSectionIndex(0);
+                            setTypingIndex(0);
+                        }, 100);
+                    } else {
+                        // No sections, mark as complete
+                        setStatus('complete');
+                    }
+                }, 600);
+                return;
+            }
+        }
+
+        // Handler 7: Special Scenario Handler
         const specialScenarioResult = handleSpecialScenario(query, options);
         if (specialScenarioResult.handled && specialScenarioResult.sections) {
             newSections = specialScenarioResult.sections;
@@ -1047,29 +1117,6 @@ export function useSimulation(options?: UseSimulationOptions) {
             return;
         }
 
-        // Handler 8: Info Query Handler
-        if ((isInfoQuery(query) || isSummaryQuery(query)) && newSections.length === 0) {
-                    const infoResult = handleInfoQuery(query);
-                    if (infoResult.handled && infoResult.needsAsyncProcessing) {
-                        setTimeout(() => {
-                            if (infoResult.response) {
-                                addMessage('assistant', infoResult.response, true);
-                            }
-                            if (infoResult.sections) {
-                                setSections(prev => addSections(prev, infoResult.sections!));
-                                if (infoResult.sections.length > 0) {
-                                    setTimeout(() => {
-                                        const firstSectionIndex = prev.length;
-                                        setCurrentSectionIndex(firstSectionIndex);
-                                        setTypingIndex(0);
-                                    }, 100);
-                                }
-                            }
-                            setStatus('complete');
-                        }, 1200);
-                        return;
-                    }
-                }
 
                 // Handler 9: Planner Request Handler
                 if (isPlannerRequest(query) && newSections.length === 0) {
@@ -1096,7 +1143,7 @@ export function useSimulation(options?: UseSimulationOptions) {
                                     setTypingIndex(0);
                                     setCurrentSectionIndex(newPlannerIndex);
                                 }, 0);
-                                return [...prev, ...plannerRequestResult.sections];
+                                return [...prev, ...(plannerRequestResult.sections || [])];
                             }
                         });
                         if (plannerRequestResult.message) {
@@ -1603,16 +1650,37 @@ export function useSimulation(options?: UseSimulationOptions) {
                     return prev;
                 });
             } else if (newSections.length === 0) {
-                // Informational query - just provide a chat response
-                const responses = [
-                    "Based on your current planner, I recommend coordinating with the relevant department heads to ensure smooth execution.",
-                    "This action requires careful coordination with security and protocol teams. I suggest scheduling a brief alignment meeting.",
-                    "For this task, you'll want to verify availability and resource allocation before proceeding.",
-                    "I'd recommend breaking this down into smaller sub-tasks and assigning specific owners to each."
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                addMessage('assistant', randomResponse, true);
-                setStatus('complete');
+                // Handler 11: Data Lookup Handler (Fallback - searches real data instead of hallucinating)
+                const dataLookupResult = handleDataLookup(query);
+                if (dataLookupResult.handled) {
+                    setTimeout(() => {
+                        if (dataLookupResult.response) {
+                            addMessage('assistant', dataLookupResult.response, true);
+                        }
+                        if (dataLookupResult.sections && dataLookupResult.sections.length > 0) {
+                            setSections(prev => {
+                                // Use replaceFocusCards if info section exists, otherwise addSections
+                                const hasInfoSection = dataLookupResult.sections!.some(s => s.id.startsWith('focus-info-'));
+                                if (hasInfoSection) {
+                                    return replaceFocusCards(prev, dataLookupResult.sections!);
+                                }
+                                return addSections(prev, dataLookupResult.sections!);
+                            });
+                            setTimeout(() => {
+                                setCurrentSectionIndex(sections.length); // Start typing from the new sections
+                                setTypingIndex(0);
+                            }, 100);
+                        }
+                        setStatus('complete');
+                    }, 800);
+                    return;
+                }
+                // If data lookup also doesn't handle it, just acknowledge
+                setTimeout(() => {
+                    addMessage('assistant', "I'm processing your query. Please try rephrasing or asking about specific data.", true);
+                    setStatus('complete');
+                }, 800);
+                return;
             } else {
                 // Generate context-specific response based on query type
                 let response = "I'm generating the relevant briefing in your workspace focus area.";

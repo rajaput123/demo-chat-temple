@@ -8,6 +8,8 @@ import { ParsedVIPVisit } from '@/types/vip';
 import { QueryParserService } from '@/services/queryParserService';
 import { VIPPlannerService } from '@/services/vipPlannerService';
 import { createSection, createPlannerSection } from '@/services/sectionManager';
+import { generateInfoCardContent } from '@/services/infoCardContentGenerator';
+import { generateCEOActions, formatActionsForPlanner } from '@/services/ceoActionGenerator';
 
 export interface VIPQueryResult {
     handled: boolean;
@@ -49,76 +51,20 @@ export function handleVIPQuery(
             options.onVIPVisitParsed(parsedVisit);
         }
 
-        // Format date
-        const dateStr = parsedVisit.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        // Use temple response format: Generate info card from calendar aggregation
+        const infoCardContent = generateInfoCardContent(query);
+        focusContent = JSON.stringify(infoCardContent);
 
-        // Create structured VIP data for the info card
-        const vipCardData = {
-            visitor: parsedVisit.visitor,
-            title: parsedVisit.title || '',
-            dateTime: `${dateStr} at ${parsedVisit.time}`,
-            location: parsedVisit.location || 'Main Entrance',
-            protocolLevel: parsedVisit.protocolLevel,
-            delegationSize: '~15 persons',
-            leadEscort: 'Executive Officer',
-            securityStatus: 'Briefed & Ready',
-            todayHighlights: [
-                { time: '07:00 AM', description: 'Sri Gurugalu will perform the Morning Anushtana as part of the daily spiritual observances.' },
-                { time: '09:00 AM', description: 'The Sahasra Chandi Yaga Purnahuti will be conducted in the temple sanctum.' },
-                { time: '09:30 AM', description: 'VIP Darshan is scheduled for the Honourable Prime Minister, with special protocol arrangements in place.' },
-                { time: '04:00 PM', description: 'Sri Gurugalu will deliver the Evening Discourse, offering spiritual guidance and blessings to devotees.' }
-            ],
-            templeEvents: [
-                { time: '09:00 AM', event: 'Sahasra Chandi Yaga Purnahuti' },
-                { time: '10:30 AM', event: 'Special Pooja for VIP Visit' },
-                { time: '04:00 PM', event: 'Evening Discourse' }
-            ],
-            executiveSchedule: [
-                { time: '08:30 AM', event: 'Security Briefing with Police Chief' },
-                { time: '09:00 AM', event: 'Receive Prime Minister at Helipad' },
-                { time: '11:00 AM', event: 'Press Briefing Review' },
-                { time: '02:00 PM', event: 'Internal Review Meeting' }
-            ],
-            gurugaluSchedule: [
-                { time: '07:00 AM', event: 'Morning Anushtana' },
-                { time: '09:30 AM', event: 'VIP Darshan (Prime Minister)' },
-                { time: '10:30 AM', event: 'Public Discourse (Anugraha Bhashana)' },
-                { time: '05:00 PM', event: 'Evening Pooja' }
-            ]
-        };
-
-        focusContent = JSON.stringify(vipCardData);
-
-        // Generate planner actions
-        const tempVisit = {
-            id: 'temp',
-            visitor: parsedVisit.visitor,
-            title: parsedVisit.title,
-            date: parsedVisit.date.toISOString().split('T')[0],
-            time: parsedVisit.time,
-            location: parsedVisit.location,
-            protocolLevel: parsedVisit.protocolLevel,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            createdBy: 'system',
-            updatedBy: 'system',
-        };
-        const actions = VIPPlannerService.generateVIPPlannerActions(tempVisit);
-        plannerActions = VIPPlannerService.formatActionsForPlanner(actions);
+        // Generate CEO-level actions (8-10 items)
+        const ceoActions = generateCEOActions(query);
+        plannerActions = formatActionsForPlanner(ceoActions);
     } else {
-        // Fallback VIP data
-        const fallbackVipData = {
-            visitor: 'Justice A. K. Reddy',
-            title: 'High Court Judge',
-            dateTime: 'Today at 4:00 PM',
-            location: 'North Gate VIP Entrance',
-            protocolLevel: 'high',
-            delegationSize: '~5 persons',
-            leadEscort: 'Executive Officer',
-            securityStatus: 'Briefed & Ready'
-        };
-        focusContent = JSON.stringify(fallbackVipData);
-        plannerActions = '[·] Reserve North Gate parking\n[·] Brief Sanctum security staff\n[·] Arrange Prasadam for 5 guests';
+        // Fallback: Use temple response format
+        const infoCardContent = generateInfoCardContent(query);
+        focusContent = JSON.stringify(infoCardContent);
+        
+        const ceoActions = generateCEOActions(query);
+        plannerActions = formatActionsForPlanner(ceoActions);
     }
 
     const sections: CanvasSection[] = [

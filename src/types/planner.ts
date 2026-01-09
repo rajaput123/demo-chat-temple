@@ -46,3 +46,36 @@ export interface CEOCard {
     visibility: string;
 }
 
+export interface InfoCardData {
+    id: string;
+    title: string;
+    content: string;
+    visibleContent?: string;
+    type: string;
+    metadata?: {
+        recordType?: string;
+        name?: string | null;
+        title?: string | null;
+        date?: string | null;
+        time?: string | null;
+        location?: string | null;
+        status?: string | null;
+        assignedRoles?: string | null;
+        department?: string | null;
+        departmentId?: string | null;
+        missingInformation?: string[];
+    };
+}
+
+export interface PlanSectionData {
+    id: string;
+    title: string;
+    subTitle?: string;
+    content: string;
+    visibleContent?: string;
+    type: string;
+    isVisible?: boolean;
+    actions: PlannerAction[];
+    visibleActions?: PlannerAction[];
+}
+

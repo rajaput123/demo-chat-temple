@@ -3,72 +3,20 @@
  * Utilities for generating and parsing planner actions from queries
  */
 
+import { generateCEOActions, formatActionsForPlanner } from '@/services/ceoActionGenerator';
+
 /**
  * Generate planner actions based on query context
+ * Uses CEO Action Generator to produce 8-10 CEO-level actions
  */
 export function generatePlannerActionsFromQuery(
     query: string,
-    queryType: 'info' | 'summary' | 'kitchen' | 'general' = 'general'
+    queryType: 'info' | 'summary' | 'kitchen' | 'general' | string = 'general',
+    context?: any
 ): string {
-    const lowerQuery = query.toLowerCase();
-    let actions: string[] = [];
-
-    // Generate actions based on query type and content
-    if (queryType === 'info') {
-        if (lowerQuery.includes('employee') || lowerQuery.includes('staff') || lowerQuery.includes('who')) {
-            actions.push('Review employee assignments and availability');
-            actions.push('Update employee records if needed');
-        } else if (lowerQuery.includes('inventory') || lowerQuery.includes('stock')) {
-            actions.push('Review inventory levels and reorder if needed');
-            actions.push('Update inventory records');
-        } else if (lowerQuery.includes('location') || lowerQuery.includes('where')) {
-            actions.push('Verify location availability');
-            actions.push('Coordinate location access if needed');
-        } else if (lowerQuery.includes('devotee')) {
-            actions.push('Review devotee records');
-            actions.push('Update devotee information if needed');
-        } else {
-            actions.push('Review the information provided');
-            actions.push('Take necessary follow-up actions');
-        }
-    } else if (queryType === 'summary' || queryType === 'general') {
-        if (lowerQuery.includes('progress') || lowerQuery.includes('status')) {
-            actions.push('Review current progress and status');
-            actions.push('Identify any blockers or issues');
-            actions.push('Update progress tracking');
-        } else if (lowerQuery.includes('festival') || lowerQuery.includes('navaratri')) {
-            actions.push('Review festival preparation status');
-            actions.push('Address any pending items');
-            actions.push('Coordinate with relevant departments');
-        } else {
-            actions.push('Review the information');
-            actions.push('Plan next steps based on the data');
-        }
-    } else if (queryType === 'kitchen') {
-        actions.push('Review kitchen menu and requirements');
-        actions.push('Coordinate with kitchen department');
-        actions.push('Update menu planning if needed');
-    }
-
-    // Add general follow-up actions if query contains specific keywords
-    if (lowerQuery.includes('check') || lowerQuery.includes('verify')) {
-        actions.push('Verify the information is accurate');
-        actions.push('Update records if discrepancies found');
-    }
-
-    if (lowerQuery.includes('show') || lowerQuery.includes('display') || lowerQuery.includes('list')) {
-        actions.push('Review the displayed information');
-        actions.push('Take action based on the findings');
-    }
-
-    // If no specific actions generated, add generic ones
-    if (actions.length === 0) {
-        actions.push('Review the query and information provided');
-        actions.push('Plan appropriate follow-up actions');
-    }
-
-    // Format as planner actions
-    return actions.map(action => `[·] ${action}`).join('\n');
+    // Use CEO Action Generator for temple queries
+    const ceoActions = generateCEOActions(query, context);
+    return formatActionsForPlanner(ceoActions);
 }
 
 /**

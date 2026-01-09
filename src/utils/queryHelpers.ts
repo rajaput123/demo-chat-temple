@@ -8,24 +8,42 @@
  */
 export function isInfoQuery(query: string): boolean {
     const lowercaseQuery = query.toLowerCase();
-    return lowercaseQuery.includes('show') ||
-        lowercaseQuery.includes('list') ||
-        lowercaseQuery.includes('what') ||
+    
+    // Check for information-seeking patterns (not action-oriented)
+    const isInformationSeeking = lowercaseQuery.includes('what') ||
         lowercaseQuery.includes('who') ||
         lowercaseQuery.includes('when') ||
         lowercaseQuery.includes('where') ||
+        lowercaseQuery.includes('how') ||
         lowercaseQuery.includes('tell me') ||
+        lowercaseQuery.includes('show') ||
+        lowercaseQuery.includes('list') ||
         lowercaseQuery.includes('display') ||
         lowercaseQuery.includes('get') ||
         lowercaseQuery.includes('find') ||
         lowercaseQuery.includes('about') ||
         lowercaseQuery.includes('information') ||
         lowercaseQuery.includes('details') ||
-        (lowercaseQuery.includes('temple') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('jagadguru') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('ceo') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('sringeri') && !lowercaseQuery.includes('plan')) ||
-        (lowercaseQuery.includes('peetham') && !lowercaseQuery.includes('plan'));
+        lowercaseQuery.includes('look like') ||
+        lowercaseQuery.includes('looks like');
+    
+    // Schedule information queries (not creating schedules)
+    const isScheduleInfo = (lowercaseQuery.includes('schedule') || lowercaseQuery.includes('timetable')) &&
+        (lowercaseQuery.includes('what') || lowercaseQuery.includes('show') || lowercaseQuery.includes('look like') || lowercaseQuery.includes('information'));
+    
+    // Temple-related info queries
+    const isTempleInfo = (lowercaseQuery.includes('temple') || 
+        lowercaseQuery.includes('jagadguru') || 
+        lowercaseQuery.includes('ceo') || 
+        lowercaseQuery.includes('sringeri') || 
+        lowercaseQuery.includes('peetham') ||
+        lowercaseQuery.includes('ekadashi')) &&
+        !lowercaseQuery.includes('plan') &&
+        !lowercaseQuery.startsWith('schedule') && // Not "schedule X" (action)
+        !lowercaseQuery.startsWith('create') &&
+        !lowercaseQuery.startsWith('add');
+    
+    return isInformationSeeking || isScheduleInfo || isTempleInfo;
 }
 
 /**

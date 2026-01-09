@@ -9,6 +9,8 @@ import { QueryParserService } from './queryParserService';
 import { FlexibleQueryParser, ParsedPlanningQuery, ParsedProgressQuery } from './flexibleQueryParser';
 import { VIPPlannerService } from './vipPlannerService';
 import { ParsedVIPVisit } from '@/types/vip';
+import { generateInfoCardContent } from './infoCardContentGenerator';
+import { generateCEOActions, formatActionsForPlanner } from './ceoActionGenerator';
 
 export interface SpecialQueryResult {
     infoCardData: string; // JSON string with card data
@@ -74,59 +76,18 @@ export class SpecialQueryHandler {
                 onVIPVisitParsed(parsedVisit);
             }
 
-            // Format date
-            const dateStr = parsedVisit.date.toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-
-            // Create info card data with brown/amber format
-            const infoCardData = {
-                highlightTitle: "VIP VISIT | HIGHLIGHTS",
-                todayHighlights: [
-                    { 
-                        time: '07:00 AM', 
-                        description: 'Sri Gurugalu will perform the Morning Anushtana as part of the daily spiritual observances.' 
-                    },
-                    { 
-                        time: parsedVisit.time || '09:00 AM', 
-                        description: `VIP Darshan is scheduled for ${parsedVisit.visitor}${parsedVisit.title ? ` (${parsedVisit.title})` : ''}, with special protocol arrangements in place.` 
-                    },
-                    { 
-                        time: '09:00 AM', 
-                        description: 'The Sahasra Chandi Yaga Purnahuti will be conducted in the temple sanctum.' 
-                    },
-                    { 
-                        time: '04:00 PM', 
-                        description: 'Sri Gurugalu will deliver the Evening Discourse, offering spiritual guidance and blessings to devotees.' 
-                    }
-                ]
-            };
-
-            // Generate planner actions
-            const tempVisit = {
-                id: 'temp',
-                visitor: parsedVisit.visitor,
-                title: parsedVisit.title,
-                date: parsedVisit.date.toISOString().split('T')[0],
-                time: parsedVisit.time,
-                location: parsedVisit.location,
-                protocolLevel: parsedVisit.protocolLevel,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                createdBy: 'system',
-                updatedBy: 'system',
-            };
-            const actions = VIPPlannerService.generateVIPPlannerActions(tempVisit);
-            const plannerActions = VIPPlannerService.formatActionsForPlanner(actions);
+            // Use temple response format: Generate info card from calendar aggregation
+            const infoCardContent = generateInfoCardContent(query);
+            const ceoActions = generateCEOActions(query);
+            const plannerActions = formatActionsForPlanner(ceoActions);
+            
+            const infoCardData = infoCardContent;
 
             return {
                 infoCardData: JSON.stringify(infoCardData),
                 plannerActions,
                 sectionId: 'focus-visit-vip',
-                cardTitle: 'VIP Protocol Brief',
+                cardTitle: infoCardData.highlightTitle || 'VIP Protocol Brief',
                 planTitle: 'VIP Plan'
             };
         }
